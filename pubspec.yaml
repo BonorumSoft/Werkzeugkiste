@@ -1,0 +1,22 @@
+name: werkzeugkiste
+description: >
+  Community-Werkzeug-Verleih-App – privat, kostenlos, dezentral, offline-first.
+  Lastenheft v0.4, Domain-Schicht gemäß Abschnitt 36 frameworkfrei.
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+
+# Bewusst KEINE Flutter-, SQLite- oder Nostr-Abhängigkeiten in diesem
+# pubspec, solange nur die Domain-Schicht existiert (Abschnitt 35/36).
+# Application-/Infrastructure-Schicht wird in einem separaten Package
+# ergänzt, sobald ADR-07 (lokale DB) und ADR-01 (Nostr-Event-Modell)
+# entschieden sind (siehe pipeline/00_offene_fragen.md).
+dependencies:
+  meta: ^1.15.0
+
+dev_dependencies:
+  test: ^1.25.0
+  lints: ^5.0.0
+  coverage: ^1.9.0

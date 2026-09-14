@@ -1,0 +1,2942 @@
+[
+  {
+    "id": "REQ-001",
+    "quelle": "1",
+    "kategorie": "Funktional",
+    "beschreibung": "Nutzer kann sehen, welche Werkzeuge innerhalb seiner Communities vorhanden sind",
+    "akzeptanzkriterium": "Werkzeugliste je Community wird angezeigt"
+  },
+  {
+    "id": "REQ-002",
+    "quelle": "1",
+    "kategorie": "Funktional",
+    "beschreibung": "Nutzer kann eigene Werkzeuge anbieten",
+    "akzeptanzkriterium": "Werkzeug-Erstellung ist möglich und erscheint in der Community-Werkzeugliste"
+  },
+  {
+    "id": "REQ-003",
+    "quelle": "1",
+    "kategorie": "Funktional",
+    "beschreibung": "Nutzer kann Werkzeuge anderer Mitglieder anfragen",
+    "akzeptanzkriterium": "Leihanfrage für fremdes Werkzeug kann gestellt werden"
+  },
+  {
+    "id": "REQ-004",
+    "quelle": "1",
+    "kategorie": "Funktional",
+    "beschreibung": "Nutzer kann Leihanfragen bestätigen oder ablehnen",
+    "akzeptanzkriterium": "Eigentümer kann eingehende Anfrage annehmen oder ablehnen"
+  },
+  {
+    "id": "REQ-005",
+    "quelle": "1",
+    "kategorie": "Funktional",
+    "beschreibung": "Nutzer kann ausgeliehene Werkzeuge zurückgeben und die Rückgabe bestätigen",
+    "akzeptanzkriterium": "Rückgabebestätigung durch Eigentümer ist möglich"
+  },
+  {
+    "id": "REQ-006",
+    "quelle": "1",
+    "kategorie": "Historie",
+    "beschreibung": "Nutzer kann jederzeit nachvollziehen, was er wann von wem geliehen bzw. an wen verliehen hat",
+    "akzeptanzkriterium": "Persönliche Historie zeigt geliehene und verliehene Werkzeuge mit Zeitpunkt und Gegenpartei"
+  },
+  {
+    "id": "REQ-007",
+    "quelle": "1",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Die Anwendung funktioniert ohne zentrale Betreiberplattform",
+    "akzeptanzkriterium": "Kein zentraler Server ist für den Betrieb der Kernfunktionen erforderlich"
+  },
+  {
+    "id": "REQ-008",
+    "quelle": "1.1",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Leitprinzip: Private Communities statt öffentlichem Marktplatz",
+    "akzeptanzkriterium": "Kein öffentlicher Marktplatz-Modus existiert im MVP"
+  },
+  {
+    "id": "REQ-009",
+    "quelle": "1.1",
+    "kategorie": "Explizit-Ausgeschlossen",
+    "beschreibung": "Leitprinzip: Kein Geld innerhalb des MVP",
+    "akzeptanzkriterium": "Keine Zahlungsfunktion ist im MVP vorhanden"
+  },
+  {
+    "id": "REQ-010",
+    "quelle": "1.1",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Leitprinzip: Kein zentraler Betreiber-Server als Single Point of Failure",
+    "akzeptanzkriterium": "Ausfall eines einzelnen Servers/Relays legt die App nicht lahm"
+  },
+  {
+    "id": "REQ-011",
+    "quelle": "1.1",
+    "kategorie": "Offline-Sync",
+    "beschreibung": "Leitprinzip: Local-first / Offline-first",
+    "akzeptanzkriterium": "Kernfunktionen sind ohne Netzwerkverbindung nutzbar"
+  },
+  {
+    "id": "REQ-012",
+    "quelle": "1.1",
+    "kategorie": "Security",
+    "beschreibung": "Leitprinzip: Ende-zu-Ende-Verschlüsselung",
+    "akzeptanzkriterium": "Private Community-Daten sind für Dritte inkl. Relay-Betreiber nicht lesbar"
+  },
+  {
+    "id": "REQ-013",
+    "quelle": "1.1",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Leitprinzip: Datensparsamkeit",
+    "akzeptanzkriterium": "Es werden nur die für die Funktion notwendigen personenbezogenen Daten erhoben"
+  },
+  {
+    "id": "REQ-014",
+    "quelle": "1.1",
+    "kategorie": "Security",
+    "beschreibung": "Leitprinzip: Nutzer besitzt seine Identität und Daten",
+    "akzeptanzkriterium": "Kryptografische Identität liegt ausschließlich beim Nutzer (Private Key verlässt das Gerät nicht ungeschützt)"
+  },
+  {
+    "id": "REQ-015",
+    "quelle": "1.1",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Leitprinzip: Keine zentrale Benutzerverwaltung",
+    "akzeptanzkriterium": "Kein zentrales Benutzerkonto-System ist erforderlich"
+  },
+  {
+    "id": "REQ-016",
+    "quelle": "1.1",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Leitprinzip: Keine zentrale Datenbank",
+    "akzeptanzkriterium": "Keine zentrale, für den Betrieb notwendige Datenbank existiert"
+  },
+  {
+    "id": "REQ-017",
+    "quelle": "1.1",
+    "kategorie": "UI",
+    "beschreibung": "Leitprinzip: Keine unnötige Bürokratie oder komplexe Bedienung",
+    "akzeptanzkriterium": "Kernabläufe (Anfrage/Bestätigung) sind mit minimaler Anzahl an Schritten nutzbar"
+  },
+  {
+    "id": "REQ-018",
+    "quelle": "2",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Die Community ist grundsätzlich geschlossen",
+    "akzeptanzkriterium": "Zutritt zu einer Community ist nur über eine gültige Einladung möglich"
+  },
+  {
+    "id": "REQ-019",
+    "quelle": "2",
+    "kategorie": "Explizit-Ausgeschlossen",
+    "beschreibung": "Öffentliche Suche nach Werkzeugen oder Nutzern gehört nicht zum MVP",
+    "akzeptanzkriterium": "Guard-Test: keine öffentliche Such-/Discovery-Funktion ist im MVP erreichbar"
+  },
+  {
+    "id": "REQ-020",
+    "quelle": "3",
+    "kategorie": "Funktional",
+    "beschreibung": "Community erstellen",
+    "akzeptanzkriterium": "Nutzer kann eine neue Community mit eigenem Community-Schlüssel erzeugen"
+  },
+  {
+    "id": "REQ-021",
+    "quelle": "3",
+    "kategorie": "Funktional",
+    "beschreibung": "Community beitreten",
+    "akzeptanzkriterium": "Nutzer kann über eine gültige Einladung einer Community beitreten"
+  },
+  {
+    "id": "REQ-022",
+    "quelle": "3",
+    "kategorie": "Funktional",
+    "beschreibung": "Mitglieder einladen",
+    "akzeptanzkriterium": "Community-Mitglied kann eine Einladung für neue Mitglieder erzeugen"
+  },
+  {
+    "id": "REQ-023",
+    "quelle": "3",
+    "kategorie": "Funktional",
+    "beschreibung": "Ein Nutzer kann Mitglied mehrerer Communities gleichzeitig sein",
+    "akzeptanzkriterium": "Nutzer sieht und wechselt zwischen mehreren eigenen Communities"
+  },
+  {
+    "id": "REQ-024",
+    "quelle": "3",
+    "kategorie": "Funktional",
+    "beschreibung": "Mitglieder einer Community anzeigen",
+    "akzeptanzkriterium": "Mitgliederliste einer Community ist einsehbar"
+  },
+  {
+    "id": "REQ-025",
+    "quelle": "3",
+    "kategorie": "Funktional",
+    "beschreibung": "Community verlassen",
+    "akzeptanzkriterium": "Nutzer kann eine Community aktiv verlassen"
+  },
+  {
+    "id": "REQ-026",
+    "quelle": "3",
+    "kategorie": "Funktional",
+    "beschreibung": "Werkzeug anlegen",
+    "akzeptanzkriterium": "Nutzer kann ein neues Werkzeug mit Pflicht- und Optionalfeldern anlegen"
+  },
+  {
+    "id": "REQ-027",
+    "quelle": "3",
+    "kategorie": "Funktional",
+    "beschreibung": "Eigenes Werkzeug bearbeiten",
+    "akzeptanzkriterium": "Eigentümer kann Felder eines eigenen Werkzeugs ändern"
+  },
+  {
+    "id": "REQ-028",
+    "quelle": "3",
+    "kategorie": "Funktional",
+    "beschreibung": "Eigenes Werkzeug löschen",
+    "akzeptanzkriterium": "Eigentümer kann ein eigenes Werkzeug löschen (Status DELETED)"
+  },
+  {
+    "id": "REQ-029",
+    "quelle": "3",
+    "kategorie": "Funktional",
+    "beschreibung": "Werkzeuge anderer Mitglieder der Community anzeigen",
+    "akzeptanzkriterium": "Werkzeugliste zeigt auch Werkzeuge anderer Mitglieder derselben Community"
+  },
+  {
+    "id": "REQ-030",
+    "quelle": "3",
+    "kategorie": "Funktional",
+    "beschreibung": "Ein Werkzeug besitzt eine Werkzeugkategorie",
+    "akzeptanzkriterium": "Kategorie ist Pflichtfeld beim Anlegen eines Werkzeugs"
+  },
+  {
+    "id": "REQ-031",
+    "quelle": "3",
+    "kategorie": "Funktional",
+    "beschreibung": "Ein Werkzeug besitzt eine Bezeichnung",
+    "akzeptanzkriterium": "Bezeichnung ist Pflichtfeld beim Anlegen eines Werkzeugs"
+  },
+  {
+    "id": "REQ-032",
+    "quelle": "3",
+    "kategorie": "Funktional",
+    "beschreibung": "Ein Werkzeug kann optional Hersteller/Modell besitzen",
+    "akzeptanzkriterium": "Feld Hersteller/Modell ist optional befüllbar"
+  },
+  {
+    "id": "REQ-033",
+    "quelle": "3",
+    "kategorie": "Funktional",
+    "beschreibung": "Ein Werkzeug kann optional eine Beschreibung besitzen",
+    "akzeptanzkriterium": "Freitext-Beschreibung ist optional befüllbar"
+  },
+  {
+    "id": "REQ-034",
+    "quelle": "3",
+    "kategorie": "Funktional",
+    "beschreibung": "Ein Werkzeug kann optional Fotos besitzen",
+    "akzeptanzkriterium": "Ein oder mehrere Fotos können optional angehängt werden"
+  },
+  {
+    "id": "REQ-035",
+    "quelle": "3",
+    "kategorie": "Funktional",
+    "beschreibung": "Ein Werkzeug kann optional einen Zustand besitzen",
+    "akzeptanzkriterium": "Zustandsfeld ist optional befüllbar"
+  },
+  {
+    "id": "REQ-036",
+    "quelle": "3",
+    "kategorie": "Funktional",
+    "beschreibung": "Ein Werkzeug besitzt einen Verfügbarkeitsstatus",
+    "akzeptanzkriterium": "Status ist immer eindeutig einem der definierten Zustände zugeordnet"
+  },
+  {
+    "id": "REQ-037",
+    "quelle": "3",
+    "kategorie": "Funktional",
+    "beschreibung": "Leihanfrage stellen",
+    "akzeptanzkriterium": "Nutzer kann für ein verfügbares fremdes Werkzeug eine Anfrage stellen"
+  },
+  {
+    "id": "REQ-038",
+    "quelle": "3",
+    "kategorie": "Funktional",
+    "beschreibung": "Leihanfrage ablehnen",
+    "akzeptanzkriterium": "Eigentümer kann eine offene Anfrage ablehnen"
+  },
+  {
+    "id": "REQ-039",
+    "quelle": "3",
+    "kategorie": "Funktional",
+    "beschreibung": "Leihanfrage bestätigen",
+    "akzeptanzkriterium": "Eigentümer kann eine offene Anfrage bestätigen"
+  },
+  {
+    "id": "REQ-040",
+    "quelle": "3",
+    "kategorie": "Funktional",
+    "beschreibung": "Werkzeug wird bei Bestätigung als verliehen markiert",
+    "akzeptanzkriterium": "Status wechselt bei Bestätigung von REQUESTED zu LOANED"
+  },
+  {
+    "id": "REQ-041",
+    "quelle": "3",
+    "kategorie": "Funktional",
+    "beschreibung": "Rückgabe bestätigen",
+    "akzeptanzkriterium": "Eigentümer kann die Rückgabe eines verliehenen Werkzeugs bestätigen"
+  },
+  {
+    "id": "REQ-042",
+    "quelle": "3",
+    "kategorie": "Funktional",
+    "beschreibung": "Werkzeug wird nach Rückgabebestätigung wieder verfügbar",
+    "akzeptanzkriterium": "Status wechselt bei Rückgabebestätigung von LOANED zu AVAILABLE"
+  },
+  {
+    "id": "REQ-043",
+    "quelle": "3",
+    "kategorie": "Historie",
+    "beschreibung": "Persönliche Leihhistorie ist Bestandteil des MVP",
+    "akzeptanzkriterium": "Historie-Ansicht ist im MVP-Funktionsumfang vorhanden und nutzbar"
+  },
+  {
+    "id": "REQ-044",
+    "quelle": "3",
+    "kategorie": "Offline-Sync",
+    "beschreibung": "Offline-Nutzung ist unterstützt",
+    "akzeptanzkriterium": "Definierte Kernaktionen funktionieren ohne Netzwerkverbindung"
+  },
+  {
+    "id": "REQ-045",
+    "quelle": "3",
+    "kategorie": "Offline-Sync",
+    "beschreibung": "Lokale Speicherung aller Kerndaten ist vorhanden",
+    "akzeptanzkriterium": "Alle Kerndaten sind nach App-Neustart ohne Netzwerk verfügbar"
+  },
+  {
+    "id": "REQ-046",
+    "quelle": "3",
+    "kategorie": "Offline-Sync",
+    "beschreibung": "Synchronisation erfolgt bei bestehender Verbindung",
+    "akzeptanzkriterium": "Ausstehende Änderungen werden bei Verbindung automatisch synchronisiert"
+  },
+  {
+    "id": "REQ-047",
+    "quelle": "3",
+    "kategorie": "Offline-Sync",
+    "beschreibung": "Fehlgeschlagene Synchronisation wird wiederholt",
+    "akzeptanzkriterium": "Ein Event im Status FAILED wird bei erneuter Gelegenheit automatisch erneut versucht"
+  },
+  {
+    "id": "REQ-048",
+    "quelle": "3",
+    "kategorie": "Offline-Sync",
+    "beschreibung": "Konflikterkennung ist vorhanden",
+    "akzeptanzkriterium": "Widersprüchliche, unabhängig entstandene Änderungen werden als Konflikt erkannt"
+  },
+  {
+    "id": "REQ-049",
+    "quelle": "3",
+    "kategorie": "Offline-Sync",
+    "beschreibung": "Konfliktbehandlung ist deterministisch",
+    "akzeptanzkriterium": "Bei identischer Ausgangslage führt Konfliktauflösung auf allen Geräten zum selben Ergebnis"
+  },
+  {
+    "id": "REQ-050",
+    "quelle": "3",
+    "kategorie": "Security",
+    "beschreibung": "Jeder Nutzer besitzt eine kryptografische Identität",
+    "akzeptanzkriterium": "Public/Private-Keypaar wird bei Ersteinrichtung erzeugt"
+  },
+  {
+    "id": "REQ-051",
+    "quelle": "3",
+    "kategorie": "Security",
+    "beschreibung": "Ende-zu-Ende-Verschlüsselung ist implementiert",
+    "akzeptanzkriterium": "Community-Inhalte sind für Relay-Betreiber nicht im Klartext einsehbar"
+  },
+  {
+    "id": "REQ-052",
+    "quelle": "3",
+    "kategorie": "Security",
+    "beschreibung": "Sichere Speicherung privater Schlüssel ist implementiert",
+    "akzeptanzkriterium": "Private Key liegt in OS-Secure-Storage (Keychain/Keystore), nicht im Klartext auf Dateisystemebene"
+  },
+  {
+    "id": "REQ-053",
+    "quelle": "3",
+    "kategorie": "Security",
+    "beschreibung": "Fotos werden verschlüsselt gespeichert/übertragen",
+    "akzeptanzkriterium": "Foto-Binärdaten sind vor Übertragung verschlüsselt"
+  },
+  {
+    "id": "REQ-054",
+    "quelle": "3",
+    "kategorie": "Security",
+    "beschreibung": "Backups sind geschützt",
+    "akzeptanzkriterium": "Backup-Mechanismus überträgt keinen Klartext-Private-Key an Dritte"
+  },
+  {
+    "id": "REQ-055",
+    "quelle": "4",
+    "kategorie": "Explizit-Ausgeschlossen",
+    "beschreibung": "Nicht Bestandteil des MVP: öffentliche Werkzeugangebote",
+    "akzeptanzkriterium": "Guard-Test: öffentliche Werkzeugangebote ist im MVP nicht implementiert/erreichbar"
+  },
+  {
+    "id": "REQ-056",
+    "quelle": "4",
+    "kategorie": "Explizit-Ausgeschlossen",
+    "beschreibung": "Nicht Bestandteil des MVP: öffentliche Nutzerprofile",
+    "akzeptanzkriterium": "Guard-Test: öffentliche Nutzerprofile ist im MVP nicht implementiert/erreichbar"
+  },
+  {
+    "id": "REQ-057",
+    "quelle": "4",
+    "kategorie": "Explizit-Ausgeschlossen",
+    "beschreibung": "Nicht Bestandteil des MVP: Bewertungen",
+    "akzeptanzkriterium": "Guard-Test: Bewertungen ist im MVP nicht implementiert/erreichbar"
+  },
+  {
+    "id": "REQ-058",
+    "quelle": "4",
+    "kategorie": "Explizit-Ausgeschlossen",
+    "beschreibung": "Nicht Bestandteil des MVP: Sterne/Ratings",
+    "akzeptanzkriterium": "Guard-Test: Sterne/Ratings ist im MVP nicht implementiert/erreichbar"
+  },
+  {
+    "id": "REQ-059",
+    "quelle": "4",
+    "kategorie": "Explizit-Ausgeschlossen",
+    "beschreibung": "Nicht Bestandteil des MVP: Vertrauensscores",
+    "akzeptanzkriterium": "Guard-Test: Vertrauensscores ist im MVP nicht implementiert/erreichbar"
+  },
+  {
+    "id": "REQ-060",
+    "quelle": "4",
+    "kategorie": "Explizit-Ausgeschlossen",
+    "beschreibung": "Nicht Bestandteil des MVP: Bezahlung",
+    "akzeptanzkriterium": "Guard-Test: Bezahlung ist im MVP nicht implementiert/erreichbar"
+  },
+  {
+    "id": "REQ-061",
+    "quelle": "4",
+    "kategorie": "Explizit-Ausgeschlossen",
+    "beschreibung": "Nicht Bestandteil des MVP: Mietpreise",
+    "akzeptanzkriterium": "Guard-Test: Mietpreise ist im MVP nicht implementiert/erreichbar"
+  },
+  {
+    "id": "REQ-062",
+    "quelle": "4",
+    "kategorie": "Explizit-Ausgeschlossen",
+    "beschreibung": "Nicht Bestandteil des MVP: Kaution",
+    "akzeptanzkriterium": "Guard-Test: Kaution ist im MVP nicht implementiert/erreichbar"
+  },
+  {
+    "id": "REQ-063",
+    "quelle": "4",
+    "kategorie": "Explizit-Ausgeschlossen",
+    "beschreibung": "Nicht Bestandteil des MVP: Vertragsverwaltung",
+    "akzeptanzkriterium": "Guard-Test: Vertragsverwaltung ist im MVP nicht implementiert/erreichbar"
+  },
+  {
+    "id": "REQ-064",
+    "quelle": "4",
+    "kategorie": "Explizit-Ausgeschlossen",
+    "beschreibung": "Nicht Bestandteil des MVP: digitale Mietverträge",
+    "akzeptanzkriterium": "Guard-Test: digitale Mietverträge ist im MVP nicht implementiert/erreichbar"
+  },
+  {
+    "id": "REQ-065",
+    "quelle": "4",
+    "kategorie": "Explizit-Ausgeschlossen",
+    "beschreibung": "Nicht Bestandteil des MVP: Zahlungsabwicklung",
+    "akzeptanzkriterium": "Guard-Test: Zahlungsabwicklung ist im MVP nicht implementiert/erreichbar"
+  },
+  {
+    "id": "REQ-066",
+    "quelle": "4",
+    "kategorie": "Explizit-Ausgeschlossen",
+    "beschreibung": "Nicht Bestandteil des MVP: Kalenderbuchungen",
+    "akzeptanzkriterium": "Guard-Test: Kalenderbuchungen ist im MVP nicht implementiert/erreichbar"
+  },
+  {
+    "id": "REQ-067",
+    "quelle": "4",
+    "kategorie": "Explizit-Ausgeschlossen",
+    "beschreibung": "Nicht Bestandteil des MVP: zentrale Administration",
+    "akzeptanzkriterium": "Guard-Test: zentrale Administration ist im MVP nicht implementiert/erreichbar"
+  },
+  {
+    "id": "REQ-068",
+    "quelle": "4",
+    "kategorie": "Explizit-Ausgeschlossen",
+    "beschreibung": "Nicht Bestandteil des MVP: zentrale Benutzerkonten",
+    "akzeptanzkriterium": "Guard-Test: zentrale Benutzerkonten ist im MVP nicht implementiert/erreichbar"
+  },
+  {
+    "id": "REQ-069",
+    "quelle": "4",
+    "kategorie": "Explizit-Ausgeschlossen",
+    "beschreibung": "Nicht Bestandteil des MVP: serverseitige Push-Infrastruktur",
+    "akzeptanzkriterium": "Guard-Test: serverseitige Push-Infrastruktur ist im MVP nicht implementiert/erreichbar"
+  },
+  {
+    "id": "REQ-070",
+    "quelle": "4",
+    "kategorie": "Explizit-Ausgeschlossen",
+    "beschreibung": "Nicht Bestandteil des MVP: Social Recovery",
+    "akzeptanzkriterium": "Guard-Test: Social Recovery ist im MVP nicht implementiert/erreichbar"
+  },
+  {
+    "id": "REQ-071",
+    "quelle": "4",
+    "kategorie": "Explizit-Ausgeschlossen",
+    "beschreibung": "Nicht Bestandteil des MVP: komplexe Multi-Device-Identitäten",
+    "akzeptanzkriterium": "Guard-Test: komplexe Multi-Device-Identitäten ist im MVP nicht implementiert/erreichbar"
+  },
+  {
+    "id": "REQ-072",
+    "quelle": "4",
+    "kategorie": "Explizit-Ausgeschlossen",
+    "beschreibung": "Nicht Bestandteil des MVP: direkte Bluetooth-/Wi-Fi-P2P-Synchronisation",
+    "akzeptanzkriterium": "Guard-Test: direkte Bluetooth-/Wi-Fi-P2P-Synchronisation ist im MVP nicht implementiert/erreichbar"
+  },
+  {
+    "id": "REQ-073",
+    "quelle": "4/7/10",
+    "kategorie": "Explizit-Ausgeschlossen",
+    "beschreibung": "Gleichzeitiges Anbieten desselben physischen Werkzeugs in mehreren Communities ist kein MVP-Fall",
+    "akzeptanzkriterium": "Guard-Test: Tool.community_id ist ein Einzelwert (kein Array); es existiert kein Mechanismus zur community-übergreifenden Verfügbarkeitsprüfung eines Werkzeugs"
+  },
+  {
+    "id": "REQ-074",
+    "quelle": "4/12/44.3",
+    "kategorie": "Explizit-Ausgeschlossen",
+    "beschreibung": "Leihfristen, Fälligkeitsdaten und Rückgabe-Erinnerungen sind kein MVP-Bestandteil",
+    "akzeptanzkriterium": "Guard-Test: Loan/Tool besitzen kein Feld expected_return_at; es wird keine Benachrichtigung bei Fristüberschreitung ausgelöst"
+  },
+  {
+    "id": "REQ-075",
+    "quelle": "5.1",
+    "kategorie": "Security",
+    "beschreibung": "Als technisches Identitätsmodell wird eine Nostr-artige Public-/Private-Key-Identität vorgesehen",
+    "akzeptanzkriterium": "Identität basiert auf asymmetrischem Schlüsselpaar"
+  },
+  {
+    "id": "REQ-076",
+    "quelle": "5.1",
+    "kategorie": "Security",
+    "beschreibung": "Der Public Key dient als technische Identität des Nutzers",
+    "akzeptanzkriterium": "Fachliche Zuordnungen (Eigentümer, Ausleiher, Mitglied) referenzieren den Public Key"
+  },
+  {
+    "id": "REQ-077",
+    "quelle": "5.1",
+    "kategorie": "Security",
+    "beschreibung": "Der Private Key darf das Gerät nicht ungeschützt verlassen",
+    "akzeptanzkriterium": "Es existiert kein Code-Pfad, der den unverschlüsselten Private Key über Netzwerk sendet"
+  },
+  {
+    "id": "REQ-078",
+    "quelle": "5.1",
+    "kategorie": "Security",
+    "beschreibung": "Der Private Key darf nicht in Logs auftauchen",
+    "akzeptanzkriterium": "Statische Analyse/Log-Review zeigt keine Private-Key-Ausgabe in Logging-Aufrufen"
+  },
+  {
+    "id": "REQ-079",
+    "quelle": "5.1",
+    "kategorie": "Security",
+    "beschreibung": "Der Private Key darf nicht an einen Server übertragen werden",
+    "akzeptanzkriterium": "Kein Netzwerk-Request enthält den unverschlüsselten Private Key"
+  },
+  {
+    "id": "REQ-080",
+    "quelle": "5.1",
+    "kategorie": "Security",
+    "beschreibung": "Der Private Key muss sicher auf dem Gerät gespeichert werden",
+    "akzeptanzkriterium": "Speicherung erfolgt über Apple Keychain/Secure Enclave bzw. Android Keystore"
+  },
+  {
+    "id": "REQ-081",
+    "quelle": "5.1",
+    "kategorie": "Security",
+    "beschreibung": "Biometrische Authentifizierung soll als Zugriffsschutz verwendet werden",
+    "akzeptanzkriterium": "Zugriff auf sicherheitsrelevante Aktionen kann biometrisch/PIN-geschützt werden"
+  },
+  {
+    "id": "REQ-082",
+    "quelle": "5.2",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Die technische Identität des Nutzers ist nicht vom Anzeigenamen abhängig",
+    "akzeptanzkriterium": "Änderung des Anzeigenamens ändert nicht den Public Key"
+  },
+  {
+    "id": "REQ-083",
+    "quelle": "5.2",
+    "kategorie": "Funktional",
+    "beschreibung": "Ein Nutzer kann einen lokalen Anzeigenamen besitzen",
+    "akzeptanzkriterium": "Anzeigename kann gesetzt und angezeigt werden"
+  },
+  {
+    "id": "REQ-084",
+    "quelle": "5.2",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Fachliche Zuordnung von Werkzeugbesitzer/Ausleiher/Mitglied erfolgt über die kryptografische Identität",
+    "akzeptanzkriterium": "owner_pubkey/borrower_pubkey/requester_pubkey sind die maßgeblichen Identitätsreferenzen, nicht der Anzeigename"
+  },
+  {
+    "id": "REQ-085",
+    "quelle": "6",
+    "kategorie": "Security",
+    "beschreibung": "Nutzer muss seine Identität sichern können",
+    "akzeptanzkriterium": "Ein Backup-Vorgang für die Identität ist in der App auslösbar"
+  },
+  {
+    "id": "REQ-086",
+    "quelle": "6",
+    "kategorie": "Security",
+    "beschreibung": "Geschütztes Plattform-Backup ist vorgesehen",
+    "akzeptanzkriterium": "Identität kann über iCloud Keychain / Google Password Manager gesichert werden"
+  },
+  {
+    "id": "REQ-087",
+    "quelle": "6",
+    "kategorie": "Security",
+    "beschreibung": "Manueller Export des Seeds bzw. Schlüsselmaterials ist vorgesehen",
+    "akzeptanzkriterium": "Nutzer kann Seed/Schlüsselmaterial manuell exportieren"
+  },
+  {
+    "id": "REQ-088",
+    "quelle": "6",
+    "kategorie": "UI",
+    "beschreibung": "App zeigt verständlichen Sicherungsstatus an",
+    "akzeptanzkriterium": "UI zeigt eindeutig „Identität gesichert\" bzw. „Identität noch nicht gesichert\" an"
+  },
+  {
+    "id": "REQ-089",
+    "quelle": "6",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Verlust des privaten Schlüssels darf nicht stillschweigend zu einem Verlust der Identität führen",
+    "akzeptanzkriterium": "Nutzer wird proaktiv auf fehlendes Backup hingewiesen, bevor ein Risiko entsteht"
+  },
+  {
+    "id": "REQ-090",
+    "quelle": "7",
+    "kategorie": "Funktional",
+    "beschreibung": "Eine Community besitzt mindestens eine Community ID",
+    "akzeptanzkriterium": "Community-Datensatz enthält eindeutige ID"
+  },
+  {
+    "id": "REQ-091",
+    "quelle": "7",
+    "kategorie": "Security",
+    "beschreibung": "Eine Community besitzt einen kryptografischen Community-Schlüssel",
+    "akzeptanzkriterium": "Community-Datensatz enthält Schlüsselmaterial zur Ver-/Entschlüsselung"
+  },
+  {
+    "id": "REQ-092",
+    "quelle": "7",
+    "kategorie": "Funktional",
+    "beschreibung": "Eine Community besitzt eine Liste der bekannten Mitglieder",
+    "akzeptanzkriterium": "Mitgliederliste ist Teil des Community-Datensatzes"
+  },
+  {
+    "id": "REQ-093",
+    "quelle": "7",
+    "kategorie": "Funktional",
+    "beschreibung": "Eine Community besitzt Community-Metadaten",
+    "akzeptanzkriterium": "Metadaten (z. B. Name) sind Teil des Community-Datensatzes"
+  },
+  {
+    "id": "REQ-094",
+    "quelle": "7",
+    "kategorie": "Funktional",
+    "beschreibung": "Ein Nutzer darf gleichzeitig Mitglied mehrerer Communities sein",
+    "akzeptanzkriterium": "Mehrfachmitgliedschaft ist technisch möglich und dargestellt"
+  },
+  {
+    "id": "REQ-095",
+    "quelle": "7",
+    "kategorie": "Security",
+    "beschreibung": "Daten einer Community dürfen nicht automatisch für andere Communities sichtbar sein",
+    "akzeptanzkriterium": "Datenisolation: Werkzeuge/Mitglieder/Historie einer Community sind aus einer anderen Community heraus nicht abrufbar"
+  },
+  {
+    "id": "REQ-096",
+    "quelle": "7",
+    "kategorie": "Funktional",
+    "beschreibung": "Ein Werkzeug ist im MVP genau einer Community zugeordnet",
+    "akzeptanzkriterium": "Tool.community_id ist Pflichtfeld mit genau einem Wert"
+  },
+  {
+    "id": "REQ-097",
+    "quelle": "8",
+    "kategorie": "Security",
+    "beschreibung": "Eine Einladung besteht logisch aus Community ID, Community Key und Invite Token",
+    "akzeptanzkriterium": "Einladungsdatensatz/-link enthält alle drei Komponenten"
+  },
+  {
+    "id": "REQ-098",
+    "quelle": "8",
+    "kategorie": "Security",
+    "beschreibung": "Der Invite Token wird zufällig erzeugt",
+    "akzeptanzkriterium": "Token wird über einen kryptografisch sicheren Zufallszahlengenerator erzeugt"
+  },
+  {
+    "id": "REQ-099",
+    "quelle": "8",
+    "kategorie": "Security",
+    "beschreibung": "Der Invite Token ist nicht erratbar",
+    "akzeptanzkriterium": "Token besitzt ausreichende Entropie gegen Brute-Force"
+  },
+  {
+    "id": "REQ-100",
+    "quelle": "8",
+    "kategorie": "Funktional",
+    "beschreibung": "Der Invite Token kann optional zeitlich begrenzt werden",
+    "akzeptanzkriterium": "Ablaufzeitpunkt ist optional konfigurierbar"
+  },
+  {
+    "id": "REQ-101",
+    "quelle": "8",
+    "kategorie": "Funktional",
+    "beschreibung": "Der Invite Token kann optional nur einmal verwendet werden",
+    "akzeptanzkriterium": "Einmalverwendung ist optional konfigurierbar und wird durchgesetzt"
+  },
+  {
+    "id": "REQ-102",
+    "quelle": "8",
+    "kategorie": "Funktional",
+    "beschreibung": "Eine gültige Einladung gewährt dem Empfänger Zugriff auf die entsprechende Community",
+    "akzeptanzkriterium": "Einlösen einer gültigen Einladung fügt den Nutzer der Community hinzu"
+  },
+  {
+    "id": "REQ-103",
+    "quelle": "8",
+    "kategorie": "Security",
+    "beschreibung": "Ein dauerhaft öffentlich geteilter Community-Schlüssel soll nach Möglichkeit vermieden werden",
+    "akzeptanzkriterium": "Einladungsmechanismus vermeidet permanente öffentliche Exposition des Community-Keys"
+  },
+  {
+    "id": "REQ-104",
+    "quelle": "9",
+    "kategorie": "Funktional",
+    "beschreibung": "Mitgliederanzeige enthält mindestens Anzeigename",
+    "akzeptanzkriterium": "Mitgliederliste zeigt Anzeigename je Mitglied"
+  },
+  {
+    "id": "REQ-105",
+    "quelle": "9",
+    "kategorie": "Funktional",
+    "beschreibung": "Mitgliederanzeige enthält mindestens Public Key bzw. technische Identität",
+    "akzeptanzkriterium": "Mitgliederliste zeigt/referenziert Public Key je Mitglied"
+  },
+  {
+    "id": "REQ-106",
+    "quelle": "9",
+    "kategorie": "Funktional",
+    "beschreibung": "Mitgliederanzeige enthält mindestens Mitgliedsstatus",
+    "akzeptanzkriterium": "Mitgliederliste zeigt Status (z. B. aktiv/entfernt) je Mitglied"
+  },
+  {
+    "id": "REQ-107",
+    "quelle": "9",
+    "kategorie": "Funktional",
+    "beschreibung": "Ein Nutzer kann eine Community verlassen",
+    "akzeptanzkriterium": "Verlassen-Aktion entfernt den Nutzer aus der lokalen Mitgliederliste seiner Sicht"
+  },
+  {
+    "id": "REQ-108",
+    "quelle": "9",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Beim Verlassen wird keine vollständige kryptografische Rücknahme bereits verteilter Daten garantiert (MVP-Einschränkung)",
+    "akzeptanzkriterium": "Dokumentation/UI weist transparent darauf hin, dass bereits synchronisierte Daten auf Geräten ehemaliger Mitglieder verbleiben können"
+  },
+  {
+    "id": "REQ-109",
+    "quelle": "9",
+    "kategorie": "Security",
+    "beschreibung": "Ein entferntes Mitglied kann ohne Schlüsselrotation weiterhin gültig signierte Events einspeisen (bekannte MVP-Einschränkung)",
+    "akzeptanzkriterium": "UI zeigt Hinweis, dass entfernte Mitglieder ggf. weiterhin Zugriff haben, bis der Community-Schlüssel erneuert wurde"
+  },
+  {
+    "id": "REQ-110",
+    "quelle": "10",
+    "kategorie": "Funktional",
+    "beschreibung": "Tool-Datensatz besitzt mindestens das Feld tool_id",
+    "akzeptanzkriterium": "Feld tool_id ist im Tool-Datenmodell vorhanden"
+  },
+  {
+    "id": "REQ-111",
+    "quelle": "10",
+    "kategorie": "Funktional",
+    "beschreibung": "Tool-Datensatz besitzt mindestens das Feld owner_pubkey",
+    "akzeptanzkriterium": "Feld owner_pubkey ist im Tool-Datenmodell vorhanden"
+  },
+  {
+    "id": "REQ-112",
+    "quelle": "10",
+    "kategorie": "Funktional",
+    "beschreibung": "Tool-Datensatz besitzt mindestens das Feld community_id",
+    "akzeptanzkriterium": "Feld community_id ist im Tool-Datenmodell vorhanden"
+  },
+  {
+    "id": "REQ-113",
+    "quelle": "10",
+    "kategorie": "Funktional",
+    "beschreibung": "Tool-Datensatz besitzt mindestens das Feld name",
+    "akzeptanzkriterium": "Feld name ist im Tool-Datenmodell vorhanden"
+  },
+  {
+    "id": "REQ-114",
+    "quelle": "10",
+    "kategorie": "Funktional",
+    "beschreibung": "Tool-Datensatz besitzt mindestens das Feld category",
+    "akzeptanzkriterium": "Feld category ist im Tool-Datenmodell vorhanden"
+  },
+  {
+    "id": "REQ-115",
+    "quelle": "10",
+    "kategorie": "Funktional",
+    "beschreibung": "Tool-Datensatz besitzt mindestens das Feld model (optional)",
+    "akzeptanzkriterium": "Feld model (optional) ist im Tool-Datenmodell vorhanden"
+  },
+  {
+    "id": "REQ-116",
+    "quelle": "10",
+    "kategorie": "Funktional",
+    "beschreibung": "Tool-Datensatz besitzt mindestens das Feld description (optional)",
+    "akzeptanzkriterium": "Feld description (optional) ist im Tool-Datenmodell vorhanden"
+  },
+  {
+    "id": "REQ-117",
+    "quelle": "10",
+    "kategorie": "Funktional",
+    "beschreibung": "Tool-Datensatz besitzt mindestens das Feld photos (optional)",
+    "akzeptanzkriterium": "Feld photos (optional) ist im Tool-Datenmodell vorhanden"
+  },
+  {
+    "id": "REQ-118",
+    "quelle": "10",
+    "kategorie": "Funktional",
+    "beschreibung": "Tool-Datensatz besitzt mindestens das Feld condition (optional)",
+    "akzeptanzkriterium": "Feld condition (optional) ist im Tool-Datenmodell vorhanden"
+  },
+  {
+    "id": "REQ-119",
+    "quelle": "10",
+    "kategorie": "Funktional",
+    "beschreibung": "Tool-Datensatz besitzt mindestens das Feld status",
+    "akzeptanzkriterium": "Feld status ist im Tool-Datenmodell vorhanden"
+  },
+  {
+    "id": "REQ-120",
+    "quelle": "10",
+    "kategorie": "Funktional",
+    "beschreibung": "Tool-Datensatz besitzt mindestens das Feld updated_at",
+    "akzeptanzkriterium": "Feld updated_at ist im Tool-Datenmodell vorhanden"
+  },
+  {
+    "id": "REQ-121",
+    "quelle": "10",
+    "kategorie": "Funktional",
+    "beschreibung": "Tool-Datensatz besitzt mindestens das Feld schema_version",
+    "akzeptanzkriterium": "Feld schema_version ist im Tool-Datenmodell vorhanden"
+  },
+  {
+    "id": "REQ-122",
+    "quelle": "10",
+    "kategorie": "Funktional",
+    "beschreibung": "Tool.community_id ist ein Einzelwert (kein Array)",
+    "akzeptanzkriterium": "Datentyp von community_id lässt genau einen Community-Bezug zu"
+  },
+  {
+    "id": "REQ-123",
+    "quelle": "10.1",
+    "kategorie": "Security",
+    "beschreibung": "Der Besitzer eines Werkzeugs wird über owner_pubkey bestimmt",
+    "akzeptanzkriterium": "Eigentümerprüfung vergleicht Aktor-Pubkey mit Tool.owner_pubkey"
+  },
+  {
+    "id": "REQ-124",
+    "quelle": "10.1",
+    "kategorie": "Security",
+    "beschreibung": "Ein Nutzer darf grundsätzlich nur eigene Werkzeuge verändern oder löschen",
+    "akzeptanzkriterium": "Änderungs-/Löschversuch an fremdem Werkzeug wird von der Domain-Schicht abgelehnt"
+  },
+  {
+    "id": "REQ-125",
+    "quelle": "10.2",
+    "kategorie": "Funktional",
+    "beschreibung": "Ein Werkzeug besitzt einen eindeutigen Zustand aus einer festen Zustandsmenge",
+    "akzeptanzkriterium": "Tool.status ist stets genau einer der definierten Werte"
+  },
+  {
+    "id": "REQ-126",
+    "quelle": "10.2",
+    "kategorie": "Funktional",
+    "beschreibung": "Zustandsübergang AVAILABLE → REQUESTED ist gültig",
+    "akzeptanzkriterium": "Anfrage auf verfügbares Werkzeug überführt Status zu REQUESTED"
+  },
+  {
+    "id": "REQ-127",
+    "quelle": "10.2",
+    "kategorie": "Funktional",
+    "beschreibung": "Zustandsübergang REQUESTED → LOANED ist gültig (Bestätigung)",
+    "akzeptanzkriterium": "Bestätigung einer Anfrage überführt Status zu LOANED"
+  },
+  {
+    "id": "REQ-128",
+    "quelle": "10.2",
+    "kategorie": "Funktional",
+    "beschreibung": "Zustandsübergang LOANED → AVAILABLE ist gültig (Rückgabe)",
+    "akzeptanzkriterium": "Bestätigte Rückgabe überführt Status zu AVAILABLE"
+  },
+  {
+    "id": "REQ-129",
+    "quelle": "10.2",
+    "kategorie": "Funktional",
+    "beschreibung": "Zustandsübergang REQUESTED → AVAILABLE ist gültig (Ablehnung oder Rücknahme)",
+    "akzeptanzkriterium": "Ablehnung durch Eigentümer oder Rückzug durch Anfragenden überführt Status zurück zu AVAILABLE"
+  },
+  {
+    "id": "REQ-130",
+    "quelle": "10.2",
+    "kategorie": "Funktional",
+    "beschreibung": "Der Zustand DELETED existiert zusätzlich zum Kernzyklus",
+    "akzeptanzkriterium": "Gelöschtes Werkzeug erhält Status DELETED"
+  },
+  {
+    "id": "REQ-131",
+    "quelle": "10.2",
+    "kategorie": "Funktional",
+    "beschreibung": "Ungültige Zustandsübergänge müssen von der Domain-Logik verhindert werden",
+    "akzeptanzkriterium": "Jeder nicht explizit erlaubte Übergang wird von der State-Machine mit Fehler abgelehnt"
+  },
+  {
+    "id": "REQ-132",
+    "quelle": "11",
+    "kategorie": "Funktional",
+    "beschreibung": "LoanRequest-Datensatz besitzt mindestens das Feld request_id",
+    "akzeptanzkriterium": "Feld request_id ist im LoanRequest-Datenmodell vorhanden"
+  },
+  {
+    "id": "REQ-133",
+    "quelle": "11",
+    "kategorie": "Funktional",
+    "beschreibung": "LoanRequest-Datensatz besitzt mindestens das Feld tool_id",
+    "akzeptanzkriterium": "Feld tool_id ist im LoanRequest-Datenmodell vorhanden"
+  },
+  {
+    "id": "REQ-134",
+    "quelle": "11",
+    "kategorie": "Funktional",
+    "beschreibung": "LoanRequest-Datensatz besitzt mindestens das Feld community_id",
+    "akzeptanzkriterium": "Feld community_id ist im LoanRequest-Datenmodell vorhanden"
+  },
+  {
+    "id": "REQ-135",
+    "quelle": "11",
+    "kategorie": "Funktional",
+    "beschreibung": "LoanRequest-Datensatz besitzt mindestens das Feld requester_pubkey",
+    "akzeptanzkriterium": "Feld requester_pubkey ist im LoanRequest-Datenmodell vorhanden"
+  },
+  {
+    "id": "REQ-136",
+    "quelle": "11",
+    "kategorie": "Funktional",
+    "beschreibung": "LoanRequest-Datensatz besitzt mindestens das Feld owner_pubkey",
+    "akzeptanzkriterium": "Feld owner_pubkey ist im LoanRequest-Datenmodell vorhanden"
+  },
+  {
+    "id": "REQ-137",
+    "quelle": "11",
+    "kategorie": "Funktional",
+    "beschreibung": "LoanRequest-Datensatz besitzt mindestens das Feld requested_at",
+    "akzeptanzkriterium": "Feld requested_at ist im LoanRequest-Datenmodell vorhanden"
+  },
+  {
+    "id": "REQ-138",
+    "quelle": "11",
+    "kategorie": "Funktional",
+    "beschreibung": "LoanRequest-Datensatz besitzt mindestens das Feld status",
+    "akzeptanzkriterium": "Feld status ist im LoanRequest-Datenmodell vorhanden"
+  },
+  {
+    "id": "REQ-139",
+    "quelle": "11",
+    "kategorie": "Funktional",
+    "beschreibung": "LoanRequest-Datensatz besitzt mindestens das Feld schema_version",
+    "akzeptanzkriterium": "Feld schema_version ist im LoanRequest-Datenmodell vorhanden"
+  },
+  {
+    "id": "REQ-140",
+    "quelle": "11",
+    "kategorie": "Funktional",
+    "beschreibung": "Mögliche LoanRequest-Zustände sind PENDING, ACCEPTED, REJECTED, CANCELLED",
+    "akzeptanzkriterium": "LoanRequest.status ist stets einer dieser vier Werte"
+  },
+  {
+    "id": "REQ-141",
+    "quelle": "11.1",
+    "kategorie": "Funktional",
+    "beschreibung": "Für ein Werkzeug darf maximal eine aktive Leihanfrage existieren (pro Werkzeug, nicht pro Werkzeug+Anfragendem)",
+    "akzeptanzkriterium": "Zweite Anfrage auf ein Werkzeug mit bereits aktiver Anfrage wird abgelehnt, unabhängig vom Anfragenden"
+  },
+  {
+    "id": "REQ-142",
+    "quelle": "11.1",
+    "kategorie": "Funktional",
+    "beschreibung": "Der Eigentümer kann eine Anfrage annehmen",
+    "akzeptanzkriterium": "ACCEPTED ist vom Eigentümer aus PENDING erreichbar"
+  },
+  {
+    "id": "REQ-143",
+    "quelle": "11.1",
+    "kategorie": "Funktional",
+    "beschreibung": "Der Eigentümer kann eine Anfrage ablehnen",
+    "akzeptanzkriterium": "REJECTED ist vom Eigentümer aus PENDING erreichbar"
+  },
+  {
+    "id": "REQ-144",
+    "quelle": "11.1",
+    "kategorie": "Funktional",
+    "beschreibung": "Der Anfragende kann eine offene Anfrage zurückziehen",
+    "akzeptanzkriterium": "CANCELLED ist vom Anfragenden aus PENDING erreichbar"
+  },
+  {
+    "id": "REQ-145",
+    "quelle": "12",
+    "kategorie": "Funktional",
+    "beschreibung": "Der Leihvorgang beginnt exakt mit der Bestätigung durch den Eigentümer",
+    "akzeptanzkriterium": "accepted_at markiert zugleich Ausleihbeginn; kein weiterer Zwischenschritt nötig"
+  },
+  {
+    "id": "REQ-146",
+    "quelle": "12",
+    "kategorie": "Explizit-Ausgeschlossen",
+    "beschreibung": "Es gibt keinen separaten Übergabezeitpunkt/manuellen Übergabe-bestätigen-Schritt im MVP",
+    "akzeptanzkriterium": "Guard-Test: Domain-Modell besitzt kein Feld/Event für einen separaten Übergabezeitpunkt"
+  },
+  {
+    "id": "REQ-147",
+    "quelle": "12",
+    "kategorie": "Funktional",
+    "beschreibung": "Loan-Datensatz besitzt mindestens das Feld loan_id",
+    "akzeptanzkriterium": "Feld loan_id ist im Loan-Datenmodell vorhanden"
+  },
+  {
+    "id": "REQ-148",
+    "quelle": "12",
+    "kategorie": "Funktional",
+    "beschreibung": "Loan-Datensatz besitzt mindestens das Feld tool_id",
+    "akzeptanzkriterium": "Feld tool_id ist im Loan-Datenmodell vorhanden"
+  },
+  {
+    "id": "REQ-149",
+    "quelle": "12",
+    "kategorie": "Funktional",
+    "beschreibung": "Loan-Datensatz besitzt mindestens das Feld community_id",
+    "akzeptanzkriterium": "Feld community_id ist im Loan-Datenmodell vorhanden"
+  },
+  {
+    "id": "REQ-150",
+    "quelle": "12",
+    "kategorie": "Funktional",
+    "beschreibung": "Loan-Datensatz besitzt mindestens das Feld owner_pubkey",
+    "akzeptanzkriterium": "Feld owner_pubkey ist im Loan-Datenmodell vorhanden"
+  },
+  {
+    "id": "REQ-151",
+    "quelle": "12",
+    "kategorie": "Funktional",
+    "beschreibung": "Loan-Datensatz besitzt mindestens das Feld borrower_pubkey",
+    "akzeptanzkriterium": "Feld borrower_pubkey ist im Loan-Datenmodell vorhanden"
+  },
+  {
+    "id": "REQ-152",
+    "quelle": "12",
+    "kategorie": "Funktional",
+    "beschreibung": "Loan-Datensatz besitzt mindestens das Feld requested_at",
+    "akzeptanzkriterium": "Feld requested_at ist im Loan-Datenmodell vorhanden"
+  },
+  {
+    "id": "REQ-153",
+    "quelle": "12",
+    "kategorie": "Funktional",
+    "beschreibung": "Loan-Datensatz besitzt mindestens das Feld accepted_at",
+    "akzeptanzkriterium": "Feld accepted_at ist im Loan-Datenmodell vorhanden"
+  },
+  {
+    "id": "REQ-154",
+    "quelle": "12",
+    "kategorie": "Funktional",
+    "beschreibung": "Loan-Datensatz besitzt mindestens das Feld returned_at",
+    "akzeptanzkriterium": "Feld returned_at ist im Loan-Datenmodell vorhanden"
+  },
+  {
+    "id": "REQ-155",
+    "quelle": "12",
+    "kategorie": "Funktional",
+    "beschreibung": "Loan-Datensatz besitzt mindestens das Feld status",
+    "akzeptanzkriterium": "Feld status ist im Loan-Datenmodell vorhanden"
+  },
+  {
+    "id": "REQ-156",
+    "quelle": "12",
+    "kategorie": "Funktional",
+    "beschreibung": "Loan-Datensatz besitzt mindestens das Feld schema_version",
+    "akzeptanzkriterium": "Feld schema_version ist im Loan-Datenmodell vorhanden"
+  },
+  {
+    "id": "REQ-157",
+    "quelle": "12",
+    "kategorie": "Funktional",
+    "beschreibung": "requested_at bezeichnet den Zeitpunkt der Anfrage",
+    "akzeptanzkriterium": "Feld wird beim Stellen der Anfrage gesetzt"
+  },
+  {
+    "id": "REQ-158",
+    "quelle": "12",
+    "kategorie": "Funktional",
+    "beschreibung": "accepted_at bezeichnet Zeitpunkt der Eigentümer-Bestätigung und Beginn der Ausleihe",
+    "akzeptanzkriterium": "Feld wird bei Bestätigung gesetzt und nicht danach verändert"
+  },
+  {
+    "id": "REQ-159",
+    "quelle": "12",
+    "kategorie": "Funktional",
+    "beschreibung": "returned_at bezeichnet den Zeitpunkt der vom Eigentümer bestätigten Rückgabe",
+    "akzeptanzkriterium": "Feld wird bei Rückgabebestätigung gesetzt"
+  },
+  {
+    "id": "REQ-160",
+    "quelle": "12",
+    "kategorie": "Explizit-Ausgeschlossen",
+    "beschreibung": "Es gibt kein separates Feld lent_at",
+    "akzeptanzkriterium": "Guard-Test: Loan-Datenmodell besitzt kein Feld lent_at"
+  },
+  {
+    "id": "REQ-161",
+    "quelle": "12",
+    "kategorie": "Explizit-Ausgeschlossen",
+    "beschreibung": "Ein Feld für eine erwartete Rückgabe (expected_return_at) ist im MVP bewusst nicht enthalten",
+    "akzeptanzkriterium": "Guard-Test: Loan-Datenmodell besitzt kein Feld expected_return_at"
+  },
+  {
+    "id": "REQ-162",
+    "quelle": "13",
+    "kategorie": "Funktional",
+    "beschreibung": "Bei Bestätigung wird accepted_at auf den aktuellen Zeitpunkt gesetzt",
+    "akzeptanzkriterium": "accepted_at == Zeitpunkt der Bestätigungs-Aktion"
+  },
+  {
+    "id": "REQ-163",
+    "quelle": "13",
+    "kategorie": "Funktional",
+    "beschreibung": "Bei Rückgabebestätigung wird returned_at auf den aktuellen Zeitpunkt gesetzt",
+    "akzeptanzkriterium": "returned_at == Zeitpunkt der Rückgabebestätigungs-Aktion"
+  },
+  {
+    "id": "REQ-164",
+    "quelle": "14",
+    "kategorie": "Funktional",
+    "beschreibung": "Rückgabe wird vom Eigentümer bestätigt",
+    "akzeptanzkriterium": "Nur der Eigentümer kann die Rückgabebestätigung auslösen"
+  },
+  {
+    "id": "REQ-165",
+    "quelle": "14",
+    "kategorie": "Funktional",
+    "beschreibung": "Rückgabebestätigung beendet den aktiven Leihvorgang",
+    "akzeptanzkriterium": "Nach Bestätigung existiert kein aktiver (nicht abgeschlossener) Loan mehr für dieses Tool"
+  },
+  {
+    "id": "REQ-166",
+    "quelle": "14",
+    "kategorie": "Funktional",
+    "beschreibung": "Rückgabebestätigung setzt returned_at",
+    "akzeptanzkriterium": "returned_at ist nach Bestätigung befüllt"
+  },
+  {
+    "id": "REQ-167",
+    "quelle": "14",
+    "kategorie": "Funktional",
+    "beschreibung": "Rückgabebestätigung setzt den Loan-Status auf COMPLETED",
+    "akzeptanzkriterium": "Loan.status == COMPLETED nach Bestätigung"
+  },
+  {
+    "id": "REQ-168",
+    "quelle": "14",
+    "kategorie": "Funktional",
+    "beschreibung": "Rückgabebestätigung setzt das Werkzeug wieder auf AVAILABLE",
+    "akzeptanzkriterium": "Tool.status == AVAILABLE nach Bestätigung"
+  },
+  {
+    "id": "REQ-169",
+    "quelle": "14",
+    "kategorie": "Funktional",
+    "beschreibung": "Nach Abschluss kann eine erneute Ausleihe beantragt werden",
+    "akzeptanzkriterium": "Neue Leihanfrage auf dasselbe Werkzeug ist nach COMPLETED möglich"
+  },
+  {
+    "id": "REQ-170",
+    "quelle": "15",
+    "kategorie": "Historie",
+    "beschreibung": "Historie ist keine öffentliche Statistik und kein Bewertungsprofil",
+    "akzeptanzkriterium": "Historie-Daten sind nur lokal für den Nutzer selbst sichtbar, keine aggregierten öffentlichen Kennzahlen"
+  },
+  {
+    "id": "REQ-171",
+    "quelle": "15.1",
+    "kategorie": "Historie",
+    "beschreibung": "Nutzer sieht Perspektive „Von anderen geliehen\"",
+    "akzeptanzkriterium": "Historie-Ansicht listet alle Fälle, in denen der Nutzer Ausleiher war"
+  },
+  {
+    "id": "REQ-172",
+    "quelle": "15.2",
+    "kategorie": "Historie",
+    "beschreibung": "Nutzer sieht Perspektive „An andere verliehen\"",
+    "akzeptanzkriterium": "Historie-Ansicht listet alle Fälle, in denen der Nutzer Eigentümer war"
+  },
+  {
+    "id": "REQ-173",
+    "quelle": "15",
+    "kategorie": "Historie",
+    "beschreibung": "Für einen aktuell laufenden Leihvorgang wird kein Rückgabezeitpunkt angezeigt",
+    "akzeptanzkriterium": "Aktive Einträge zeigen „seit <Datum>\" / „Aktiv\" statt eines Rückgabedatums"
+  },
+  {
+    "id": "REQ-174",
+    "quelle": "16",
+    "kategorie": "Historie",
+    "beschreibung": "Historieneintrag enthält mindestens: Werkzeug",
+    "akzeptanzkriterium": "Feld/Angabe „Werkzeug\" ist in jedem Historieneintrag vorhanden bzw. ableitbar"
+  },
+  {
+    "id": "REQ-175",
+    "quelle": "16",
+    "kategorie": "Historie",
+    "beschreibung": "Historieneintrag enthält mindestens: Community",
+    "akzeptanzkriterium": "Feld/Angabe „Community\" ist in jedem Historieneintrag vorhanden bzw. ableitbar"
+  },
+  {
+    "id": "REQ-176",
+    "quelle": "16",
+    "kategorie": "Historie",
+    "beschreibung": "Historieneintrag enthält mindestens: Gegenpartei",
+    "akzeptanzkriterium": "Feld/Angabe „Gegenpartei\" ist in jedem Historieneintrag vorhanden bzw. ableitbar"
+  },
+  {
+    "id": "REQ-177",
+    "quelle": "16",
+    "kategorie": "Historie",
+    "beschreibung": "Historieneintrag enthält mindestens: Leihbeginn",
+    "akzeptanzkriterium": "Feld/Angabe „Leihbeginn\" ist in jedem Historieneintrag vorhanden bzw. ableitbar"
+  },
+  {
+    "id": "REQ-178",
+    "quelle": "16",
+    "kategorie": "Historie",
+    "beschreibung": "Historieneintrag enthält mindestens: Rückgabezeitpunkt (sofern abgeschlossen)",
+    "akzeptanzkriterium": "Feld/Angabe „Rückgabezeitpunkt (sofern abgeschlossen)\" ist in jedem Historieneintrag vorhanden bzw. ableitbar"
+  },
+  {
+    "id": "REQ-179",
+    "quelle": "16",
+    "kategorie": "Historie",
+    "beschreibung": "Historieneintrag enthält mindestens: aktueller bzw. historischer Status",
+    "akzeptanzkriterium": "Feld/Angabe „aktueller bzw. historischer Status\" ist in jedem Historieneintrag vorhanden bzw. ableitbar"
+  },
+  {
+    "id": "REQ-180",
+    "quelle": "16",
+    "kategorie": "Historie",
+    "beschreibung": "Historieneintrag enthält mindestens: Richtung (geliehen/verliehen)",
+    "akzeptanzkriterium": "Feld/Angabe „Richtung (geliehen/verliehen)\" ist in jedem Historieneintrag vorhanden bzw. ableitbar"
+  },
+  {
+    "id": "REQ-181",
+    "quelle": "16",
+    "kategorie": "Historie",
+    "beschreibung": "Historie ist lokal und offline verfügbar",
+    "akzeptanzkriterium": "Historie-Ansicht funktioniert ohne Netzwerkverbindung"
+  },
+  {
+    "id": "REQ-182",
+    "quelle": "16",
+    "kategorie": "Historie",
+    "beschreibung": "Historie ist filterbar nach Community",
+    "akzeptanzkriterium": "Filter „Community\" schränkt die angezeigten Historieneinträge korrekt ein"
+  },
+  {
+    "id": "REQ-183",
+    "quelle": "16",
+    "kategorie": "Historie",
+    "beschreibung": "Historie ist filterbar nach Werkzeug",
+    "akzeptanzkriterium": "Filter „Werkzeug\" schränkt die angezeigten Historieneinträge korrekt ein"
+  },
+  {
+    "id": "REQ-184",
+    "quelle": "16",
+    "kategorie": "Historie",
+    "beschreibung": "Historie ist filterbar nach Zeitraum",
+    "akzeptanzkriterium": "Filter „Zeitraum\" schränkt die angezeigten Historieneinträge korrekt ein"
+  },
+  {
+    "id": "REQ-185",
+    "quelle": "16",
+    "kategorie": "Historie",
+    "beschreibung": "Historie ist filterbar nach Richtung",
+    "akzeptanzkriterium": "Filter „Richtung\" schränkt die angezeigten Historieneinträge korrekt ein"
+  },
+  {
+    "id": "REQ-186",
+    "quelle": "17",
+    "kategorie": "Funktional",
+    "beschreibung": "„Wo\" bezeichnet im MVP die Community, in der der Leihvorgang stattfand",
+    "akzeptanzkriterium": "Historieneintrag zeigt die zugehörige Community als Ortsangabe"
+  },
+  {
+    "id": "REQ-187",
+    "quelle": "17",
+    "kategorie": "Explizit-Ausgeschlossen",
+    "beschreibung": "Physische Ortsangabe/GPS-Position ist nicht Bestandteil des MVP",
+    "akzeptanzkriterium": "Guard-Test: kein Geodaten-/GPS-Feld ist im Domain-Modell vorhanden"
+  },
+  {
+    "id": "REQ-188",
+    "quelle": "18.1",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Technischer Event-Verlauf umfasst u. a. das Event ToolCreated",
+    "akzeptanzkriterium": "Event-Typ ToolCreated ist im technischen Event-Modell vorhanden"
+  },
+  {
+    "id": "REQ-189",
+    "quelle": "18.1",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Technischer Event-Verlauf umfasst u. a. das Event ToolUpdated",
+    "akzeptanzkriterium": "Event-Typ ToolUpdated ist im technischen Event-Modell vorhanden"
+  },
+  {
+    "id": "REQ-190",
+    "quelle": "18.1",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Technischer Event-Verlauf umfasst u. a. das Event LoanRequested",
+    "akzeptanzkriterium": "Event-Typ LoanRequested ist im technischen Event-Modell vorhanden"
+  },
+  {
+    "id": "REQ-191",
+    "quelle": "18.1",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Technischer Event-Verlauf umfasst u. a. das Event LoanAccepted",
+    "akzeptanzkriterium": "Event-Typ LoanAccepted ist im technischen Event-Modell vorhanden"
+  },
+  {
+    "id": "REQ-192",
+    "quelle": "18.1",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Technischer Event-Verlauf umfasst u. a. das Event LoanReturned",
+    "akzeptanzkriterium": "Event-Typ LoanReturned ist im technischen Event-Modell vorhanden"
+  },
+  {
+    "id": "REQ-193",
+    "quelle": "18.1",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Technischer Event-Verlauf umfasst u. a. das Event ToolDeleted",
+    "akzeptanzkriterium": "Event-Typ ToolDeleted ist im technischen Event-Modell vorhanden"
+  },
+  {
+    "id": "REQ-194",
+    "quelle": "18.2",
+    "kategorie": "Historie",
+    "beschreibung": "Die persönliche Historie ist eine abgeleitete, nutzerorientierte Sicht auf die relevanten Leihdaten",
+    "akzeptanzkriterium": "Persönliche Historie wird aus Domain-/Event-Daten berechnet, nicht separat als Wahrheitsquelle geführt"
+  },
+  {
+    "id": "REQ-195",
+    "quelle": "18.2",
+    "kategorie": "Historie",
+    "beschreibung": "Die persönliche Historie muss nicht als eigenständiger unveränderlicher Event-Datensatz gespeichert werden",
+    "akzeptanzkriterium": "Persönliche Historie kann aus verschlüsselten Events rekonstruiert und lokal optimiert gespeichert werden"
+  },
+  {
+    "id": "REQ-196",
+    "quelle": "19",
+    "kategorie": "Historie",
+    "beschreibung": "Nutzer kann seine lokal gespeicherte persönliche Historie löschen",
+    "akzeptanzkriterium": "Lösch-Aktion für lokale Historie ist in der App verfügbar"
+  },
+  {
+    "id": "REQ-197",
+    "quelle": "19",
+    "kategorie": "Historie",
+    "beschreibung": "Löschen der eigenen lokalen Historie darf nicht die historischen Daten anderer Community-Mitglieder zerstören",
+    "akzeptanzkriterium": "Nach lokalem Löschen sind Historiendaten anderer Mitglieder auf deren Geräten unverändert"
+  },
+  {
+    "id": "REQ-198",
+    "quelle": "19",
+    "kategorie": "Historie",
+    "beschreibung": "Löschen der lokalen Historie bedeutet nicht automatisch das Löschen zugehöriger Events aus dem verteilten Netzwerk",
+    "akzeptanzkriterium": "Lokales Löschen löst keine Lösch-Events für andere Teilnehmer aus"
+  },
+  {
+    "id": "REQ-199",
+    "quelle": "20",
+    "kategorie": "Offline-Sync",
+    "beschreibung": "Offline lokal möglich: Communities anzeigen",
+    "akzeptanzkriterium": "Aktion „Communities anzeigen\" funktioniert nachweislich ohne Netzwerkverbindung"
+  },
+  {
+    "id": "REQ-200",
+    "quelle": "20",
+    "kategorie": "Offline-Sync",
+    "beschreibung": "Offline lokal möglich: Werkzeuge anzeigen",
+    "akzeptanzkriterium": "Aktion „Werkzeuge anzeigen\" funktioniert nachweislich ohne Netzwerkverbindung"
+  },
+  {
+    "id": "REQ-201",
+    "quelle": "20",
+    "kategorie": "Offline-Sync",
+    "beschreibung": "Offline lokal möglich: eigene Werkzeuge bearbeiten",
+    "akzeptanzkriterium": "Aktion „eigene Werkzeuge bearbeiten\" funktioniert nachweislich ohne Netzwerkverbindung"
+  },
+  {
+    "id": "REQ-202",
+    "quelle": "20",
+    "kategorie": "Offline-Sync",
+    "beschreibung": "Offline lokal möglich: Leihanfragen vorbereiten",
+    "akzeptanzkriterium": "Aktion „Leihanfragen vorbereiten\" funktioniert nachweislich ohne Netzwerkverbindung"
+  },
+  {
+    "id": "REQ-203",
+    "quelle": "20",
+    "kategorie": "Offline-Sync",
+    "beschreibung": "Offline lokal möglich: verfügbare lokale Daten anzeigen",
+    "akzeptanzkriterium": "Aktion „verfügbare lokale Daten anzeigen\" funktioniert nachweislich ohne Netzwerkverbindung"
+  },
+  {
+    "id": "REQ-204",
+    "quelle": "20",
+    "kategorie": "Offline-Sync",
+    "beschreibung": "Offline lokal möglich: persönliche Historie anzeigen",
+    "akzeptanzkriterium": "Aktion „persönliche Historie anzeigen\" funktioniert nachweislich ohne Netzwerkverbindung"
+  },
+  {
+    "id": "REQ-205",
+    "quelle": "20",
+    "kategorie": "Offline-Sync",
+    "beschreibung": "Aktionen, die eine Synchronisation benötigen, werden lokal als ausstehend gespeichert",
+    "akzeptanzkriterium": "Solche Aktionen erhalten Sync-Status PENDING statt zu scheitern"
+  },
+  {
+    "id": "REQ-206",
+    "quelle": "20",
+    "kategorie": "Offline-Sync",
+    "beschreibung": "Sync-Zustandsmodell umfasst LOCAL → PENDING → SYNCING → SYNCED",
+    "akzeptanzkriterium": "Sync-Status eines Datensatzes durchläuft diese Abfolge im Erfolgsfall"
+  },
+  {
+    "id": "REQ-207",
+    "quelle": "20",
+    "kategorie": "Offline-Sync",
+    "beschreibung": "Bei Fehler wechselt der Sync-Status zu FAILED",
+    "akzeptanzkriterium": "Fehlgeschlagene Synchronisation setzt Status auf FAILED statt Datenverlust"
+  },
+  {
+    "id": "REQ-208",
+    "quelle": "20",
+    "kategorie": "Offline-Sync",
+    "beschreibung": "Bei Konflikten wechselt der Sync-Status zu CONFLICT und wird nach deterministischen Regeln zu SYNCED aufgelöst",
+    "akzeptanzkriterium": "CONFLICT-Zustand ist erreichbar und über definierte Regeln in SYNCED überführbar (inkl. Rückweg gemäß v0.4-Korrektur Abschnitt 20)"
+  },
+  {
+    "id": "REQ-209",
+    "quelle": "20",
+    "kategorie": "Offline-Sync",
+    "beschreibung": "Netzwerkfehler dürfen niemals zum Verlust einer bereits lokal bestätigten Benutzeraktion führen",
+    "akzeptanzkriterium": "Simulierter Netzwerkausfall nach lokaler Bestätigung führt zu keinem Datenverlust, nur zu PENDING/FAILED-Status"
+  },
+  {
+    "id": "REQ-210",
+    "quelle": "21",
+    "kategorie": "Offline-Sync",
+    "beschreibung": "Die Anwendung funktioniert ohne zentralen Datenbankserver",
+    "akzeptanzkriterium": "Kernfunktionen benötigen keinen zentralen DB-Server"
+  },
+  {
+    "id": "REQ-211",
+    "quelle": "21",
+    "kategorie": "Offline-Sync",
+    "beschreibung": "Primärer Sync-Mechanismus im MVP ist ein Nostr-basiertes Modell",
+    "akzeptanzkriterium": "Synchronisation nutzt Nostr-Relays als Transportmechanismus"
+  },
+  {
+    "id": "REQ-212",
+    "quelle": "21",
+    "kategorie": "Offline-Sync",
+    "beschreibung": "Mehrere Relays werden unterstützt",
+    "akzeptanzkriterium": "Konfiguration mehrerer Relay-Endpunkte ist möglich"
+  },
+  {
+    "id": "REQ-213",
+    "quelle": "21",
+    "kategorie": "Offline-Sync",
+    "beschreibung": "Ein einzelner Relay darf kein Single Point of Failure sein",
+    "akzeptanzkriterium": "Ausfall eines Relays verhindert nicht die Synchronisation über verbleibende Relays"
+  },
+  {
+    "id": "REQ-214",
+    "quelle": "21",
+    "kategorie": "Offline-Sync",
+    "beschreibung": "Lokale Datenbank dient u. a. als Offline-Datenspeicher",
+    "akzeptanzkriterium": "Funktion „Offline-Datenspeicher\" wird von der lokalen Datenbank abgedeckt"
+  },
+  {
+    "id": "REQ-215",
+    "quelle": "21",
+    "kategorie": "Offline-Sync",
+    "beschreibung": "Lokale Datenbank dient u. a. als lokaler Cache",
+    "akzeptanzkriterium": "Funktion „lokaler Cache\" wird von der lokalen Datenbank abgedeckt"
+  },
+  {
+    "id": "REQ-216",
+    "quelle": "21",
+    "kategorie": "Offline-Sync",
+    "beschreibung": "Lokale Datenbank dient u. a. als Event-Index",
+    "akzeptanzkriterium": "Funktion „Event-Index\" wird von der lokalen Datenbank abgedeckt"
+  },
+  {
+    "id": "REQ-217",
+    "quelle": "21",
+    "kategorie": "Offline-Sync",
+    "beschreibung": "Lokale Datenbank dient u. a. als Pending-Queue",
+    "akzeptanzkriterium": "Funktion „Pending-Queue\" wird von der lokalen Datenbank abgedeckt"
+  },
+  {
+    "id": "REQ-218",
+    "quelle": "21",
+    "kategorie": "Offline-Sync",
+    "beschreibung": "Lokale Datenbank dient u. a. als Statusspeicher",
+    "akzeptanzkriterium": "Funktion „Statusspeicher\" wird von der lokalen Datenbank abgedeckt"
+  },
+  {
+    "id": "REQ-219",
+    "quelle": "22",
+    "kategorie": "Offline-Sync",
+    "beschreibung": "Die Domain-Schicht behandelt Konflikte anhand deterministischer Regeln",
+    "akzeptanzkriterium": "Gleiche Konfliktausgangslage führt immer zum gleichen Auflösungsergebnis"
+  },
+  {
+    "id": "REQ-220",
+    "quelle": "22",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Konfliktauflösungsregeln werden in einem separaten ADR spezifiziert (ADR-04)",
+    "akzeptanzkriterium": "ADR-04 dokumentiert Prioritätsregeln, Event-Reihenfolge, konkurrierende Anfragen/Änderungen"
+  },
+  {
+    "id": "REQ-221",
+    "quelle": "22",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Konfliktauflösung darf nicht von UI oder Netzwerkcode abhängen",
+    "akzeptanzkriterium": "Konfliktauflösungslogik liegt vollständig in der Domain-Schicht und ist ohne UI/Netzwerk testbar"
+  },
+  {
+    "id": "REQ-222",
+    "quelle": "23",
+    "kategorie": "Security",
+    "beschreibung": "Ende-zu-Ende-Verschlüsselung gilt insbesondere für: Werkzeugdaten",
+    "akzeptanzkriterium": "„Werkzeugdaten\" sind für Nicht-Community-Mitglieder inkl. Relay-Betreiber nicht im Klartext einsehbar"
+  },
+  {
+    "id": "REQ-223",
+    "quelle": "23",
+    "kategorie": "Security",
+    "beschreibung": "Ende-zu-Ende-Verschlüsselung gilt insbesondere für: Mitgliedsinformationen",
+    "akzeptanzkriterium": "„Mitgliedsinformationen\" sind für Nicht-Community-Mitglieder inkl. Relay-Betreiber nicht im Klartext einsehbar"
+  },
+  {
+    "id": "REQ-224",
+    "quelle": "23",
+    "kategorie": "Security",
+    "beschreibung": "Ende-zu-Ende-Verschlüsselung gilt insbesondere für: Leihanfragen",
+    "akzeptanzkriterium": "„Leihanfragen\" sind für Nicht-Community-Mitglieder inkl. Relay-Betreiber nicht im Klartext einsehbar"
+  },
+  {
+    "id": "REQ-225",
+    "quelle": "23",
+    "kategorie": "Security",
+    "beschreibung": "Ende-zu-Ende-Verschlüsselung gilt insbesondere für: Leihhistorie",
+    "akzeptanzkriterium": "„Leihhistorie\" sind für Nicht-Community-Mitglieder inkl. Relay-Betreiber nicht im Klartext einsehbar"
+  },
+  {
+    "id": "REQ-226",
+    "quelle": "23",
+    "kategorie": "Security",
+    "beschreibung": "Ende-zu-Ende-Verschlüsselung gilt insbesondere für: private Metadaten",
+    "akzeptanzkriterium": "„private Metadaten\" sind für Nicht-Community-Mitglieder inkl. Relay-Betreiber nicht im Klartext einsehbar"
+  },
+  {
+    "id": "REQ-227",
+    "quelle": "23",
+    "kategorie": "Security",
+    "beschreibung": "Ende-zu-Ende-Verschlüsselung gilt insbesondere für: Fotos",
+    "akzeptanzkriterium": "„Fotos\" sind für Nicht-Community-Mitglieder inkl. Relay-Betreiber nicht im Klartext einsehbar"
+  },
+  {
+    "id": "REQ-228",
+    "quelle": "23",
+    "kategorie": "Security",
+    "beschreibung": "Ein Relay-Betreiber darf keine lesbaren privaten Informationen gewinnen können",
+    "akzeptanzkriterium": "Ausgehender Datenverkehr an Relays enthält keine unverschlüsselten privaten Inhalte"
+  },
+  {
+    "id": "REQ-229",
+    "quelle": "23",
+    "kategorie": "Security",
+    "beschreibung": "Es dürfen ausschließlich etablierte und geprüfte kryptografische Verfahren und Bibliotheken verwendet werden",
+    "akzeptanzkriterium": "Code-Review bestätigt Nutzung anerkannter Krypto-Bibliotheken statt Eigenimplementierung"
+  },
+  {
+    "id": "REQ-230",
+    "quelle": "23",
+    "kategorie": "Security",
+    "beschreibung": "Keine eigene Kryptografie",
+    "akzeptanzkriterium": "Guard-Test/Review: kein selbstgeschriebener kryptografischer Primitiv-Algorithmus im Code"
+  },
+  {
+    "id": "REQ-231",
+    "quelle": "24",
+    "kategorie": "Security",
+    "beschreibung": "EXIF-Daten werden vor dem Upload entfernt",
+    "akzeptanzkriterium": "Hochgeladenes Foto enthält keine EXIF-Metadaten"
+  },
+  {
+    "id": "REQ-232",
+    "quelle": "24",
+    "kategorie": "Security",
+    "beschreibung": "GPS-Daten werden insbesondere vor dem Upload entfernt",
+    "akzeptanzkriterium": "Hochgeladenes Foto enthält keine GPS-Metadaten"
+  },
+  {
+    "id": "REQ-233",
+    "quelle": "24",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Bild wird ggf. vor Upload verkleinert/komprimiert",
+    "akzeptanzkriterium": "Bildgröße wird vor Übertragung reduziert, sofern sinnvoll"
+  },
+  {
+    "id": "REQ-234",
+    "quelle": "24",
+    "kategorie": "Security",
+    "beschreibung": "Bild wird vor Übertragung verschlüsselt",
+    "akzeptanzkriterium": "Binärdaten des Fotos sind vor dem Verlassen des Geräts verschlüsselt"
+  },
+  {
+    "id": "REQ-235",
+    "quelle": "24",
+    "kategorie": "Security",
+    "beschreibung": "Es wird ausschließlich das verschlüsselte Bild übertragen",
+    "akzeptanzkriterium": "Kein unverschlüsseltes Bild wird an Storage/Relay übertragen"
+  },
+  {
+    "id": "REQ-236",
+    "quelle": "24",
+    "kategorie": "Security",
+    "beschreibung": "Es reicht nicht, nur URL/Referenz auf ein unverschlüsseltes Bild zu verschlüsseln – die Bilddatei selbst muss verschlüsselt sein",
+    "akzeptanzkriterium": "Guard-Test: verschlüsselte Referenz auf unverschlüsselte Bilddatei gilt als Verstoß"
+  },
+  {
+    "id": "REQ-237",
+    "quelle": "25",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Für Bilder wird ein Blossom-kompatibler Ansatz verwendet",
+    "akzeptanzkriterium": "Foto-Storage-Client implementiert das Blossom-Protokoll"
+  },
+  {
+    "id": "REQ-238",
+    "quelle": "25",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Die Anwendung darf nicht dauerhaft von einem einzelnen Storage-Anbieter abhängig sein",
+    "akzeptanzkriterium": "Mindestens ein alternativer Storage-Endpunkt ist konfigurierbar"
+  },
+  {
+    "id": "REQ-239",
+    "quelle": "25",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Wo sinnvoll, werden mehrere Speicheranbieter unterstützt bzw. Bilder repliziert",
+    "akzeptanzkriterium": "Upload kann an mehrere Blossom-Server gleichzeitig erfolgen"
+  },
+  {
+    "id": "REQ-240",
+    "quelle": "25",
+    "kategorie": "Security",
+    "beschreibung": "Der eigentliche Bildinhalt bleibt verschlüsselt",
+    "akzeptanzkriterium": "Auf dem Storage-Server liegt nur verschlüsseltes Bildmaterial"
+  },
+  {
+    "id": "REQ-241",
+    "quelle": "25",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "In den verschlüsselten Daten wird eine Referenz bzw. ein Content Hash gespeichert",
+    "akzeptanzkriterium": "Domain-Datensatz referenziert Foto über Content Hash statt Klartext-URL"
+  },
+  {
+    "id": "REQ-242",
+    "quelle": "26",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Anwendung folgt Privacy by Design und Privacy by Default",
+    "akzeptanzkriterium": "Voreinstellungen sammeln minimal notwendige Daten ohne Zusatzaktion des Nutzers"
+  },
+  {
+    "id": "REQ-243",
+    "quelle": "26",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Es werden möglichst wenige personenbezogene Daten erhoben (Datensparsamkeit)",
+    "akzeptanzkriterium": "Datenmodell enthält keine über den Zweck hinausgehenden personenbezogenen Felder"
+  },
+  {
+    "id": "REQ-244",
+    "quelle": "26",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Keine unnötige zentrale Sammlung von: E-Mail-Adressen",
+    "akzeptanzkriterium": "„E-Mail-Adressen\" werden nicht zentral/unnötig erhoben oder übertragen"
+  },
+  {
+    "id": "REQ-245",
+    "quelle": "26",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Keine unnötige zentrale Sammlung von: Telefonnummern",
+    "akzeptanzkriterium": "„Telefonnummern\" werden nicht zentral/unnötig erhoben oder übertragen"
+  },
+  {
+    "id": "REQ-246",
+    "quelle": "26",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Keine unnötige zentrale Sammlung von: Standortdaten",
+    "akzeptanzkriterium": "„Standortdaten\" werden nicht zentral/unnötig erhoben oder übertragen"
+  },
+  {
+    "id": "REQ-247",
+    "quelle": "26",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Keine unnötige zentrale Sammlung von: Gerätekennungen",
+    "akzeptanzkriterium": "„Gerätekennungen\" werden nicht zentral/unnötig erhoben oder übertragen"
+  },
+  {
+    "id": "REQ-248",
+    "quelle": "26",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Keine unnötige zentrale Sammlung von: Trackingdaten",
+    "akzeptanzkriterium": "„Trackingdaten\" werden nicht zentral/unnötig erhoben oder übertragen"
+  },
+  {
+    "id": "REQ-249",
+    "quelle": "27",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Es kann nicht garantiert werden, dass ein veröffentlichtes Event aus jedem Relay vollständig verschwindet",
+    "akzeptanzkriterium": "Dokumentation benennt diese technische Grenze explizit"
+  },
+  {
+    "id": "REQ-250",
+    "quelle": "27",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Die App nutzt vorhandene Löschmechanismen",
+    "akzeptanzkriterium": "Verfügbare Nostr-Delete-Events o. ä. werden bei Löschvorgängen ausgelöst"
+  },
+  {
+    "id": "REQ-251",
+    "quelle": "27",
+    "kategorie": "UI",
+    "beschreibung": "Dem Nutzer wird transparent erklärt, dass lokales Löschen zuverlässig, vollständiges Löschen aus fremden/verteilten Speichern aber nicht garantierbar ist",
+    "akzeptanzkriterium": "Entsprechender Hinweistext ist in der UI vorhanden"
+  },
+  {
+    "id": "REQ-252",
+    "quelle": "28",
+    "kategorie": "Security",
+    "beschreibung": "Im MVP besitzt ein Nutzer grundsätzlich eine kryptografische Identität",
+    "akzeptanzkriterium": "Ein Public/Private-Keypaar repräsentiert den Nutzer über alle Geräte hinweg"
+  },
+  {
+    "id": "REQ-253",
+    "quelle": "28",
+    "kategorie": "Security",
+    "beschreibung": "Diese Identität kann auf einem weiteren Gerät wiederhergestellt werden",
+    "akzeptanzkriterium": "Wiederherstellungs-Flow auf Zweitgerät führt zu identischem Public Key"
+  },
+  {
+    "id": "REQ-254",
+    "quelle": "28",
+    "kategorie": "Security",
+    "beschreibung": "Der Transfer erfolgt über einen geschützten Backup-/Recovery-Mechanismus",
+    "akzeptanzkriterium": "Wiederherstellung nutzt den in Abschnitt 6 definierten Backup-Mechanismus"
+  },
+  {
+    "id": "REQ-255",
+    "quelle": "28",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Bekannte MVP-Einschränkung: kein Widerruf eines einzelnen verlorenen/gestohlenen Geräts ohne vollständigen Identitätswechsel",
+    "akzeptanzkriterium": "UI weist bei Geräteverlust auf Notwendigkeit eines Identitätswechsels hin; Risiko ist dokumentiert"
+  },
+  {
+    "id": "REQ-256",
+    "quelle": "29",
+    "kategorie": "Explizit-Ausgeschlossen",
+    "beschreibung": "Serverbasierte Push-Benachrichtigungen sind nicht Bestandteil des MVP",
+    "akzeptanzkriterium": "Guard-Test: keine Server-Push-Infrastruktur ist im MVP integriert"
+  },
+  {
+    "id": "REQ-257",
+    "quelle": "29",
+    "kategorie": "Offline-Sync",
+    "beschreibung": "Synchronisation kann erfolgen bei: App-Start",
+    "akzeptanzkriterium": "Auslöser „App-Start\" stößt eine Synchronisation an"
+  },
+  {
+    "id": "REQ-258",
+    "quelle": "29",
+    "kategorie": "Offline-Sync",
+    "beschreibung": "Synchronisation kann erfolgen bei: manueller Refresh",
+    "akzeptanzkriterium": "Auslöser „manueller Refresh\" stößt eine Synchronisation an"
+  },
+  {
+    "id": "REQ-259",
+    "quelle": "29",
+    "kategorie": "Offline-Sync",
+    "beschreibung": "Synchronisation kann erfolgen bei: aktiver Synchronisationsvorgang",
+    "akzeptanzkriterium": "Auslöser „aktiver Synchronisationsvorgang\" stößt eine Synchronisation an"
+  },
+  {
+    "id": "REQ-260",
+    "quelle": "29",
+    "kategorie": "Offline-Sync",
+    "beschreibung": "Synchronisation kann erfolgen bei: geeignete Hintergrundmechanismen des Betriebssystems",
+    "akzeptanzkriterium": "Auslöser „geeignete Hintergrundmechanismen des Betriebssystems\" stößt eine Synchronisation an"
+  },
+  {
+    "id": "REQ-261",
+    "quelle": "30",
+    "kategorie": "UI",
+    "beschreibung": "UI-Bereich Communities: Meine Communities",
+    "akzeptanzkriterium": "Screen/Funktion „Meine Communities\" ist im Bereich Communities erreichbar"
+  },
+  {
+    "id": "REQ-262",
+    "quelle": "30",
+    "kategorie": "UI",
+    "beschreibung": "UI-Bereich Communities: Community auswählen",
+    "akzeptanzkriterium": "Screen/Funktion „Community auswählen\" ist im Bereich Communities erreichbar"
+  },
+  {
+    "id": "REQ-263",
+    "quelle": "30",
+    "kategorie": "UI",
+    "beschreibung": "UI-Bereich Communities: Mitglieder",
+    "akzeptanzkriterium": "Screen/Funktion „Mitglieder\" ist im Bereich Communities erreichbar"
+  },
+  {
+    "id": "REQ-264",
+    "quelle": "30",
+    "kategorie": "UI",
+    "beschreibung": "UI-Bereich Communities: Einladung",
+    "akzeptanzkriterium": "Screen/Funktion „Einladung\" ist im Bereich Communities erreichbar"
+  },
+  {
+    "id": "REQ-265",
+    "quelle": "30",
+    "kategorie": "UI",
+    "beschreibung": "UI-Bereich Werkzeuge: Alle Werkzeuge",
+    "akzeptanzkriterium": "Screen/Funktion „Alle Werkzeuge\" ist im Bereich Werkzeuge erreichbar"
+  },
+  {
+    "id": "REQ-266",
+    "quelle": "30",
+    "kategorie": "UI",
+    "beschreibung": "UI-Bereich Werkzeuge: Meine Werkzeuge",
+    "akzeptanzkriterium": "Screen/Funktion „Meine Werkzeuge\" ist im Bereich Werkzeuge erreichbar"
+  },
+  {
+    "id": "REQ-267",
+    "quelle": "30",
+    "kategorie": "UI",
+    "beschreibung": "UI-Bereich Werkzeuge: Verfügbare Werkzeuge",
+    "akzeptanzkriterium": "Screen/Funktion „Verfügbare Werkzeuge\" ist im Bereich Werkzeuge erreichbar"
+  },
+  {
+    "id": "REQ-268",
+    "quelle": "30",
+    "kategorie": "UI",
+    "beschreibung": "UI-Bereich Werkzeuge: verliehene Werkzeuge",
+    "akzeptanzkriterium": "Screen/Funktion „verliehene Werkzeuge\" ist im Bereich Werkzeuge erreichbar"
+  },
+  {
+    "id": "REQ-269",
+    "quelle": "30",
+    "kategorie": "UI",
+    "beschreibung": "UI-Bereich Werkzeuge: Werkzeugdetails",
+    "akzeptanzkriterium": "Screen/Funktion „Werkzeugdetails\" ist im Bereich Werkzeuge erreichbar"
+  },
+  {
+    "id": "REQ-270",
+    "quelle": "30",
+    "kategorie": "UI",
+    "beschreibung": "UI-Bereich Anfragen: eingehende Anfragen",
+    "akzeptanzkriterium": "Screen/Funktion „eingehende Anfragen\" ist im Bereich Anfragen erreichbar"
+  },
+  {
+    "id": "REQ-271",
+    "quelle": "30",
+    "kategorie": "UI",
+    "beschreibung": "UI-Bereich Anfragen: eigene Anfragen",
+    "akzeptanzkriterium": "Screen/Funktion „eigene Anfragen\" ist im Bereich Anfragen erreichbar"
+  },
+  {
+    "id": "REQ-272",
+    "quelle": "30",
+    "kategorie": "UI",
+    "beschreibung": "UI-Bereich Anfragen: Anfrage bestätigen",
+    "akzeptanzkriterium": "Screen/Funktion „Anfrage bestätigen\" ist im Bereich Anfragen erreichbar"
+  },
+  {
+    "id": "REQ-273",
+    "quelle": "30",
+    "kategorie": "UI",
+    "beschreibung": "UI-Bereich Anfragen: Anfrage ablehnen",
+    "akzeptanzkriterium": "Screen/Funktion „Anfrage ablehnen\" ist im Bereich Anfragen erreichbar"
+  },
+  {
+    "id": "REQ-274",
+    "quelle": "30",
+    "kategorie": "UI",
+    "beschreibung": "UI-Bereich Anfragen: Anfrage zurückziehen",
+    "akzeptanzkriterium": "Screen/Funktion „Anfrage zurückziehen\" ist im Bereich Anfragen erreichbar"
+  },
+  {
+    "id": "REQ-275",
+    "quelle": "30",
+    "kategorie": "UI",
+    "beschreibung": "UI-Bereich Ausleihen: aktuell geliehene Werkzeuge",
+    "akzeptanzkriterium": "Screen/Funktion „aktuell geliehene Werkzeuge\" ist im Bereich Ausleihen erreichbar"
+  },
+  {
+    "id": "REQ-276",
+    "quelle": "30",
+    "kategorie": "UI",
+    "beschreibung": "UI-Bereich Ausleihen: aktuell verliehene Werkzeuge",
+    "akzeptanzkriterium": "Screen/Funktion „aktuell verliehene Werkzeuge\" ist im Bereich Ausleihen erreichbar"
+  },
+  {
+    "id": "REQ-277",
+    "quelle": "30",
+    "kategorie": "UI",
+    "beschreibung": "UI-Bereich Ausleihen: Rückgabe bestätigen",
+    "akzeptanzkriterium": "Screen/Funktion „Rückgabe bestätigen\" ist im Bereich Ausleihen erreichbar"
+  },
+  {
+    "id": "REQ-278",
+    "quelle": "30",
+    "kategorie": "UI",
+    "beschreibung": "UI-Bereich Historie: von anderen geliehen",
+    "akzeptanzkriterium": "Screen/Funktion „von anderen geliehen\" ist im Bereich Historie erreichbar"
+  },
+  {
+    "id": "REQ-279",
+    "quelle": "30",
+    "kategorie": "UI",
+    "beschreibung": "UI-Bereich Historie: an andere verliehen",
+    "akzeptanzkriterium": "Screen/Funktion „an andere verliehen\" ist im Bereich Historie erreichbar"
+  },
+  {
+    "id": "REQ-280",
+    "quelle": "30",
+    "kategorie": "UI",
+    "beschreibung": "UI-Bereich Historie: Filter",
+    "akzeptanzkriterium": "Screen/Funktion „Filter\" ist im Bereich Historie erreichbar"
+  },
+  {
+    "id": "REQ-281",
+    "quelle": "31",
+    "kategorie": "UI",
+    "beschreibung": "Der Status eines Werkzeugs muss eindeutig erkennbar sein",
+    "akzeptanzkriterium": "Jeder definierte Status hat eine eigene erkennbare Darstellung (Text/Icon)"
+  },
+  {
+    "id": "REQ-282",
+    "quelle": "31",
+    "kategorie": "UI",
+    "beschreibung": "Der Status darf nicht ausschließlich über Farbe vermittelt werden",
+    "akzeptanzkriterium": "Statusdarstellung enthält zusätzlich Text oder Symbol, nicht nur Farbcodierung"
+  },
+  {
+    "id": "REQ-283",
+    "quelle": "32",
+    "kategorie": "UI",
+    "beschreibung": "Barrierefreiheit: Unterstützung von Screenreader",
+    "akzeptanzkriterium": "„Screenreader\" ist bereits im MVP umgesetzt und geprüft"
+  },
+  {
+    "id": "REQ-284",
+    "quelle": "32",
+    "kategorie": "UI",
+    "beschreibung": "Barrierefreiheit: Unterstützung von ausreichende Kontraste",
+    "akzeptanzkriterium": "„ausreichende Kontraste\" ist bereits im MVP umgesetzt und geprüft"
+  },
+  {
+    "id": "REQ-285",
+    "quelle": "32",
+    "kategorie": "UI",
+    "beschreibung": "Barrierefreiheit: Unterstützung von dynamische Schriftgrößen",
+    "akzeptanzkriterium": "„dynamische Schriftgrößen\" ist bereits im MVP umgesetzt und geprüft"
+  },
+  {
+    "id": "REQ-286",
+    "quelle": "32",
+    "kategorie": "UI",
+    "beschreibung": "Barrierefreiheit: Unterstützung von ausreichend große Touch-Ziele",
+    "akzeptanzkriterium": "„ausreichend große Touch-Ziele\" ist bereits im MVP umgesetzt und geprüft"
+  },
+  {
+    "id": "REQ-287",
+    "quelle": "32",
+    "kategorie": "UI",
+    "beschreibung": "Barrierefreiheit: Unterstützung von semantische Beschriftungen",
+    "akzeptanzkriterium": "„semantische Beschriftungen\" ist bereits im MVP umgesetzt und geprüft"
+  },
+  {
+    "id": "REQ-288",
+    "quelle": "32",
+    "kategorie": "UI",
+    "beschreibung": "Barrierefreiheit: Unterstützung von keine ausschließliche Farbcodierung",
+    "akzeptanzkriterium": "„keine ausschließliche Farbcodierung\" ist bereits im MVP umgesetzt und geprüft"
+  },
+  {
+    "id": "REQ-289",
+    "quelle": "33",
+    "kategorie": "Security",
+    "beschreibung": "Sicherheitsanforderung: sichere Zufallszahlengenerierung",
+    "akzeptanzkriterium": "„sichere Zufallszahlengenerierung\" ist implementiert bzw. als CI-Prüfung aktiv"
+  },
+  {
+    "id": "REQ-290",
+    "quelle": "33",
+    "kategorie": "Security",
+    "beschreibung": "Sicherheitsanforderung: sichere Schlüsselablage",
+    "akzeptanzkriterium": "„sichere Schlüsselablage\" ist implementiert bzw. als CI-Prüfung aktiv"
+  },
+  {
+    "id": "REQ-291",
+    "quelle": "33",
+    "kategorie": "Security",
+    "beschreibung": "Sicherheitsanforderung: biometrischer/PIN-basierter Zugriff",
+    "akzeptanzkriterium": "„biometrischer/PIN-basierter Zugriff\" ist implementiert bzw. als CI-Prüfung aktiv"
+  },
+  {
+    "id": "REQ-292",
+    "quelle": "33",
+    "kategorie": "Security",
+    "beschreibung": "Sicherheitsanforderung: keine Secrets in Logs",
+    "akzeptanzkriterium": "„keine Secrets in Logs\" ist implementiert bzw. als CI-Prüfung aktiv"
+  },
+  {
+    "id": "REQ-293",
+    "quelle": "33",
+    "kategorie": "Security",
+    "beschreibung": "Sicherheitsanforderung: keine Secrets im Repository",
+    "akzeptanzkriterium": "„keine Secrets im Repository\" ist implementiert bzw. als CI-Prüfung aktiv"
+  },
+  {
+    "id": "REQ-294",
+    "quelle": "33",
+    "kategorie": "Security",
+    "beschreibung": "Sicherheitsanforderung: verschlüsselte private Daten",
+    "akzeptanzkriterium": "„verschlüsselte private Daten\" ist implementiert bzw. als CI-Prüfung aktiv"
+  },
+  {
+    "id": "REQ-295",
+    "quelle": "33",
+    "kategorie": "Security",
+    "beschreibung": "Sicherheitsanforderung: verschlüsselte Fotos",
+    "akzeptanzkriterium": "„verschlüsselte Fotos\" ist implementiert bzw. als CI-Prüfung aktiv"
+  },
+  {
+    "id": "REQ-296",
+    "quelle": "33",
+    "kategorie": "Security",
+    "beschreibung": "Sicherheitsanforderung: Eingabevalidierung",
+    "akzeptanzkriterium": "„Eingabevalidierung\" ist implementiert bzw. als CI-Prüfung aktiv"
+  },
+  {
+    "id": "REQ-297",
+    "quelle": "33",
+    "kategorie": "Security",
+    "beschreibung": "Sicherheitsanforderung: Berechtigungsprüfung in der Domain-Schicht",
+    "akzeptanzkriterium": "„Berechtigungsprüfung in der Domain-Schicht\" ist implementiert bzw. als CI-Prüfung aktiv"
+  },
+  {
+    "id": "REQ-298",
+    "quelle": "33",
+    "kategorie": "Security",
+    "beschreibung": "Sicherheitsanforderung: Dependency Security Scanning",
+    "akzeptanzkriterium": "„Dependency Security Scanning\" ist implementiert bzw. als CI-Prüfung aktiv"
+  },
+  {
+    "id": "REQ-299",
+    "quelle": "33",
+    "kategorie": "Security",
+    "beschreibung": "Sicherheitsanforderung: Secret Scanning",
+    "akzeptanzkriterium": "„Secret Scanning\" ist implementiert bzw. als CI-Prüfung aktiv"
+  },
+  {
+    "id": "REQ-300",
+    "quelle": "33",
+    "kategorie": "Security",
+    "beschreibung": "Sicherheitsanforderung: Schutz vor manipulierten Events",
+    "akzeptanzkriterium": "„Schutz vor manipulierten Events\" ist implementiert bzw. als CI-Prüfung aktiv"
+  },
+  {
+    "id": "REQ-301",
+    "quelle": "34",
+    "kategorie": "Security",
+    "beschreibung": "Lokale Schutzmechanismen: ungültige Events verwerfen",
+    "akzeptanzkriterium": "Mechanismus „ungültige Events verwerfen\" ist in der Domain-/Validierungsschicht implementiert"
+  },
+  {
+    "id": "REQ-302",
+    "quelle": "34",
+    "kategorie": "Security",
+    "beschreibung": "Lokale Schutzmechanismen: unbekannte Signaturen verwerfen",
+    "akzeptanzkriterium": "Mechanismus „unbekannte Signaturen verwerfen\" ist in der Domain-/Validierungsschicht implementiert"
+  },
+  {
+    "id": "REQ-303",
+    "quelle": "34",
+    "kategorie": "Security",
+    "beschreibung": "Lokale Schutzmechanismen: ungültige Zustandsübergänge ablehnen",
+    "akzeptanzkriterium": "Mechanismus „ungültige Zustandsübergänge ablehnen\" ist in der Domain-/Validierungsschicht implementiert"
+  },
+  {
+    "id": "REQ-304",
+    "quelle": "34",
+    "kategorie": "Security",
+    "beschreibung": "Lokale Schutzmechanismen: manipulierte Daten erkennen",
+    "akzeptanzkriterium": "Mechanismus „manipulierte Daten erkennen\" ist in der Domain-/Validierungsschicht implementiert"
+  },
+  {
+    "id": "REQ-305",
+    "quelle": "34",
+    "kategorie": "Security",
+    "beschreibung": "Lokale Schutzmechanismen: übermäßig große Datenmengen begrenzen",
+    "akzeptanzkriterium": "Mechanismus „übermäßig große Datenmengen begrenzen\" ist in der Domain-/Validierungsschicht implementiert"
+  },
+  {
+    "id": "REQ-306",
+    "quelle": "35",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Die Anwendung wird plattformübergreifend entwickelt (eine Codebasis für iOS/Android)",
+    "akzeptanzkriterium": "Ein gemeinsames Codebase-Artefakt läuft auf iOS und Android"
+  },
+  {
+    "id": "REQ-307",
+    "quelle": "35",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Tech-Stack-Kandidaten (Flutter/Dart, Riverpod, Drift/SQLite oder Isar, Nostr-Dart-Lib) sind durch ADRs zu bestätigen",
+    "akzeptanzkriterium": "ADR-07 (u. a.) dokumentiert die finale Tech-Stack-Entscheidung"
+  },
+  {
+    "id": "REQ-308",
+    "quelle": "35",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Die Domain-Logik darf keine direkte Abhängigkeit zu Flutter besitzen",
+    "akzeptanzkriterium": "Statische Analyse (Import-Linting) zeigt keinen Import von Flutter im Domain-Package"
+  },
+  {
+    "id": "REQ-309",
+    "quelle": "35",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Die Domain-Logik darf keine direkte Abhängigkeit zu SQLite besitzen",
+    "akzeptanzkriterium": "Statische Analyse (Import-Linting) zeigt keinen Import von SQLite im Domain-Package"
+  },
+  {
+    "id": "REQ-310",
+    "quelle": "35",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Die Domain-Logik darf keine direkte Abhängigkeit zu Nostr besitzen",
+    "akzeptanzkriterium": "Statische Analyse (Import-Linting) zeigt keinen Import von Nostr im Domain-Package"
+  },
+  {
+    "id": "REQ-311",
+    "quelle": "35",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Die Domain-Logik darf keine direkte Abhängigkeit zu konkrete Storage-Anbieter besitzen",
+    "akzeptanzkriterium": "Statische Analyse (Import-Linting) zeigt keinen Import von konkrete Storage-Anbieter im Domain-Package"
+  },
+  {
+    "id": "REQ-312",
+    "quelle": "36",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Anwendung ist in Schichten strukturiert: UI/Presentation → Application/State → Domain → Data/Infrastructure",
+    "akzeptanzkriterium": "Modulstruktur des Codes spiegelt diese Schichtenfolge wider"
+  },
+  {
+    "id": "REQ-313",
+    "quelle": "36",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Domain-Schicht umfasst Community, Tool, Loan, State Machine, Conflict Resolution",
+    "akzeptanzkriterium": "Diese fünf Bereiche sind als eigenständige Domain-Module vorhanden"
+  },
+  {
+    "id": "REQ-314",
+    "quelle": "36",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Die Domain muss unabhängig von konkreten technischen Implementierungen testbar sein",
+    "akzeptanzkriterium": "Domain-Unit-Tests laufen ohne Flutter-Test-Runner, DB oder Netzwerk"
+  },
+  {
+    "id": "REQ-315",
+    "quelle": "37",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Lokale Datenbank verwaltet mindestens: Communities",
+    "akzeptanzkriterium": "Datenbankschema enthält Entität/Tabelle für „Communities\""
+  },
+  {
+    "id": "REQ-316",
+    "quelle": "37",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Lokale Datenbank verwaltet mindestens: Mitglieder",
+    "akzeptanzkriterium": "Datenbankschema enthält Entität/Tabelle für „Mitglieder\""
+  },
+  {
+    "id": "REQ-317",
+    "quelle": "37",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Lokale Datenbank verwaltet mindestens: Werkzeuge",
+    "akzeptanzkriterium": "Datenbankschema enthält Entität/Tabelle für „Werkzeuge\""
+  },
+  {
+    "id": "REQ-318",
+    "quelle": "37",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Lokale Datenbank verwaltet mindestens: Leihanfragen",
+    "akzeptanzkriterium": "Datenbankschema enthält Entität/Tabelle für „Leihanfragen\""
+  },
+  {
+    "id": "REQ-319",
+    "quelle": "37",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Lokale Datenbank verwaltet mindestens: Leihvorgänge",
+    "akzeptanzkriterium": "Datenbankschema enthält Entität/Tabelle für „Leihvorgänge\""
+  },
+  {
+    "id": "REQ-320",
+    "quelle": "37",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Lokale Datenbank verwaltet mindestens: persönliche Historie",
+    "akzeptanzkriterium": "Datenbankschema enthält Entität/Tabelle für „persönliche Historie\""
+  },
+  {
+    "id": "REQ-321",
+    "quelle": "37",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Lokale Datenbank verwaltet mindestens: technische Events",
+    "akzeptanzkriterium": "Datenbankschema enthält Entität/Tabelle für „technische Events\""
+  },
+  {
+    "id": "REQ-322",
+    "quelle": "37",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Lokale Datenbank verwaltet mindestens: Pending Events",
+    "akzeptanzkriterium": "Datenbankschema enthält Entität/Tabelle für „Pending Events\""
+  },
+  {
+    "id": "REQ-323",
+    "quelle": "37",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Lokale Datenbank verwaltet mindestens: Synchronisationsstatus",
+    "akzeptanzkriterium": "Datenbankschema enthält Entität/Tabelle für „Synchronisationsstatus\""
+  },
+  {
+    "id": "REQ-324",
+    "quelle": "37",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Lokale Datenbank verwaltet mindestens: Fotometadaten",
+    "akzeptanzkriterium": "Datenbankschema enthält Entität/Tabelle für „Fotometadaten\""
+  },
+  {
+    "id": "REQ-325",
+    "quelle": "37",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Lokale Datenbank verwaltet mindestens: Schlüsselreferenzen",
+    "akzeptanzkriterium": "Datenbankschema enthält Entität/Tabelle für „Schlüsselreferenzen\""
+  },
+  {
+    "id": "REQ-326",
+    "quelle": "37",
+    "kategorie": "Historie",
+    "beschreibung": "Die persönliche Historie ist als optimierte lokale Ansicht verfügbar",
+    "akzeptanzkriterium": "Historie-Abfrage ist performant ohne vollständigen Event-Replay bei jedem Aufruf"
+  },
+  {
+    "id": "REQ-327",
+    "quelle": "38",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Das Event-Modell muss versioniert werden",
+    "akzeptanzkriterium": "Jedes Event trägt eine Schema-/Versionsangabe"
+  },
+  {
+    "id": "REQ-328",
+    "quelle": "38",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Event-Modell benötigt mindestens den Event-Typ ToolCreated",
+    "akzeptanzkriterium": "Event-Typ ToolCreated ist definiert und wird bei entsprechender Domain-Aktion erzeugt"
+  },
+  {
+    "id": "REQ-329",
+    "quelle": "38",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Event-Modell benötigt mindestens den Event-Typ ToolUpdated",
+    "akzeptanzkriterium": "Event-Typ ToolUpdated ist definiert und wird bei entsprechender Domain-Aktion erzeugt"
+  },
+  {
+    "id": "REQ-330",
+    "quelle": "38",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Event-Modell benötigt mindestens den Event-Typ ToolDeleted",
+    "akzeptanzkriterium": "Event-Typ ToolDeleted ist definiert und wird bei entsprechender Domain-Aktion erzeugt"
+  },
+  {
+    "id": "REQ-331",
+    "quelle": "38",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Event-Modell benötigt mindestens den Event-Typ LoanRequested",
+    "akzeptanzkriterium": "Event-Typ LoanRequested ist definiert und wird bei entsprechender Domain-Aktion erzeugt"
+  },
+  {
+    "id": "REQ-332",
+    "quelle": "38",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Event-Modell benötigt mindestens den Event-Typ LoanAccepted",
+    "akzeptanzkriterium": "Event-Typ LoanAccepted ist definiert und wird bei entsprechender Domain-Aktion erzeugt"
+  },
+  {
+    "id": "REQ-333",
+    "quelle": "38",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Event-Modell benötigt mindestens den Event-Typ LoanRejected",
+    "akzeptanzkriterium": "Event-Typ LoanRejected ist definiert und wird bei entsprechender Domain-Aktion erzeugt"
+  },
+  {
+    "id": "REQ-334",
+    "quelle": "38",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Event-Modell benötigt mindestens den Event-Typ LoanCancelled",
+    "akzeptanzkriterium": "Event-Typ LoanCancelled ist definiert und wird bei entsprechender Domain-Aktion erzeugt"
+  },
+  {
+    "id": "REQ-335",
+    "quelle": "38",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Event-Modell benötigt mindestens den Event-Typ LoanReturned",
+    "akzeptanzkriterium": "Event-Typ LoanReturned ist definiert und wird bei entsprechender Domain-Aktion erzeugt"
+  },
+  {
+    "id": "REQ-336",
+    "quelle": "38",
+    "kategorie": "Security",
+    "beschreibung": "Jedes Event benötigt eine eindeutige Identifikation",
+    "akzeptanzkriterium": "Event besitzt ein eindeutiges ID-Feld"
+  },
+  {
+    "id": "REQ-337",
+    "quelle": "38",
+    "kategorie": "Security",
+    "beschreibung": "Jedes Event muss kryptografisch authentifiziert werden",
+    "akzeptanzkriterium": "Event ist signiert und Signatur wird beim Empfang geprüft"
+  },
+  {
+    "id": "REQ-338",
+    "quelle": "38",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Die konkrete Nostr-/NIP-Ausgestaltung wird in einem ADR festgelegt (ADR-01)",
+    "akzeptanzkriterium": "ADR-01 dokumentiert Event-Typen, NIPs, Tags, Signaturen, Verschlüsselungsverfahren"
+  },
+  {
+    "id": "REQ-339",
+    "quelle": "39",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Teststrategie Domain: intensive Testabdeckung für Werkzeug-State-Machine",
+    "akzeptanzkriterium": "Für „Werkzeug-State-Machine\" existieren dedizierte, benannte Testfälle"
+  },
+  {
+    "id": "REQ-340",
+    "quelle": "39",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Teststrategie Domain: intensive Testabdeckung für Leihprozess",
+    "akzeptanzkriterium": "Für „Leihprozess\" existieren dedizierte, benannte Testfälle"
+  },
+  {
+    "id": "REQ-341",
+    "quelle": "39",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Teststrategie Domain: intensive Testabdeckung für Berechtigungen",
+    "akzeptanzkriterium": "Für „Berechtigungen\" existieren dedizierte, benannte Testfälle"
+  },
+  {
+    "id": "REQ-342",
+    "quelle": "39",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Teststrategie Domain: intensive Testabdeckung für Konfliktauflösung",
+    "akzeptanzkriterium": "Für „Konfliktauflösung\" existieren dedizierte, benannte Testfälle"
+  },
+  {
+    "id": "REQ-343",
+    "quelle": "39",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Teststrategie Domain: intensive Testabdeckung für Eventvalidierung",
+    "akzeptanzkriterium": "Für „Eventvalidierung\" existieren dedizierte, benannte Testfälle"
+  },
+  {
+    "id": "REQ-344",
+    "quelle": "39",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Teststrategie Security: intensive Testabdeckung für Schlüsselverwaltung",
+    "akzeptanzkriterium": "Für „Schlüsselverwaltung\" existieren dedizierte Sicherheitstestfälle"
+  },
+  {
+    "id": "REQ-345",
+    "quelle": "39",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Teststrategie Security: intensive Testabdeckung für Verschlüsselung",
+    "akzeptanzkriterium": "Für „Verschlüsselung\" existieren dedizierte Sicherheitstestfälle"
+  },
+  {
+    "id": "REQ-346",
+    "quelle": "39",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Teststrategie Security: intensive Testabdeckung für Signaturprüfung",
+    "akzeptanzkriterium": "Für „Signaturprüfung\" existieren dedizierte Sicherheitstestfälle"
+  },
+  {
+    "id": "REQ-347",
+    "quelle": "39",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Teststrategie Security: intensive Testabdeckung für Manipulation",
+    "akzeptanzkriterium": "Für „Manipulation\" existieren dedizierte Sicherheitstestfälle"
+  },
+  {
+    "id": "REQ-348",
+    "quelle": "39",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Teststrategie Security: intensive Testabdeckung für ungültige Events",
+    "akzeptanzkriterium": "Für „ungültige Events\" existieren dedizierte Sicherheitstestfälle"
+  },
+  {
+    "id": "REQ-349",
+    "quelle": "39",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Teststrategie Offline: intensive Testabdeckung für Netzwerkverlust",
+    "akzeptanzkriterium": "Für „Netzwerkverlust\" existieren dedizierte Offline-/Sync-Testfälle"
+  },
+  {
+    "id": "REQ-350",
+    "quelle": "39",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Teststrategie Offline: intensive Testabdeckung für Wiederverbindung",
+    "akzeptanzkriterium": "Für „Wiederverbindung\" existieren dedizierte Offline-/Sync-Testfälle"
+  },
+  {
+    "id": "REQ-351",
+    "quelle": "39",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Teststrategie Offline: intensive Testabdeckung für doppelte Events",
+    "akzeptanzkriterium": "Für „doppelte Events\" existieren dedizierte Offline-/Sync-Testfälle"
+  },
+  {
+    "id": "REQ-352",
+    "quelle": "39",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Teststrategie Offline: intensive Testabdeckung für verzögerte Events",
+    "akzeptanzkriterium": "Für „verzögerte Events\" existieren dedizierte Offline-/Sync-Testfälle"
+  },
+  {
+    "id": "REQ-353",
+    "quelle": "39",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Teststrategie Offline: intensive Testabdeckung für Konflikte",
+    "akzeptanzkriterium": "Für „Konflikte\" existieren dedizierte Offline-/Sync-Testfälle"
+  },
+  {
+    "id": "REQ-354",
+    "quelle": "39",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Teststrategie Historie: intensive Testabdeckung für korrekte Zuordnung geliehen/verliehen",
+    "akzeptanzkriterium": "Für „korrekte Zuordnung geliehen/verliehen\" existieren dedizierte Historie-Testfälle"
+  },
+  {
+    "id": "REQ-355",
+    "quelle": "39",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Teststrategie Historie: intensive Testabdeckung für korrekter Leihbeginn",
+    "akzeptanzkriterium": "Für „korrekter Leihbeginn\" existieren dedizierte Historie-Testfälle"
+  },
+  {
+    "id": "REQ-356",
+    "quelle": "39",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Teststrategie Historie: intensive Testabdeckung für korrekter Rückgabezeitpunkt",
+    "akzeptanzkriterium": "Für „korrekter Rückgabezeitpunkt\" existieren dedizierte Historie-Testfälle"
+  },
+  {
+    "id": "REQ-357",
+    "quelle": "39",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Teststrategie Historie: intensive Testabdeckung für aktive vs. abgeschlossene Leihen",
+    "akzeptanzkriterium": "Für „aktive vs. abgeschlossene Leihen\" existieren dedizierte Historie-Testfälle"
+  },
+  {
+    "id": "REQ-358",
+    "quelle": "39",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Teststrategie Historie: intensive Testabdeckung für Löschen lokaler Historie",
+    "akzeptanzkriterium": "Für „Löschen lokaler Historie\" existieren dedizierte Historie-Testfälle"
+  },
+  {
+    "id": "REQ-359",
+    "quelle": "40",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Zielgröße von ca. 80 % Testabdeckung für kritische Logik wird angestrebt",
+    "akzeptanzkriterium": "Coverage-Report weist ≥80 % für Domain-Module (Tool/Loan/State-Machine/Conflict) aus"
+  },
+  {
+    "id": "REQ-360",
+    "quelle": "40",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Ein Fehler in der Leih-State-Machine darf nicht ausschließlich durch UI-Tests unentdeckt bleiben können",
+    "akzeptanzkriterium": "Dedizierte Unit-Tests der State-Machine existieren unabhängig von Widget-/UI-Tests"
+  },
+  {
+    "id": "REQ-361",
+    "quelle": "41",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "CI/CD führt bei jedem Pull Request mindestens aus: Formatting",
+    "akzeptanzkriterium": "CI-Pipeline enthält einen Schritt „Formatting\""
+  },
+  {
+    "id": "REQ-362",
+    "quelle": "41",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "CI/CD führt bei jedem Pull Request mindestens aus: Linting",
+    "akzeptanzkriterium": "CI-Pipeline enthält einen Schritt „Linting\""
+  },
+  {
+    "id": "REQ-363",
+    "quelle": "41",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "CI/CD führt bei jedem Pull Request mindestens aus: Static Analysis",
+    "akzeptanzkriterium": "CI-Pipeline enthält einen Schritt „Static Analysis\""
+  },
+  {
+    "id": "REQ-364",
+    "quelle": "41",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "CI/CD führt bei jedem Pull Request mindestens aus: Unit Tests",
+    "akzeptanzkriterium": "CI-Pipeline enthält einen Schritt „Unit Tests\""
+  },
+  {
+    "id": "REQ-365",
+    "quelle": "41",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "CI/CD führt bei jedem Pull Request mindestens aus: Widget Tests",
+    "akzeptanzkriterium": "CI-Pipeline enthält einen Schritt „Widget Tests\""
+  },
+  {
+    "id": "REQ-366",
+    "quelle": "41",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "CI/CD führt bei jedem Pull Request mindestens aus: Integration Tests (soweit relevant)",
+    "akzeptanzkriterium": "CI-Pipeline enthält einen Schritt „Integration Tests (soweit relevant)\""
+  },
+  {
+    "id": "REQ-367",
+    "quelle": "41",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "CI/CD führt bei jedem Pull Request mindestens aus: Security Scans",
+    "akzeptanzkriterium": "CI-Pipeline enthält einen Schritt „Security Scans\""
+  },
+  {
+    "id": "REQ-368",
+    "quelle": "41",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "CI/CD führt bei jedem Pull Request mindestens aus: Secret Scanning",
+    "akzeptanzkriterium": "CI-Pipeline enthält einen Schritt „Secret Scanning\""
+  },
+  {
+    "id": "REQ-369",
+    "quelle": "41",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "CI/CD führt bei jedem Pull Request mindestens aus: Dependency Checks",
+    "akzeptanzkriterium": "CI-Pipeline enthält einen Schritt „Dependency Checks\""
+  },
+  {
+    "id": "REQ-370",
+    "quelle": "41",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Ein Merge ist grundsätzlich nur bei erfolgreicher Pipeline möglich",
+    "akzeptanzkriterium": "Branch-Protection erzwingt grünen CI-Status vor Merge"
+  },
+  {
+    "id": "REQ-371",
+    "quelle": "41",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Produktionsfehler werden nach Möglichkeit als Regressionstest aufgenommen",
+    "akzeptanzkriterium": "Prozessvorgabe: Bugfix-PRs enthalten einen zugehörigen Regressionstest"
+  },
+  {
+    "id": "REQ-372",
+    "quelle": "42",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Beta-Test deckt ab: zwei Smartphones",
+    "akzeptanzkriterium": "Manueller/automatisierter Testplan enthält ein Szenario zu „zwei Smartphones\""
+  },
+  {
+    "id": "REQ-373",
+    "quelle": "42",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Beta-Test deckt ab: mehrere Nutzer",
+    "akzeptanzkriterium": "Manueller/automatisierter Testplan enthält ein Szenario zu „mehrere Nutzer\""
+  },
+  {
+    "id": "REQ-374",
+    "quelle": "42",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Beta-Test deckt ab: mehrere Communities",
+    "akzeptanzkriterium": "Manueller/automatisierter Testplan enthält ein Szenario zu „mehrere Communities\""
+  },
+  {
+    "id": "REQ-375",
+    "quelle": "42",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Beta-Test deckt ab: instabile Netzwerkverbindung",
+    "akzeptanzkriterium": "Manueller/automatisierter Testplan enthält ein Szenario zu „instabile Netzwerkverbindung\""
+  },
+  {
+    "id": "REQ-376",
+    "quelle": "42",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Beta-Test deckt ab: Offline-Betrieb",
+    "akzeptanzkriterium": "Manueller/automatisierter Testplan enthält ein Szenario zu „Offline-Betrieb\""
+  },
+  {
+    "id": "REQ-377",
+    "quelle": "42",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Beta-Test deckt ab: Relay-Ausfall",
+    "akzeptanzkriterium": "Manueller/automatisierter Testplan enthält ein Szenario zu „Relay-Ausfall\""
+  },
+  {
+    "id": "REQ-378",
+    "quelle": "42",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Beta-Test deckt ab: Storage-Ausfall",
+    "akzeptanzkriterium": "Manueller/automatisierter Testplan enthält ein Szenario zu „Storage-Ausfall\""
+  },
+  {
+    "id": "REQ-379",
+    "quelle": "42",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Beta-Test deckt ab: konkurrierende Änderungen",
+    "akzeptanzkriterium": "Manueller/automatisierter Testplan enthält ein Szenario zu „konkurrierende Änderungen\""
+  },
+  {
+    "id": "REQ-380",
+    "quelle": "42",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Beta-Test deckt ab: Foto-Upload",
+    "akzeptanzkriterium": "Manueller/automatisierter Testplan enthält ein Szenario zu „Foto-Upload\""
+  },
+  {
+    "id": "REQ-381",
+    "quelle": "42",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Beta-Test deckt ab: Wiederherstellung einer Identität",
+    "akzeptanzkriterium": "Manueller/automatisierter Testplan enthält ein Szenario zu „Wiederherstellung einer Identität\""
+  },
+  {
+    "id": "REQ-382",
+    "quelle": "43",
+    "kategorie": "Security",
+    "beschreibung": "Fehler-/Crash-Reporting darf nicht übertragen: Private Keys",
+    "akzeptanzkriterium": "Crash-Reports enthalten nachweislich kein/e „Private Keys\""
+  },
+  {
+    "id": "REQ-383",
+    "quelle": "43",
+    "kategorie": "Security",
+    "beschreibung": "Fehler-/Crash-Reporting darf nicht übertragen: Community Keys",
+    "akzeptanzkriterium": "Crash-Reports enthalten nachweislich kein/e „Community Keys\""
+  },
+  {
+    "id": "REQ-384",
+    "quelle": "43",
+    "kategorie": "Security",
+    "beschreibung": "Fehler-/Crash-Reporting darf nicht übertragen: unverschlüsselte Tool-Daten",
+    "akzeptanzkriterium": "Crash-Reports enthalten nachweislich kein/e „unverschlüsselte Tool-Daten\""
+  },
+  {
+    "id": "REQ-385",
+    "quelle": "43",
+    "kategorie": "Security",
+    "beschreibung": "Fehler-/Crash-Reporting darf nicht übertragen: Leihinformationen",
+    "akzeptanzkriterium": "Crash-Reports enthalten nachweislich kein/e „Leihinformationen\""
+  },
+  {
+    "id": "REQ-386",
+    "quelle": "43",
+    "kategorie": "Security",
+    "beschreibung": "Fehler-/Crash-Reporting darf nicht übertragen: Fotos",
+    "akzeptanzkriterium": "Crash-Reports enthalten nachweislich kein/e „Fotos\""
+  },
+  {
+    "id": "REQ-387",
+    "quelle": "43",
+    "kategorie": "Security",
+    "beschreibung": "Fehler-/Crash-Reporting darf nicht übertragen: private Event-Payloads",
+    "akzeptanzkriterium": "Crash-Reports enthalten nachweislich kein/e „private Event-Payloads\""
+  },
+  {
+    "id": "REQ-388",
+    "quelle": "43",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Fehlerdiagnose soll möglichst über technische Metadaten erfolgen",
+    "akzeptanzkriterium": "Reporting nutzt technische IDs/Stacktraces statt fachlicher Klartextinhalte"
+  },
+  {
+    "id": "REQ-389",
+    "quelle": "45",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Vor öffentlicher Veröffentlichung ist zu prüfen: App-Store-Richtlinien",
+    "akzeptanzkriterium": "Deployment-Checkliste enthält geprüften Punkt „App-Store-Richtlinien\""
+  },
+  {
+    "id": "REQ-390",
+    "quelle": "45",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Vor öffentlicher Veröffentlichung ist zu prüfen: Datenschutzanforderungen",
+    "akzeptanzkriterium": "Deployment-Checkliste enthält geprüften Punkt „Datenschutzanforderungen\""
+  },
+  {
+    "id": "REQ-391",
+    "quelle": "45",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Vor öffentlicher Veröffentlichung ist zu prüfen: Verschlüsselungs-/Exportanforderungen",
+    "akzeptanzkriterium": "Deployment-Checkliste enthält geprüften Punkt „Verschlüsselungs-/Exportanforderungen\""
+  },
+  {
+    "id": "REQ-392",
+    "quelle": "45",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Vor öffentlicher Veröffentlichung ist zu prüfen: rechtliche Anforderungen für Deutschland/EU",
+    "akzeptanzkriterium": "Deployment-Checkliste enthält geprüften Punkt „rechtliche Anforderungen für Deutschland/EU\""
+  },
+  {
+    "id": "REQ-393",
+    "quelle": "45",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Vor öffentlicher Veröffentlichung ist zu prüfen: Anforderungen an Drittanbieterbibliotheken",
+    "akzeptanzkriterium": "Deployment-Checkliste enthält geprüften Punkt „Anforderungen an Drittanbieterbibliotheken\""
+  },
+  {
+    "id": "REQ-394",
+    "quelle": "45",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Vor öffentlicher Veröffentlichung ist zu prüfen: Lizenzbedingungen verwendeter Komponenten",
+    "akzeptanzkriterium": "Deployment-Checkliste enthält geprüften Punkt „Lizenzbedingungen verwendeter Komponenten\""
+  },
+  {
+    "id": "REQ-395",
+    "quelle": "47",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "ADR-01 muss vor der Implementierung konkret entschieden und dokumentiert werden: Nostr Event-Modell (Event-Typen, NIPs, Tags, Signaturen, Verschlüsselungsverfahren)",
+    "akzeptanzkriterium": "ADR-01 liegt als dokumentierte Entscheidung vor, bevor der betroffene Code implementiert wird"
+  },
+  {
+    "id": "REQ-396",
+    "quelle": "47",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "ADR-02 muss vor der Implementierung konkret entschieden und dokumentiert werden: Community-Verschlüsselung (Schlüsselverteilung, -rotation, Umgang mit ausgeschiedenen Mitgliedern)",
+    "akzeptanzkriterium": "ADR-02 liegt als dokumentierte Entscheidung vor, bevor der betroffene Code implementiert wird"
+  },
+  {
+    "id": "REQ-397",
+    "quelle": "47",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "ADR-03 muss vor der Implementierung konkret entschieden und dokumentiert werden: Invite-System (Tokenformat, Ablauf, Einmalverwendung, sichere Schlüsselübertragung)",
+    "akzeptanzkriterium": "ADR-03 liegt als dokumentierte Entscheidung vor, bevor der betroffene Code implementiert wird"
+  },
+  {
+    "id": "REQ-398",
+    "quelle": "47",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "ADR-04 muss vor der Implementierung konkret entschieden und dokumentiert werden: Konfliktauflösung (Prioritätsregeln, Event-Reihenfolge, konkurrierende Anfragen/Änderungen)",
+    "akzeptanzkriterium": "ADR-04 liegt als dokumentierte Entscheidung vor, bevor der betroffene Code implementiert wird"
+  },
+  {
+    "id": "REQ-399",
+    "quelle": "47",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "ADR-05 muss vor der Implementierung konkret entschieden und dokumentiert werden: Foto-Storage (Blossom-Anbieter, Redundanz, Upload-/Download-Protokoll, Content Hash)",
+    "akzeptanzkriterium": "ADR-05 liegt als dokumentierte Entscheidung vor, bevor der betroffene Code implementiert wird"
+  },
+  {
+    "id": "REQ-400",
+    "quelle": "47",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "ADR-06 muss vor der Implementierung konkret entschieden und dokumentiert werden: Backup/Recovery (Plattformbackup, Seed Export, Wiederherstellung, Geräte-Widerruf)",
+    "akzeptanzkriterium": "ADR-06 liegt als dokumentierte Entscheidung vor, bevor der betroffene Code implementiert wird"
+  },
+  {
+    "id": "REQ-401",
+    "quelle": "47",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "ADR-07 muss vor der Implementierung konkret entschieden und dokumentiert werden: Lokale Datenbank (Drift/SQLite vs. Isar, Verschlüsselung, Migrationen)",
+    "akzeptanzkriterium": "ADR-07 liegt als dokumentierte Entscheidung vor, bevor der betroffene Code implementiert wird"
+  },
+  {
+    "id": "REQ-402",
+    "quelle": "47",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "ADR-08 muss vor der Implementierung konkret entschieden und dokumentiert werden: Relay-/Blob-Storage-Betrieb (öffentliche Relays vs. eigene Instanz, Finanzierung, Kostenmodell, Skalierung)",
+    "akzeptanzkriterium": "ADR-08 liegt als dokumentierte Entscheidung vor, bevor der betroffene Code implementiert wird"
+  },
+  {
+    "id": "REQ-403",
+    "quelle": "48",
+    "kategorie": "Funktional",
+    "beschreibung": "E2E-Akzeptanzszenario: Person A erstellt eine private Community",
+    "akzeptanzkriterium": "Community wird erfolgreich erstellt"
+  },
+  {
+    "id": "REQ-404",
+    "quelle": "48",
+    "kategorie": "Funktional",
+    "beschreibung": "E2E-Akzeptanzszenario: Person A lädt Person B ein und Person B tritt bei",
+    "akzeptanzkriterium": "Person B ist danach Mitglied der Community"
+  },
+  {
+    "id": "REQ-405",
+    "quelle": "48",
+    "kategorie": "Funktional",
+    "beschreibung": "E2E-Akzeptanzszenario: Person A legt einen Bohrhammer an und Person B sieht ihn",
+    "akzeptanzkriterium": "Neues Tool ist für Person B in der Community-Werkzeugliste sichtbar"
+  },
+  {
+    "id": "REQ-406",
+    "quelle": "48",
+    "kategorie": "Funktional",
+    "beschreibung": "E2E-Akzeptanzszenario: Person B stellt Leihanfrage, Person A sieht und bestätigt sie",
+    "akzeptanzkriterium": "LoanRequest wird PENDING→ACCEPTED; accepted_at wird gesetzt"
+  },
+  {
+    "id": "REQ-407",
+    "quelle": "48",
+    "kategorie": "Funktional",
+    "beschreibung": "E2E-Akzeptanzszenario: Werkzeug steht nach Bestätigung auf VERLIEHEN für beide Seiten sichtbar",
+    "akzeptanzkriterium": "Person A sieht „verliehen\", Person B sieht „geliehen\" für dasselbe Tool"
+  },
+  {
+    "id": "REQ-408",
+    "quelle": "48",
+    "kategorie": "Offline-Sync",
+    "beschreibung": "E2E-Akzeptanzszenario: Beide Geräte verlieren die Netzwerkverbindung, lokale Historie bleibt verfügbar",
+    "akzeptanzkriterium": "Historie-Ansicht funktioniert weiterhin ohne Netzwerk"
+  },
+  {
+    "id": "REQ-409",
+    "quelle": "48",
+    "kategorie": "Funktional",
+    "beschreibung": "E2E-Akzeptanzszenario: Person A bestätigt später die Rückgabe; returned_at wird gesetzt, Loan wird COMPLETED, Tool wird AVAILABLE",
+    "akzeptanzkriterium": "Alle drei Effekte treten nach Rückgabebestätigung ein"
+  },
+  {
+    "id": "REQ-410",
+    "quelle": "48",
+    "kategorie": "Historie",
+    "beschreibung": "E2E-Akzeptanzszenario: Beide Nutzer sehen den abgeschlossenen Leihvorgang in ihrer persönlichen Historie",
+    "akzeptanzkriterium": "Abgeschlossener Loan erscheint bei A unter „verliehen\" und bei B unter „geliehen\""
+  },
+  {
+    "id": "REQ-411",
+    "quelle": "48",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Im Akzeptanzszenario ist kein zentraler Benutzeraccount erforderlich",
+    "akzeptanzkriterium": "Kein Schritt des Szenarios setzt ein zentrales Konto voraus"
+  },
+  {
+    "id": "REQ-412",
+    "quelle": "48",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Im Akzeptanzszenario ist keine zentrale Datenbank erforderlich",
+    "akzeptanzkriterium": "Kein Schritt des Szenarios setzt einen zentralen DB-Server voraus"
+  },
+  {
+    "id": "REQ-413",
+    "quelle": "48",
+    "kategorie": "Offline-Sync",
+    "beschreibung": "Ein einzelner Relay-Ausfall macht die Anwendung im Szenario nicht dauerhaft unbrauchbar",
+    "akzeptanzkriterium": "Szenario ist auch bei Ausfall eines von mehreren Relays erfolgreich abschließbar"
+  },
+  {
+    "id": "REQ-414",
+    "quelle": "48",
+    "kategorie": "Security",
+    "beschreibung": "Der Relay-Betreiber kann die privaten Community-Inhalte im Szenario nicht lesen",
+    "akzeptanzkriterium": "Über den Relay übertragene Events sind ohne Community-Key nicht entschlüsselbar"
+  },
+  {
+    "id": "REQ-415",
+    "quelle": "49",
+    "kategorie": "UI",
+    "beschreibung": "Erfolgskriterium Einfach: Werkzeug auswählen → Anfrage stellen → Besitzer bestätigt → geliehen",
+    "akzeptanzkriterium": "Kernablauf ist in genau diesen Schritten ohne Zusatzkomplexität durchführbar"
+  },
+  {
+    "id": "REQ-416",
+    "quelle": "49",
+    "kategorie": "Historie",
+    "beschreibung": "Erfolgskriterium Nachvollziehbar: Jeder Nutzer kann seine persönliche Leihhistorie einsehen",
+    "akzeptanzkriterium": "Historie-Funktion ist für jeden Nutzer jederzeit erreichbar"
+  },
+  {
+    "id": "REQ-417",
+    "quelle": "49",
+    "kategorie": "Security",
+    "beschreibung": "Erfolgskriterium Privat: Außenstehende können die privaten Inhalte nicht lesen",
+    "akzeptanzkriterium": "E2E-Verschlüsselung verhindert Zugriff Außenstehender auf Klartextinhalte"
+  },
+  {
+    "id": "REQ-418",
+    "quelle": "49",
+    "kategorie": "Nicht-Funktional",
+    "beschreibung": "Erfolgskriterium Dezentral: kein einzelner Betreiber kontrolliert die Community-Daten",
+    "akzeptanzkriterium": "Kein Single-Admin-Zugriff auf fremde Community-Daten existiert"
+  },
+  {
+    "id": "REQ-419",
+    "quelle": "49",
+    "kategorie": "Offline-Sync",
+    "beschreibung": "Erfolgskriterium Robust: temporäre Netzwerk-/Relay-Ausfälle dürfen keine lokalen Daten zerstören",
+    "akzeptanzkriterium": "Simulierter Ausfall führt zu keinem Datenverlust"
+  },
+  {
+    "id": "REQ-420",
+    "quelle": "49",
+    "kategorie": "Funktional",
+    "beschreibung": "Erfolgskriterium Klar: Eigentümer-Bestätigung ist zugleich Beginn der Ausleihe, ohne zusätzliche Übergabebestätigung",
+    "akzeptanzkriterium": "Kein UI-Schritt fordert eine separate Übergabebestätigung an"
+  }
+]
