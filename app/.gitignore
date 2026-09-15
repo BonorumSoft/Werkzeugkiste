@@ -46,3 +46,7 @@ app.*.map.json
 
 # Widget Preview related
 .widget_preview/
+
+# Generiert von build_runner/drift_dev (siehe .github/workflows/iOS-app.yml,
+# Schritt "Code-Generierung (Drift, ADR-07)") – bewusst nicht eingecheckt.
+**/*.g.dart
