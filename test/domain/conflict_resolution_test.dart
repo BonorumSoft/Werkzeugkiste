@@ -5,7 +5,6 @@
 // ADR-04-Endentscheidung.
 import "package:test/test.dart";
 import "package:werkzeugkiste/domain/conflict_resolution.dart";
-import "package:werkzeugkiste/domain/tool.dart";
 
 import "fixtures.dart";
 

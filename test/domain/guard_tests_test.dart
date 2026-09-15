@@ -5,7 +5,6 @@
 // auf Tool), REQ zu Loan ohne lent_at / ohne expected_return_at.
 import "package:test/test.dart";
 import "package:werkzeugkiste/domain/loan.dart";
-import "package:werkzeugkiste/domain/tool.dart";
 
 import "fixtures.dart";
 
