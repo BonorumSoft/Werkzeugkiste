@@ -8,6 +8,15 @@ analyzer:
   errors:
     unused_import: error
     unused_local_variable: error
+  exclude:
+    # app/ ist ein eigenständiges Flutter-Package mit eigener pubspec.yaml
+    # und eigenem CI-Job (.github/workflows/iOS-app.yml, "flutter analyze"
+    # nach "flutter pub get" dort). Der Domain-CI-Job hier (cli.yml) führt
+    # nur "dart pub get" im Repo-Root aus, ohne app/'s Abhängigkeiten
+    # (flutter_riverpod, drift, ...) aufzulösen – ohne diesen Ausschluss
+    # meldet "dart analyze" hier fälschlich "Target of URI doesn't exist"
+    # für jeden app/-Import.
+    - "app/**"
 
 linter:
   rules:
