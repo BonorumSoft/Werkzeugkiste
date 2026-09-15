@@ -1,7 +1,7 @@
 # ADR-08 – Relay- und Blob-Storage-Betrieb
 
-**Status:** Vorschlag (Claude, September 2026) – wartet auf Bestätigung
-durch den Auftraggeber.
+**Status:** Entschieden (Tjorben, September 2026, auf Basis des Claude-
+Vorschlags). Betrifft ausschließlich Infrastrukturkonfiguration.
 
 ## Kontext
 

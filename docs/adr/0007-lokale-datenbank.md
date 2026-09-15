@@ -1,8 +1,8 @@
 # ADR-07 – Lokale Datenbank
 
-**Status:** Vorschlag (Claude, September 2026) – wartet auf Bestätigung
-durch den Auftraggeber. Bestätigt/präzisiert die bisherige
-Arbeitsannahme aus Phase 1.
+**Status:** Entschieden (Tjorben, September 2026, auf Basis des Claude-
+Vorschlags). Bestätigt/präzisiert die bisherige Arbeitsannahme aus
+Phase 1. Betrifft die noch nicht implementierte Infrastructure-Schicht.
 
 ## Kontext
 

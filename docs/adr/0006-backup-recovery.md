@@ -1,9 +1,10 @@
 # ADR-06 – Backup / Recovery
 
-**Status:** Vorschlag (Claude, September 2026) – wartet auf Bestätigung
-durch den Auftraggeber. Das Lastenheft (Abschnitt 46) stuft „kein
-Widerruf einzelner Geräte bei Verlust/Diebstahl" als **hohes Risiko**
-ein – diese ADR sollte entsprechend priorisiert entschieden werden.
+**Status:** Entschieden (Tjorben, September 2026, auf Basis des Claude-
+Vorschlags). Betrifft die noch nicht implementierte Infrastructure-
+Schicht (Identitäts-/Schlüsselverwaltung); die Wiederverwendung von
+`Community.hasActiveMember()` für den Geräte-Widerruf (siehe unten)
+benötigt keine weitere Domain-Änderung.
 
 ## Kontext
 

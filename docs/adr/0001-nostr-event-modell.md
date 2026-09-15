@@ -1,8 +1,10 @@
 # ADR-01 – Nostr Event-Modell
 
-**Status:** Vorschlag (Claude, September 2026) – wartet auf Bestätigung
-durch den Auftraggeber. Ersetzt die vorherige, unspezifische
-Arbeitsannahme aus Phase 3/4.
+**Status:** Entschieden (Tjorben, September 2026, auf Basis des Claude-
+Vorschlags). Ersetzt die vorherige, unspezifische Arbeitsannahme aus
+Phase 3/4. Betrifft die noch nicht implementierte Infrastructure-Schicht
+(siehe „Konsequenz für den Code" unten) – keine Domain-Code-Änderung
+durch diese Entscheidung.
 
 ## Kontext
 

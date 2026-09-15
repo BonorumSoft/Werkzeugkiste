@@ -1,7 +1,8 @@
 # ADR-03 – Invite-System
 
-**Status:** Vorschlag (Claude, September 2026) – wartet auf Bestätigung
-durch den Auftraggeber.
+**Status:** Entschieden (Tjorben, September 2026, auf Basis des Claude-
+Vorschlags). Umgesetzt in `lib/domain/invite.dart` und
+`lib/domain/invite_service.dart`.
 
 ## Kontext
 
@@ -53,11 +54,27 @@ blockierend für den MVP.
 - Verhalten bei abgelaufenem Token (Fehlermeldung vs. automatische
   Anfrage an den Ersteller für einen neuen Link).
 
-## Konsequenz für den Code
+## Konsequenz für den Code (umgesetzt)
 
-Dieses Konzept führt eine neue Entität "Invite"/"JoinRequest" ein, die
-im bisherigen Domain-Scope (Phase 3/4) nicht existiert. Keine
-rückwirkende Änderung an bestehendem Code nötig; bei Umsetzung wäre ein
-neues `lib/domain/invite.dart` (State Machine: PENDING → CONSUMED/
-EXPIRED, analog zum bereits etablierten Muster in `loan_request.dart`)
-der naheliegende Ort, testgetrieben nach demselben Phase-3/4-Prozess.
+- `lib/domain/invite.dart`: `Invite`-Entität + State-Machine (PENDING →
+  CONSUMED/EXPIRED, analog zum Muster in `loan_request.dart`), mit
+  Invariante `consumedByPubkey` genau dann gesetzt, wenn `status ==
+  consumed`, und Guard, dass **kein Klartext-Token** je im Modell
+  auftaucht (nur `tokenHash`).
+- `lib/domain/invite_service.dart`: `createInvite()` (Standard-
+  Gültigkeit 7 Tage, siehe `defaultInviteValidity`), `consumeInvite()`
+  mit den drei Prüfschritten Token-Übereinstimmung
+  ([InvalidInviteToken]) → Ablauf ([InviteExpired]) → gültiger
+  Zustandsübergang ([InvalidStateTransition], sichert zugleich die
+  Einmalverwendung).
+- `lib/domain/exceptions.dart`: neue Fehlertypen `InviteExpired`,
+  `InvalidInviteToken`.
+- `lib/domain/ids.dart`: neuer Typalias `InviteId`.
+- Tests: `test/domain/invite_state_machine_test.dart`,
+  `test/domain/invite_test.dart`, `test/domain/invite_service_test.dart`
+  – über echten CI-Lauf verifiziert (siehe `reports/`).
+
+**Nicht umgesetzt** (bewusst außerhalb des Domain-Scopes, da
+Infrastruktur-/Netzwerklogik): Erzeugen/Verteilen des eigentlichen
+Invite-Links, Signieren/Versenden der `JoinRequest`-/`InviteConsumed`-
+Events, tatsächliche Hash-Berechnung des Tokens.

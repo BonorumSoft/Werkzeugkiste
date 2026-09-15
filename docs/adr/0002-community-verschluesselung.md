@@ -1,7 +1,10 @@
 # ADR-02 – Community-Verschlüsselung
 
-**Status:** Vorschlag (Claude, September 2026) – wartet auf Bestätigung
-durch den Auftraggeber.
+**Status:** Entschieden (Tjorben, September 2026, auf Basis des Claude-
+Vorschlags). Betrifft die noch nicht implementierte Infrastructure-/
+Application-Schicht – die dafür bereits vorhandene Domain-Grundlage
+(`Community.hasActiveMember()`, `communityKeyRef`) benötigt keine
+Änderung.
 
 ## Kontext
 

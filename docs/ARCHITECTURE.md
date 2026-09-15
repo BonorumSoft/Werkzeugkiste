@@ -1,9 +1,10 @@
 # Architektur – Werkzeugkiste
 
-Status: **Domain-Schicht, Phase 3–7 der TDD-Pipeline abgeschlossen**
-(Rot/Grün-Nachweis, Refactor, Mutationstest-Vorbereitung, Dokumentation –
-siehe `reports/`). Application-, Infrastructure- und UI-Schicht folgen,
-sobald die offenen ADRs (siehe `docs/adr/`) entschieden sind.
+Status: **Domain-Schicht, Phase 3–9 der TDD-Pipeline abgeschlossen**
+(Rot/Grün-Nachweis, Refactor, Mutationstest, Dokumentation, Abschluss-
+bericht, Deployment-Vorbereitung – siehe `reports/`). Alle acht ADRs
+(siehe `docs/adr/`) sind entschieden; Application-, Infrastructure- und
+UI-Schicht sind die nächsten Implementierungsschritte.
 
 ## Schichtenmodell (Lastenheft Abschnitt 36)
 
@@ -35,8 +36,10 @@ CI-Import-Guard abgesichert (`.github/workflows/ci.yml`).
 | `tool_service.dart` | Orchestrierende Use-Cases (requestLoan, acceptLoanRequest, confirmReturn, …) inkl. Berechtigungsprüfung | Abschnitt 10.1, 11.1, 14, 33 |
 | `events.dart` | Fachliche Event-Typen (Skelett, konkrete Nostr-Bindung offen: ADR-01) | Abschnitt 38 |
 | `exceptions.dart` | Domain-Fehlertypen | Abschnitt 33 |
-| `state_machine.dart` | Generischer Zustandsautomaten-Baustein (seit Phase 5), gemeinsam genutzt von `tool.dart` und `loan_request.dart` | Abschnitt 10.2, 11.1 |
+| `state_machine.dart` | Generischer Zustandsautomaten-Baustein (seit Phase 5), gemeinsam genutzt von `tool.dart`, `loan_request.dart` und `invite.dart` | Abschnitt 10.2, 11.1 |
 | `ids.dart` | Typdefinitionen für IDs/Pubkeys (Lesbarkeit, keine eigene Logik) | – |
+| `invite.dart` | `Invite`-Entität + State-Machine (pending/consumed/expired) | Abschnitt 47, ADR-03 |
+| `invite_service.dart` | Use-Cases `createInvite`/`consumeInvite` (Token-Prüfung vor Ablaufprüfung) | Abschnitt 47, ADR-03 |
 
 ## API-Übersicht: öffentliche Domain-Operationen
 
@@ -53,6 +56,11 @@ implementierten Application-/Infrastructure-Schicht:
 - `cancelLoanRequest(...)` – nur durch den Anfragenden.
 - `confirmReturn(...)` – nur durch den Eigentümer, setzt `Loan.returnedAt`
   und schließt den Leihvorgang ab (Abschnitt 14).
+- `createInvite(...)` (`invite_service.dart`) – erzeugt eine `Invite` mit
+  Standardgültigkeit von 7 Tagen (`defaultInviteValidity`, überschreibbar).
+- `consumeInvite(...)` (`invite_service.dart`) – prüft zuerst den
+  Token-Hash, danach die Ablaufzeit; löst `InvalidInviteToken` bzw.
+  `InviteExpired` aus (ADR-03).
 
 Jede dieser Funktionen wirft ausschließlich Subtypen von
 `DomainException` (`InvalidStateTransition`, `PermissionDenied`,
@@ -86,19 +94,20 @@ Alle acht vom Lastenheft (Abschnitt 47) geforderten ADRs sind formal unter
 
 | ADR | Thema | Status |
 |---|---|---|
-| [ADR-01](adr/0001-nostr-event-modell.md) | Nostr Event-Modell | Vorschlag (wartet auf Bestätigung) |
-| [ADR-02](adr/0002-community-verschluesselung.md) | Community-Verschlüsselung | Vorschlag (wartet auf Bestätigung) |
-| [ADR-03](adr/0003-invite-system.md) | Invite-System | Vorschlag (wartet auf Bestätigung) |
+| [ADR-01](adr/0001-nostr-event-modell.md) | Nostr Event-Modell | Entschieden |
+| [ADR-02](adr/0002-community-verschluesselung.md) | Community-Verschlüsselung | Entschieden |
+| [ADR-03](adr/0003-invite-system.md) | Invite-System | **Entschieden, implementiert + getestet** |
 | [ADR-04](adr/0004-konfliktaufloesung.md) | Konfliktauflösung | Entschieden, implementiert + getestet |
-| [ADR-05](adr/0005-foto-storage.md) | Foto-Storage | **Entschieden** (komplett lokal, Verteilung an alle) |
-| [ADR-06](adr/0006-backup-recovery.md) | Backup/Recovery | Vorschlag (wartet auf Bestätigung; hohes Risiko laut Abschnitt 46) |
-| [ADR-07](adr/0007-lokale-datenbank.md) | Lokale Datenbank | Vorschlag (wartet auf Bestätigung) |
-| [ADR-08](adr/0008-relay-blob-storage-betrieb.md) | Relay-Betrieb (Blob-Storage-Teil durch ADR-05 entfallen) | Vorschlag (wartet auf Bestätigung) |
+| [ADR-05](adr/0005-foto-storage.md) | Foto-Storage | Entschieden (komplett lokal, Verteilung an alle) |
+| [ADR-06](adr/0006-backup-recovery.md) | Backup/Recovery | Entschieden |
+| [ADR-07](adr/0007-lokale-datenbank.md) | Lokale Datenbank | Entschieden |
+| [ADR-08](adr/0008-relay-blob-storage-betrieb.md) | Relay-Betrieb (Blob-Storage-Teil durch ADR-05 entfallen) | Entschieden |
 
-Nur ADR-04 (Konfliktauflösung) hat bereits konkrete Code-Konsequenzen;
-die übrigen betreffen ausschließlich die noch nicht implementierte
-Application-/Infrastructure-Schicht (siehe jeweilige ADR-Datei für die
-genaue Abgrenzung). Sieben der acht ADRs liegen als konkrete, technisch
-begründete Vorschläge vor (September 2026) und warten auf die formale
-Bestätigung durch den Auftraggeber – nur ADR-05 ist bereits final
-entschieden.
+Alle acht ADRs sind entschieden (Tjorben, September 2026, auf Basis der
+jeweiligen Claude-Vorschläge). Zwei davon haben bereits konkrete
+Code-Konsequenzen in der Domain-Schicht: ADR-04 (Konfliktauflösung,
+`conflict_resolution.dart`) und ADR-03 (Invite-System, `invite.dart` +
+`invite_service.dart`). Die übrigen sechs betreffen ausschließlich die
+noch nicht implementierte Application-/Infrastructure-Schicht (siehe
+jeweilige ADR-Datei für die genaue Abgrenzung) und benötigen keine
+weitere Domain-Code-Änderung.

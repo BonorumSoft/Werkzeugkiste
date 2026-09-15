@@ -23,3 +23,6 @@ typedef LoanId = String;
 
 /// Eindeutige ID eines technischen Events (Lastenheft Abschnitt 38).
 typedef EventId = String;
+
+/// Eindeutige ID einer Einladung (ADR-03, `docs/adr/0003-invite-system.md`).
+typedef InviteId = String;

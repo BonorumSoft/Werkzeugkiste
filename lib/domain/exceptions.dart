@@ -52,3 +52,19 @@ final class DuplicateActiveLoanRequest extends DomainException {
 final class InvalidDomainData extends DomainException {
   const InvalidDomainData(super.message);
 }
+
+/// ADR-03 (`docs/adr/0003-invite-system.md`): eine Einladung darf nach
+/// Ablauf ihrer Gültigkeit nicht mehr eingelöst werden. Bewusst getrennt
+/// von [InvalidStateTransition]: der Zustandsübergang PENDING -> CONSUMED
+/// ist strukturell weiterhin gültig, scheitert hier an einer zeitlichen
+/// Vorbedingung, nicht am Zustand selbst.
+final class InviteExpired extends DomainException {
+  const InviteExpired(String inviteId) : super("Einladung '$inviteId' ist abgelaufen");
+}
+
+/// ADR-03: das beim Einlösen übergebene Token passt nicht zum Hash der
+/// Einladung. Der Domain-Layer vergleicht dabei nur bereits von außen
+/// berechnete Hash-Werte (keine eigene Kryptografie, Abschnitt 23).
+final class InvalidInviteToken extends DomainException {
+  const InvalidInviteToken(String inviteId) : super("Ungültiges Einladungs-Token für Einladung '$inviteId'");
+}
