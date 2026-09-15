@@ -1,0 +1,92 @@
+name: Flutter-App – Grundgerüst & iOS-Build (Phase 10)
+
+# Warum diese Datei getrennt von cli.yml ist und manuell hinzugefügt werden
+# muss: das für die Domain-Schicht genutzte GitHub-PAT hat aus Sicherheits-
+# gruenden kein "workflow"-Scope, kann also keine Dateien unter
+# .github/workflows/ selbst pushen. Bitte diese Datei einmalig manuell als
+# .github/workflows/ios-app.yml im Repo anlegen (z. B. ueber die GitHub-
+# Weboberflaeche) – alles Weitere (Scaffolding, Build, Commit des erzeugten
+# Codes) laeuft danach automatisch ueber den regulaeren GITHUB_TOKEN dieses
+# Workflow-Laufs, der dafuer kein Extra-Scope braucht, solange er nicht
+# selbst .github/workflows/ aendert.
+#
+# Hintergrund: Die in der Cloud-Sandbox bzw. auf dem verbundenen Mac
+# laufende Automatisierung kann kein echtes Flutter/Xcode-Toolchain
+# bootstrappen (Dart-SDK-Download von storage.googleapis.com ist per
+# Egress-Allowlist blockiert; Xcode selbst benoetigt echtes macOS, nicht
+# die isolierte Linux-VM der Geraete-Bruecke). GitHub-Actions-Runner vom
+# Typ macos-latest haben beides bereits vorinstalliert und uneingeschraenkten
+# Netzwerkzugriff – deshalb laeuft das komplette Flutter/iOS-Scaffolding
+# und der erste Kompilierbarkeits-Nachweis hier statt lokal.
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+    paths:
+      - "app/**"
+      - ".github/workflows/ios-app.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  flutter-ios-scaffold-and-build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Flutter-App-Grundgeruest erzeugen (nur falls noch nicht vorhanden)
+        run: |
+          if [ ! -d "app" ]; then
+            flutter create \
+              --org com.bonorumsoft \
+              --project-name werkzeugkiste_app \
+              --platforms=ios,android \
+              app
+          else
+            echo "app/ existiert bereits – Scaffolding wird nicht erneut ausgefuehrt."
+          fi
+
+      - name: Domain-Package (werkzeugkiste) als Pfad-Abhaengigkeit einbinden
+        run: |
+          cd app
+          if ! grep -q "^  werkzeugkiste:" pubspec.yaml; then
+            sed -i.bak '/^dependencies:/a\
+  werkzeugkiste:\
+    path: ..
+' pubspec.yaml
+            rm -f pubspec.yaml.bak
+          fi
+          echo "--- app/pubspec.yaml (dependencies-Ausschnitt) ---"
+          grep -A5 "^dependencies:" pubspec.yaml
+
+      - name: flutter pub get
+        run: cd app && flutter pub get
+
+      - name: flutter analyze
+        run: cd app && flutter analyze
+
+      - name: flutter test
+        run: cd app && flutter test
+
+      - name: iOS-Build ohne Codesigning (reiner Kompilierbarkeits-Nachweis)
+        run: cd app && flutter build ios --no-codesign
+
+      - name: Erzeugtes Scaffold committen (nur wenn neu/geaendert)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add app
+          if ! git diff --cached --quiet; then
+            git commit -m "Flutter-App-Grundgeruest automatisch erzeugt und iOS-Build verifiziert (CI, macos-latest)"
+            git push
+          else
+            echo "Keine Aenderungen an app/ zu committen."
+          fi
