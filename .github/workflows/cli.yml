@@ -94,3 +94,23 @@ jobs:
           scan-ref: .
           scanners: secret
           exit-code: "1"
+
+  mutation-testing:
+    name: Mutationstests Domain-Schicht (Abschnitt 40, Phase 6)
+    runs-on: ubuntu-latest
+    needs: domain-tests
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+      - name: Install dependencies
+        run: dart pub get
+      # Eigenes, abhängigkeitsfreies Skript statt eines pub.dev-Pakets
+      # (z. B. `mutation_test`) – Begründung siehe Docstring in
+      # tool/mutation_test.py und reports/phase6_mutation.md: pub.dev ist
+      # in der Entwicklungs-Sandbox netzwerkseitig blockiert, ein Paket
+      # hätte daher nicht vorab gegen den echten Index geprüft werden
+      # können.
+      - name: Mutationstests ausführen (tool/mutation_test.py)
+        run: python3 tool/mutation_test.py
