@@ -11,7 +11,8 @@ die generierten Pipeline-Artefakte in `pipeline/`.
 - ✅ Phase 0 – Setup
 - ✅ Phase 1 – Requirements-Extraktion (420 REQ-IDs, `pipeline/01_requirements.json`)
 - ✅ Phase 2 – Testfall-Ableitung (432 TC-IDs, vollständige Traceability, `pipeline/02_testcases.json`, `pipeline/03_traceability.md`)
-- 🚧 Phase 3/4 – Domain-Schicht (Tool/Loan/LoanRequest/Community, State-Machines, Konfliktauflösung, Events) mit Unit-Tests. CI läuft auf GitHub Actions (`.github/workflows/ci.yml`) – siehe `reports/`.
+- ✅ Phase 3 – Rot: Domain-Testsuite vor Implementierung, Fehlschlag über echten CI-Lauf verifiziert ([`34932430991`](https://github.com/BonorumSoft/Werkzeugkiste/actions/runs/34932430991), siehe `reports/phase3_red.md`)
+- ✅ Phase 4 – Grün: Domain-Schicht (Tool/Loan/LoanRequest/Community, State-Machines, Konfliktauflösung, Events) implementiert, alle Unit-Tests über echten CI-Lauf grün verifiziert ([`34936624556`](https://github.com/BonorumSoft/Werkzeugkiste/actions/runs/34936624556), siehe `reports/phase4_iterationen.md`)
 - ⏳ Phase 5–9 – ausstehend (Refactor, Mutation-Verifikation, Dokumentation, Abschlussbericht, Deployment)
 
 ## Projektstruktur
