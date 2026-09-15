@@ -1,10 +1,28 @@
 // Traceability: REQ-070..REQ-076 (Abschnitt 10.2), REQ-373 (Abschnitt 39
-// Domain: Werkzeug-State-Machine), REQ-401..404 (Abschnitt 48 E2E-Kette).
+// Domain: Werkzeug-State-Machine), REQ-401..404 (Abschnitt 48 E2E-Kette),
+// REQ-071/072 (Abschnitt 10.1 – Eigentümerprüfung, hier auf Modellebene
+// direkt an Tool.isOwnedBy() abgesichert; siehe reports/phase6_mutation.md,
+// Fund MUT-EQ: diese Methode war nach dem Phase-5-Refactor ungetestet).
 import "package:test/test.dart";
 import "package:werkzeugkiste/domain/exceptions.dart";
 import "package:werkzeugkiste/domain/tool.dart";
 
+import "fixtures.dart";
+
 void main() {
+  group("Tool.isOwnedBy (Abschnitt 10.1)", () {
+    test("true für den tatsächlichen Eigentümer", () {
+      final tool = buildAvailableTool(owner: ownerPubkey);
+      expect(tool.isOwnedBy(ownerPubkey), isTrue);
+    });
+
+    test("false für einen anderen Pubkey", () {
+      final tool = buildAvailableTool(owner: ownerPubkey);
+      expect(tool.isOwnedBy(otherOwnerPubkey), isFalse);
+    });
+  });
+
+
   group("ToolStateMachine – gültige Übergänge", () {
     test("AVAILABLE -> REQUESTED ist gültig", () {
       expect(isValidToolTransition(ToolStatus.available, ToolStatus.requested), isTrue);
