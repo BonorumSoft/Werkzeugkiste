@@ -40,7 +40,7 @@ jobs:
           fi
           echo "OK: keine verbotenen Imports in lib/domain/"
 
-      - name: Unit Tests mit Coverage (Abschnitt 40: Ziel ~80% kritische Logik)
+      - name: "Unit Tests mit Coverage (Abschnitt 40 - Ziel ~80% kritische Logik)"
         run: dart test --coverage=coverage --reporter=expanded
 
       - name: Coverage-Report erzeugen
