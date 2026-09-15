@@ -1,43 +1,62 @@
 # ADR-08 – Relay- und Blob-Storage-Betrieb
 
-**Status:** Offen – keine Arbeitsannahme getroffen, keine Implementierung
-vorhanden. In v0.4 gegenüber v0.3 neu ergänzt (siehe Änderungshistorie des
-Lastenhefts).
+**Status:** Vorschlag (Claude, September 2026) – wartet auf Bestätigung
+durch den Auftraggeber.
 
 ## Kontext
 
 Lastenheft Abschnitt 47 verlangt eine Entscheidung über: Nutzung
 öffentlicher Nostr-Relays vs. eigene Relay-Instanz, Betreiber und
 Finanzierung des Blossom-/Blob-Storage, Kostenmodell für „kostenlos für
-alle Nutzer" (Abschnitt 1: Kernanforderung „privat, kostenlos"), Skalierung
-bei wachsender Nutzerzahl.
+alle Nutzer" (Abschnitt 1), Skalierung bei wachsender Nutzerzahl.
 
-## Stand
+## Wichtige Vereinfachung durch ADR-05
 
-Nicht Teil des in Phase 3/4 gewählten Domain-Scopes – reine
-Betriebs-/Infrastrukturentscheidung ohne Rückwirkung auf `lib/domain/`.
-Diese ADR ist insofern besonders, als sie nicht nur eine technische,
-sondern auch eine wirtschaftliche Entscheidung ist: Das Lastenheft fordert
-in Abschnitt 1 ausdrücklich „kostenlos für alle Nutzer", was bei
-öffentlichen Nostr-Relays (meist kostenlos, aber ohne Verfügbarkeits-
-garantie) und Blossom-Storage (Speicherkosten skalieren mit Nutzerzahl und
-Fotogröße) in Spannung zueinander stehen kann.
+Mit der Entscheidung in ADR-05 (Fotos komplett lokal, Verteilung über
+denselben Kanal wie Domain-Events statt über einen separaten
+Blob-Storage-Anbieter) entfällt der **Blob-Storage-Teil dieser ADR
+vollständig** – es gibt keinen Blossom-Server und damit auch keine
+Blossom-Betriebs-/Kostenfrage mehr. Übrig bleibt die reine
+Relay-Betriebsfrage.
 
-## Offene Punkte (vollständig, da noch nichts entschieden)
+## Vorschlag
 
-- Öffentliche Relays nutzen (kostenlos, aber keine Verfügbarkeits-/
-  Datenschutzgarantie) vs. eigene Relay-Instanz betreiben (Kosten,
-  Wartungsaufwand, dafür Kontrolle).
-- Wer trägt die Betriebskosten für Blob-Storage bei wachsender
-  Nutzerzahl, wenn das Produkt laut Anforderung dauerhaft kostenlos
-  bleiben soll?
-- Skalierungsstrategie (z. B. Foto-Kompression/-Limits pro Werkzeug, um
-  Speicherkosten zu begrenzen – aktuell setzt `Tool.photoRefs`
-  (`lib/domain/tool.dart`) keine Obergrenze).
+**Für den MVP: ausschließlich öffentliche, etablierte Nostr-Relays,
+keine eigene Relay-Instanz.** Begründung: Die App soll laut Abschnitt 1
+dauerhaft kostenlos bleiben; ein selbst betriebener Relay-Server
+erzeugt laufende Infrastrukturkosten (Hosting, Wartung, Verfügbarkeit)
+ohne fachlichen Mehrwert für den MVP, solange die App-Daten ohnehin
+Ende-zu-Ende-verschlüsselt sind (Abschnitt 23) – der Relay-Betreiber
+kann die Inhalte ohnehin nicht lesen, wodurch das übliche
+Vertrauensargument für einen eigenen Relay ("wem vertraue ich mit
+meinen Klartextdaten") hier entfällt.
 
-## Konsequenz
+**Redundanz:** Jede Community konfiguriert mehrere (Vorschlag: 2–3)
+unabhängige öffentliche Relays gleichzeitig, damit der Ausfall eines
+einzelnen Relay-Betreibers den Sync nicht komplett unterbricht – Standard-
+Pattern in Nostr-Clients. Konkrete Namen bewusst nicht in dieser ADR
+festgeschrieben, da sich das Angebot öffentlicher Relays über die Zeit
+ändert; Auswahl sollte zum Implementierungszeitpunkt anhand von
+Uptime-Historie und Event-Größenlimit (siehe ADR-01/ADR-05) getroffen
+werden.
 
-Diese Entscheidung hat keine Domain-Auswirkung, ist aber eine
-Voraussetzung für ein tragfähiges Betriebsmodell und sollte vor einer
-produktiven Einführung mit realen Nutzern (nicht nur MVP-Test) geklärt
-sein.
+**Skalierung/Kostenmodell:** Da (a) kein Blob-Storage mehr anfällt
+(ADR-05) und (b) reguläre Text-/JSON-Events klein sind, bleibt die
+Bandbreitenlast pro Community gering. Größere Fotos (ADR-05) sind der
+einzige relevante Bandbreitenfaktor – die dort vorgeschlagene
+Kompression/Größenbegrenzung wirkt damit auch hier direkt kostendämpfend.
+**Optionaler Ausblick, kein MVP-Bestandteil:** Falls eine Community
+langfristig höhere Zuverlässigkeit will, kann sie freiwillig einen
+eigenen Relay betreiben (z. B. finanziert über eine Spende innerhalb
+der Community) – das ist eine lokale Entscheidung einzelner
+Communities, keine App-weite Infrastrukturverpflichtung.
+
+## Offene Punkte (auch nach diesem Vorschlag)
+
+- Konkrete Relay-Auswahl/-Liste ist eine Implementierungs-, keine
+  Architekturentscheidung und sollte erst kurz vor MVP-Launch final
+  getroffen werden (Verfügbarkeit ändert sich).
+
+## Konsequenz für den Code
+
+Kein Domain-Layer-Code betroffen – reine Infrastrukturkonfiguration.

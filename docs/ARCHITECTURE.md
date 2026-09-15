@@ -86,16 +86,19 @@ Alle acht vom Lastenheft (Abschnitt 47) geforderten ADRs sind formal unter
 
 | ADR | Thema | Status |
 |---|---|---|
-| [ADR-01](adr/0001-nostr-event-modell.md) | Nostr Event-Modell | Arbeitsannahme (nicht final) |
-| [ADR-02](adr/0002-community-verschluesselung.md) | Community-Verschlüsselung | Teilweise offen |
-| [ADR-03](adr/0003-invite-system.md) | Invite-System | Offen |
-| [ADR-04](adr/0004-konfliktaufloesung.md) | Konfliktauflösung | Arbeitsannahme, implementiert + getestet |
-| [ADR-05](adr/0005-foto-storage.md) | Foto-Storage | Offen |
-| [ADR-06](adr/0006-backup-recovery.md) | Backup/Recovery | Offen (hohes Risiko laut Abschnitt 46) |
-| [ADR-07](adr/0007-lokale-datenbank.md) | Lokale Datenbank | Arbeitsannahme (nicht final) |
-| [ADR-08](adr/0008-relay-blob-storage-betrieb.md) | Relay-/Blob-Storage-Betrieb | Offen |
+| [ADR-01](adr/0001-nostr-event-modell.md) | Nostr Event-Modell | Vorschlag (wartet auf Bestätigung) |
+| [ADR-02](adr/0002-community-verschluesselung.md) | Community-Verschlüsselung | Vorschlag (wartet auf Bestätigung) |
+| [ADR-03](adr/0003-invite-system.md) | Invite-System | Vorschlag (wartet auf Bestätigung) |
+| [ADR-04](adr/0004-konfliktaufloesung.md) | Konfliktauflösung | Entschieden, implementiert + getestet |
+| [ADR-05](adr/0005-foto-storage.md) | Foto-Storage | **Entschieden** (komplett lokal, Verteilung an alle) |
+| [ADR-06](adr/0006-backup-recovery.md) | Backup/Recovery | Vorschlag (wartet auf Bestätigung; hohes Risiko laut Abschnitt 46) |
+| [ADR-07](adr/0007-lokale-datenbank.md) | Lokale Datenbank | Vorschlag (wartet auf Bestätigung) |
+| [ADR-08](adr/0008-relay-blob-storage-betrieb.md) | Relay-Betrieb (Blob-Storage-Teil durch ADR-05 entfallen) | Vorschlag (wartet auf Bestätigung) |
 
-Nur ADR-04 (Konfliktauflösung) und indirekt ADR-01/ADR-07 haben bereits
-Code-Konsequenzen (siehe jeweilige ADR-Datei für die genaue Abgrenzung);
+Nur ADR-04 (Konfliktauflösung) hat bereits konkrete Code-Konsequenzen;
 die übrigen betreffen ausschließlich die noch nicht implementierte
-Application-/Infrastructure-Schicht.
+Application-/Infrastructure-Schicht (siehe jeweilige ADR-Datei für die
+genaue Abgrenzung). Sieben der acht ADRs liegen als konkrete, technisch
+begründete Vorschläge vor (September 2026) und warten auf die formale
+Bestätigung durch den Auftraggeber – nur ADR-05 ist bereits final
+entschieden.

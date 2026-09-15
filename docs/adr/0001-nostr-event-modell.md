@@ -1,50 +1,85 @@
 # ADR-01 – Nostr Event-Modell
 
-**Status:** Vorgeschlagen (Arbeitsannahme aus Phase 3/4), NICHT final durch
-den Auftraggeber bestätigt.
+**Status:** Vorschlag (Claude, September 2026) – wartet auf Bestätigung
+durch den Auftraggeber. Ersetzt die vorherige, unspezifische
+Arbeitsannahme aus Phase 3/4.
 
 ## Kontext
 
-Lastenheft Abschnitt 47 verlangt vor der Implementierung eine Entscheidung
-über: verwendete Event-Typen, NIPs, Tags, Signaturen,
-Verschlüsselungsverfahren. Die Domain-Schicht (`lib/domain/events.dart`)
-musste bereits in Phase 3/4 ein Strukturmodell für fachliche Events
-besitzen, um die Zustandsautomaten (Tool, LoanRequest, Loan) an etwas
-Serialisierbares anzubinden, ohne dabei selbst Kryptografie zu
-implementieren (Abschnitt 23: „keine eigene Kryptografie" – das ist
-Aufgabe der Infrastructure-Schicht).
-
-## Bisherige Arbeitsannahme (siehe `pipeline/00_offene_fragen.md`, Punkt 3)
-
-Jedes fachliche Event (`ToolCreated`, `ToolUpdated`, `ToolDeleted`,
+Lastenheft Abschnitt 47 verlangt eine Entscheidung über: verwendete
+Event-Typen, NIPs, Tags, Signaturen, Verschlüsselungsverfahren. Die
+Domain-Schicht (`lib/domain/events.dart`) kennt bereits 8 fachliche
+Event-Typen (`ToolCreated`, `ToolUpdated`, `ToolDeleted`,
 `LoanRequested`, `LoanAccepted`, `LoanRejected`, `LoanCancelled`,
-`LoanReturned` – siehe `lib/domain/events.dart`) wird als NIP-44-
-verschlüsselter, signierter Nostr-Event mit einem Custom-Kind-Range
-(z. B. 30000er „addressable events", damit ein Event pro Entität durch
-`d`-Tag ersetzbar/aktualisierbar ist statt sich unbegrenzt zu häufen)
-abgebildet. Jede `DomainEvent`-Subklasse trägt bereits die dafür nötigen
-Pflichtfelder `eventId`, `signerPubkey`, `signature`, `occurredAt`.
+`LoanReturned`) mit den Pflichtfeldern `eventId`, `signerPubkey`,
+`signature`, `occurredAt`, `schemaVersion`.
 
-## Offene Punkte (noch zu entscheiden)
+## Vorschlag
 
-- Konkrete Kind-Nummern je Event-Typ (Vorschlag: 30078–30085 als
-  Custom-Range, siehe NIP-33/NIP-78-Konventionen für addressable events –
-  müsste gegen tatsächlich verwendete Nostr-Client-/Relay-Kompatibilität
-  geprüft werden).
-- Exaktes Tag-Schema (z. B. `["d", "<tool_id>"]` für Tool-Events,
-  `["e", "<referenziertes_event>"]` für Verkettung von LoanRequest→Loan).
-- Ob NIP-44 (verschlüsselte DMs/Gruppen) tatsächlich das richtige
-  Verschlüsselungs-NIP für Community-weite (nicht 1:1-)Kommunikation ist,
-  oder ob ein gruppenfähiges Schema (z. B. geteilter Community-Schlüssel,
-  siehe ADR-02) direkt auf Event-Content-Ebene angewendet wird.
-- Wie `schema_version` (Domain-Feld, siehe `lib/domain/tool.dart` etc.) im
-  Event-Envelope transportiert wird (Tag vs. Content-Feld).
+**Event-Kind-Kategorie: „regular events" (NIP-01), NICHT addressable/
+replaceable.** Unsere `DomainEvent`s sind ein unveränderliches Log
+("was ist passiert", nicht "wie ist der aktuelle Zustand") – das
+entspricht exakt der NIP-01-Definition von regulären Events: „expected
+to be stored by relays" ohne Ersetzungssemantik. Der `d`-Tag-Mechanismus
+der addressable events (Kind 30000–39999) würde bedeuten, dass ältere
+Versionen von Relays verworfen werden dürfen – das widerspricht dem
+Event-Log-Charakter und würde die History (Abschnitt 15/39, "Wer hat
+wann was geändert") zerstören.
 
-## Konsequenz
+**Vorgeschlagener Kind-Bereich: 8200–8207** (ein Kind je der 8
+`DomainEvent`-Subklassen), im unbelegten 8000er-Bereich (Stand
+September 2026 laut Kind-Registry-Check; im Bereich 9000–9043 liegen
+bereits NIP-29-Gruppen- und Zap-Kinds, siehe unten). **Vor tatsächlicher
+Implementierung erneut gegen die dann aktuelle NIP-Kind-Registry
+prüfen** – Kind-Zuweisungen sind kein statisches Dokument.
 
-Die Domain-Schicht ist absichtlich so geschnitten, dass sie von dieser
-Entscheidung unabhängig bleibt: `DomainEvent` kennt nur, DASS es eine
-Signatur geben muss, nicht WIE sie erzeugt/geprüft wird. Eine spätere
-ADR-01-Entscheidung erfordert daher keine Änderung an `lib/domain/`,
-sondern nur an der noch nicht implementierten Infrastructure-Schicht
-(Nostr-Client-Bindung).
+**Tags:**
+- `["e", "<tool_id | request_id | loan_id>"]` – Korrelations-Tag, damit
+  ein Relay-Filter (`#e`) alle Events zu genau einer Entität liefert.
+  Bewusste Zweckentfremdung des `e`-Tags (eigentlich für Event-IDs
+  gedacht) – pragmatisch üblich, weil es das einzige von Relays
+  standardmäßig indexierte Tag ist, das für diesen Zweck passt.
+- `["p", "<betroffener_pubkey>"]` – z. B. der Anfragende bei
+  `LoanRequested`, damit dessen Client auch ohne Kenntnis der
+  `tool_id` im Voraus relevante Events findet.
+- `schemaVersion` wandert NICHT in einen Tag, sondern bleibt Teil des
+  JSON-Envelope im `content`-Feld (konsistent mit den bereits
+  bestehenden `toJson()`-Methoden der Domain-Entitäten).
+
+**Verschlüsselung:** NIP-44 (aktuell Version 2: secp256k1-ECDH + HKDF +
+ChaCha20 + HMAC-SHA256) ist laut Spezifikation explizit für **paarweise**
+Verschlüsselung zwischen zwei Schlüsselpaaren ausgelegt, NICHT für
+Gruppen. Für Community-weite Events kann NIP-44 daher nicht direkt
+verwendet werden. Vorschlag: `content` wird mit dem in ADR-02
+vorgeschlagenen **symmetrischen Community-Schlüssel** verschlüsselt,
+unter Wiederverwendung derselben Bausteine wie NIP-44 (ChaCha20 +
+HMAC-SHA256 via HKDF), nur mit einem gemeinsamen statt einem per-ECDH
+abgeleiteten Schlüssel. Das ist eine bewusste, dokumentierte Abweichung
+von der NIP-44-Spezifikation (die selbst nur den Paar-Fall definiert),
+keine falsche Anwendung.
+
+## Geprüfte, verworfene Alternative
+
+**NIP-29 (Relay-based Groups)** wurde geprüft, da es "Gruppen" bereits
+im Protokoll modelliert. Verworfen, weil NIP-29 **nicht Ende-zu-Ende-
+verschlüsselt** ist – die Mitgliedschafts- und Moderationslogik liegt
+vollständig beim Relay-Betreiber ("relay MUST reject...", Relay als
+zentrale Vertrauensinstanz). Das widerspricht Abschnitt 23 des
+Lastenhefts (E2E-Verschlüsselung) und dem Grundprinzip "dezentral, kein
+zentraler Server". NIP-29 wäre nur dann passend, wenn ein
+Community-Betreiber dem Relay explizit vertrauen soll – nicht der Fall
+hier.
+
+## Offene Punkte (auch nach diesem Vorschlag)
+
+- Endgültige Kind-Nummern müssen vor Implementierung final gegen die
+  Registry geprüft werden.
+- Wie mehrteilige/große Inhalte (siehe ADR-05, Fotoverteilung) innerhalb
+  der relay-üblichen Event-Größenlimits abgebildet werden (Chunking?).
+
+## Konsequenz für den Code
+
+Keine Änderung an `lib/domain/events.dart` nötig – das Strukturmodell
+(Pflichtfelder, `eventType`-Unterscheidung) ist mit diesem Vorschlag
+vollständig kompatibel. Der Vorschlag betrifft ausschließlich die noch
+nicht implementierte Infrastructure-Schicht.

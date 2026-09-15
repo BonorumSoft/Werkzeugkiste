@@ -77,6 +77,12 @@ final class Tool implements Versioned {
   final String category;
   final String? model;
   final String? description;
+
+  /// Opake Referenzen auf Fotos – laut ADR-05 (`docs/adr/0005-foto-storage.md`)
+  /// SHA-256-Content-Hashes lokal gehaltener Fotodateien (kein externer
+  /// Blob-Storage/Blossom-Anbieter; Fotos werden bei Änderung aktiv an
+  /// alle Community-Mitglieder verteilt). Die Domain-Schicht kennt nur die
+  /// Referenz, nicht die Bilddaten selbst (Abschnitt 23).
   final List<String> photoRefs;
   final String? condition;
   final ToolStatus status;
