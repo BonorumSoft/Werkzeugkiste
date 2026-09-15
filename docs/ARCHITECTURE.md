@@ -1,9 +1,9 @@
 # Architektur – Werkzeugkiste
 
-Status: **Domain-Schicht (Phase 3/4 der TDD-Pipeline)**. Application-,
-Infrastructure- und UI-Schicht folgen, sobald die offenen ADRs (siehe
-`pipeline/00_offene_fragen.md`, Abschnitt 47 des Lastenhefts) entschieden
-sind. Dieses Dokument wird in Phase 7 der Pipeline vervollständigt.
+Status: **Domain-Schicht, Phase 3–7 der TDD-Pipeline abgeschlossen**
+(Rot/Grün-Nachweis, Refactor, Mutationstest-Vorbereitung, Dokumentation –
+siehe `reports/`). Application-, Infrastructure- und UI-Schicht folgen,
+sobald die offenen ADRs (siehe `docs/adr/`) entschieden sind.
 
 ## Schichtenmodell (Lastenheft Abschnitt 36)
 
@@ -35,6 +35,29 @@ CI-Import-Guard abgesichert (`.github/workflows/ci.yml`).
 | `tool_service.dart` | Orchestrierende Use-Cases (requestLoan, acceptLoanRequest, confirmReturn, …) inkl. Berechtigungsprüfung | Abschnitt 10.1, 11.1, 14, 33 |
 | `events.dart` | Fachliche Event-Typen (Skelett, konkrete Nostr-Bindung offen: ADR-01) | Abschnitt 38 |
 | `exceptions.dart` | Domain-Fehlertypen | Abschnitt 33 |
+| `state_machine.dart` | Generischer Zustandsautomaten-Baustein (seit Phase 5), gemeinsam genutzt von `tool.dart` und `loan_request.dart` | Abschnitt 10.2, 11.1 |
+| `ids.dart` | Typdefinitionen für IDs/Pubkeys (Lesbarkeit, keine eigene Logik) | – |
+
+## API-Übersicht: öffentliche Domain-Operationen
+
+Alle zustandsverändernden Operationen liegen gebündelt in
+`tool_service.dart` und sind reine Funktionen (keine Seiteneffekte, kein
+IO) – Persistenz und Event-Versand sind Aufgabe der noch nicht
+implementierten Application-/Infrastructure-Schicht:
+
+- `updateTool(...)`, `deleteTool(...)` – nur durch den Eigentümer (Abschnitt 10.1).
+- `requestLoan(...)` – erzwingt Tool-State-Machine und die Regel „max. eine
+  aktive Anfrage pro Werkzeug" (REQ-249, Abschnitt 11.1).
+- `acceptLoanRequest(...)`, `rejectLoanRequest(...)` – nur durch den
+  Eigentümer.
+- `cancelLoanRequest(...)` – nur durch den Anfragenden.
+- `confirmReturn(...)` – nur durch den Eigentümer, setzt `Loan.returnedAt`
+  und schließt den Leihvorgang ab (Abschnitt 14).
+
+Jede dieser Funktionen wirft ausschließlich Subtypen von
+`DomainException` (`InvalidStateTransition`, `PermissionDenied`,
+`DuplicateActiveLoanRequest`, `InvalidDomainData`) – nie rohe
+`StateError`/`ArgumentError` (Abschnitt 33).
 
 ## Sequenzdiagramm: Leihvorgang (Akzeptanzszenario Abschnitt 48)
 
@@ -56,10 +79,23 @@ sequenceDiagram
     D-->>D: Loan.returnedAt = now, status = COMPLETED
 ```
 
-## Offene ADRs
+## Architekturentscheidungen (ADRs)
 
-Siehe `pipeline/00_offene_fragen.md` und `pipeline/01_requirements.json`
-(Quelle „47") für den vollständigen Stand der acht offenen ADRs
-(ADR-01 … ADR-08). Diese Domain-Implementierung trifft für ADR-04
-(Konfliktauflösung) eine dokumentierte Arbeitsannahme (Last-Writer-Wins +
-Tiebreak), ersetzt aber nicht die formale Entscheidung.
+Alle acht vom Lastenheft (Abschnitt 47) geforderten ADRs sind formal unter
+`docs/adr/` dokumentiert:
+
+| ADR | Thema | Status |
+|---|---|---|
+| [ADR-01](adr/0001-nostr-event-modell.md) | Nostr Event-Modell | Arbeitsannahme (nicht final) |
+| [ADR-02](adr/0002-community-verschluesselung.md) | Community-Verschlüsselung | Teilweise offen |
+| [ADR-03](adr/0003-invite-system.md) | Invite-System | Offen |
+| [ADR-04](adr/0004-konfliktaufloesung.md) | Konfliktauflösung | Arbeitsannahme, implementiert + getestet |
+| [ADR-05](adr/0005-foto-storage.md) | Foto-Storage | Offen |
+| [ADR-06](adr/0006-backup-recovery.md) | Backup/Recovery | Offen (hohes Risiko laut Abschnitt 46) |
+| [ADR-07](adr/0007-lokale-datenbank.md) | Lokale Datenbank | Arbeitsannahme (nicht final) |
+| [ADR-08](adr/0008-relay-blob-storage-betrieb.md) | Relay-/Blob-Storage-Betrieb | Offen |
+
+Nur ADR-04 (Konfliktauflösung) und indirekt ADR-01/ADR-07 haben bereits
+Code-Konsequenzen (siehe jeweilige ADR-Datei für die genaue Abgrenzung);
+die übrigen betreffen ausschließlich die noch nicht implementierte
+Application-/Infrastructure-Schicht.
