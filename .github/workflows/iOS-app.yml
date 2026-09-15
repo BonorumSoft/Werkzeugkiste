@@ -58,11 +58,8 @@ jobs:
         run: |
           cd app
           if ! grep -q "^  werkzeugkiste:" pubspec.yaml; then
-            sed -i.bak '/^dependencies:/a\
-  werkzeugkiste:\
-    path: ..
-' pubspec.yaml
-            rm -f pubspec.yaml.bak
+            awk '/^dependencies:/{print; print "  werkzeugkiste:"; print "    path: .."; next}1' pubspec.yaml > pubspec.yaml.new
+            mv pubspec.yaml.new pubspec.yaml
           fi
           echo "--- app/pubspec.yaml (dependencies-Ausschnitt) ---"
           grep -A5 "^dependencies:" pubspec.yaml
