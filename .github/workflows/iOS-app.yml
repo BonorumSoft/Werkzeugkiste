@@ -71,13 +71,34 @@ jobs:
         run: cd app && dart run build_runner build --delete-conflicting-outputs
 
       - name: flutter analyze
-        run: cd app && flutter analyze
+        run: |
+          cd app
+          if ! flutter analyze > /tmp/analyze.log 2>&1; then
+            echo "::error::flutter analyze fehlgeschlagen:%0A$(sed ':a;N;$!ba;s/\n/%0A/g' /tmp/analyze.log)"
+            cat /tmp/analyze.log
+            exit 1
+          fi
+          cat /tmp/analyze.log
 
       - name: flutter test
-        run: cd app && flutter test
+        run: |
+          cd app
+          if ! flutter test > /tmp/test.log 2>&1; then
+            echo "::error::flutter test fehlgeschlagen:%0A$(sed ':a;N;$!ba;s/\n/%0A/g' /tmp/test.log)"
+            cat /tmp/test.log
+            exit 1
+          fi
+          cat /tmp/test.log
 
       - name: iOS-Build ohne Codesigning (reiner Kompilierbarkeits-Nachweis)
-        run: cd app && flutter build ios --no-codesign
+        run: |
+          cd app
+          if ! flutter build ios --no-codesign > /tmp/build.log 2>&1; then
+            echo "::error::flutter build ios fehlgeschlagen:%0A$(tail -c 60000 /tmp/build.log | sed ':a;N;$!ba;s/\n/%0A/g')"
+            cat /tmp/build.log
+            exit 1
+          fi
+          cat /tmp/build.log
 
       - name: Erzeugtes Scaffold committen (nur wenn neu/geaendert)
         run: |
