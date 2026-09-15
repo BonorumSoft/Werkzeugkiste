@@ -88,15 +88,41 @@ in Phase 3/4 für `cli.yml`), liegt die aktualisierte Workflow-Datei als
 `ci.yml.PLEASE-ADD-MANUALLY-TO-.github-workflows` bei und muss manuell
 übernommen werden.
 
-**Status zum Zeitpunkt dieses Reports:** Skript und die zugehörigen neuen
-Tests (`community_test.dart`, `isOwnedBy`-Tests) sind bereits gepusht und
-über einen echten grünen CI-Lauf verifiziert
-([`34938415380`](https://github.com/BonorumSoft/Werkzeugkiste/actions/runs/34938415380)).
-Der eigentliche `mutation-testing`-Job lief zu diesem Zeitpunkt noch NICHT,
-da die Workflow-Datei die manuelle Übernahme durch den Auftraggeber
-voraussetzt. Sobald das erfolgt ist, wird dieser Report um das tatsächliche
-Ergebnis (Mutation Score, ggf. Nacharbeiten bei überlebenden Mutanten)
-ergänzt – siehe TODO-Markierung unten.
+## Ergebnis (nach manueller CI-Aktivierung durch den Auftraggeber)
 
-**TODO (nach manueller CI-Aktivierung nachzutragen):** tatsächlicher
-Mutation Score aus dem ersten `mutation-testing`-Lauf.
+Die Workflow-Datei wurde übernommen; der `mutation-testing`-Job lief
+seitdem erstmals mit.
+
+**Lauf:** [`34959301982`](https://github.com/BonorumSoft/Werkzeugkiste/actions/runs/34959301982)
+(Commit `5ca4758`)
+
+Alle drei Jobs grün, inkl. `Mutationstests Domain-Schicht (Abschnitt 40,
+Phase 6)` → Schritt „Mutationstests ausführen (tool/mutation_test.py)"
+erfolgreich. Da `tool/mutation_test.py` nur dann mit Exit-Code 0 beendet,
+wenn **kein einziger** der 10 Mutanten überlebt hat (siehe Skript-Logik
+oben), ist dieser grüne CI-Status gleichbedeutend mit:
+
+**Mutation Score: 10/10 (100 %)** – alle 10 gezielt eingeschleusten
+Mutationen wurden von der bestehenden Testsuite erkannt und haben die
+Testsuite fehlschlagen lassen, inklusive der beiden erst im Rahmen dieser
+Phase nachgezogenen Tests (`community_test.dart`, `isOwnedBy`-Tests).
+
+Die vollständige Schritt-für-Schritt-Ausgabe des Skripts (welcher Mutant
+im Detail welchen Test bricht) liegt im Job-Log auf GitHub; das Log selbst
+konnte aus dieser Sandbox nicht heruntergeladen werden, da der
+Log-Speicher (`productionresultssa1.blob.core.windows.net`) vom selben
+Netzwerk-Proxy blockiert wird wie `pub.dev`/`storage.googleapis.com` –
+der Job-Status (`success`/`failure`) über die GitHub-Actions-API war aber
+in allen bisherigen Phasen dieser Pipeline die maßgebliche
+Verifikationsquelle und ist hier ausreichend eindeutig, da das Skript
+keine Zwischenzustände kennt: entweder alle 10 Mutanten tot (Exit 0) oder
+mindestens einer überlebt (Exit 1, Job rot).
+
+## Fazit Phase 6
+
+Damit ist Phase 6 vollständig abgeschlossen: kritische Logik in allen
+sechs betroffenen Domain-Dateien (Tool, LoanRequest, Loan,
+ConflictResolution, ToolService, Community) ist nicht nur mit Tests
+abgedeckt, sondern die Tests sind nachweislich in der Lage, gezielt
+eingeschleuste Verhaltensfehler zu erkennen ("Test-die-Tests"-Nachweis
+laut Meta-Prompt).
