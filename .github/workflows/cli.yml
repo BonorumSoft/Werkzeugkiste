@@ -1,0 +1,83 @@
+name: CI
+
+# Lastenheft Abschnitt 41: Formatting, Linting, Static Analysis, Unit Tests,
+# Security/Dependency-Checks bei jedem Pull Request und auf main.
+# Läuft auf GitHub-Runnern (echtes Dart-SDK) – nicht in einer Sandbox mit
+# eingeschränktem Netzwerkzugriff, siehe pipeline/00_offene_fragen.md.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch: {}
+
+jobs:
+  domain-tests:
+    name: Domain-Schicht – Format/Analyze/Test/Coverage
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+
+      - name: Install dependencies
+        run: dart pub get
+
+      - name: Formatting (Abschnitt 41)
+        run: dart format --output=none --set-exit-if-changed .
+
+      - name: Static analysis / Linting (Abschnitt 41)
+        run: dart analyze --fatal-infos
+
+      - name: Import-Guard – Domain darf kein Flutter/SQLite/Nostr importieren (Abschnitt 35)
+        run: |
+          if grep -R --include="*.dart" -E "package:flutter/|sqlite|package:nostr" lib/domain/; then
+            echo "::error::Domain-Schicht importiert eine verbotene Abhängigkeit (siehe Abschnitt 35/36)."
+            exit 1
+          fi
+          echo "OK: keine verbotenen Imports in lib/domain/"
+
+      - name: Unit Tests mit Coverage (Abschnitt 40: Ziel ~80% kritische Logik)
+        run: dart test --coverage=coverage --reporter=expanded
+
+      - name: Coverage-Report erzeugen
+        run: |
+          dart pub global activate coverage
+          dart pub global run coverage:format_coverage \
+            --lcov --in=coverage --out=coverage/lcov.info \
+            --report-on=lib/domain
+
+      - name: Coverage-Zusammenfassung
+        run: |
+          if [ -f coverage/lcov.info ]; then
+            lines_found=$(grep -c "^DA:" coverage/lcov.info || true)
+            lines_hit=$(grep "^DA:" coverage/lcov.info | awk -F',' '$2>0' | wc -l)
+            echo "Domain-Coverage: $lines_hit / $lines_found Zeilen getroffen"
+          fi
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: coverage-lcov
+          path: coverage/lcov.info
+          if-no-files-found: warn
+
+  dependency-check:
+    name: Dependency- und Secret-Scan (Abschnitt 41)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+      - name: Outdated/Dependency-Report
+        run: dart pub outdated || true
+      - name: Trivy Secret Scan
+        uses: aquasecurity/trivy-action@0.29.0
+        with:
+          scan-type: fs
+          scan-ref: .
+          scanners: secret
+          exit-code: "1"
