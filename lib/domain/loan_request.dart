@@ -1,7 +1,7 @@
 import "package:meta/meta.dart";
 
-import "exceptions.dart";
 import "ids.dart";
+import "state_machine.dart" as state_machine;
 
 /// Zustand einer Leihanfrage (Lastenheft Abschnitt 11).
 enum LoanRequestStatus { pending, accepted, rejected, cancelled }
@@ -17,15 +17,11 @@ const Map<LoanRequestStatus, Set<LoanRequestStatus>> _allowedRequestTransitions 
   LoanRequestStatus.cancelled: {},
 };
 
-bool isValidLoanRequestTransition(LoanRequestStatus from, LoanRequestStatus to) {
-  return _allowedRequestTransitions[from]?.contains(to) ?? false;
-}
+bool isValidLoanRequestTransition(LoanRequestStatus from, LoanRequestStatus to) =>
+    state_machine.isValidTransition(_allowedRequestTransitions, from, to);
 
-void assertValidLoanRequestTransition(LoanRequestStatus from, LoanRequestStatus to) {
-  if (!isValidLoanRequestTransition(from, to)) {
-    throw InvalidStateTransition(from, to);
-  }
-}
+void assertValidLoanRequestTransition(LoanRequestStatus from, LoanRequestStatus to) =>
+    state_machine.assertValidTransition(_allowedRequestTransitions, from, to);
 
 /// Leihanfrage-Datensatz (Lastenheft Abschnitt 11).
 @immutable

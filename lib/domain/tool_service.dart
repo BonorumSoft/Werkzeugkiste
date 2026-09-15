@@ -25,7 +25,7 @@ Tool updateTool(
   String? condition,
   required DateTime now,
 }) {
-  _assertOwner(tool, actor, action: "Werkzeug bearbeiten");
+  _assertActor(actor, tool.ownerPubkey, action: "Werkzeug bearbeiten", roleLabel: "owner_pubkey");
   return tool.copyWith(
     name: name,
     category: category,
@@ -41,14 +41,24 @@ Tool updateTool(
 /// Zustandsübergang wird über die Tool-State-Machine erzwungen (siehe
 /// tool.dart: DELETED ist nur aus AVAILABLE erreichbar).
 Tool deleteTool(Tool tool, {required Pubkey actor, required DateTime now}) {
-  _assertOwner(tool, actor, action: "Werkzeug löschen");
+  _assertActor(actor, tool.ownerPubkey, action: "Werkzeug löschen", roleLabel: "owner_pubkey");
   assertValidToolTransition(tool.status, ToolStatus.deleted);
   return tool.copyWith(status: ToolStatus.deleted, updatedAt: now);
 }
 
-void _assertOwner(Tool tool, Pubkey actor, {required String action}) {
-  if (!tool.isOwnedBy(actor)) {
-    throw PermissionDenied(action, actor: actor, requiredRole: "owner_pubkey=${tool.ownerPubkey}");
+/// PHASE 5 (Refactor): Bündelt das zuvor vierfach duplizierte Muster
+/// "Aktor muss mit einem bestimmten Pubkey übereinstimmen, sonst
+/// PermissionDenied" (Eigentümer bearbeiten/löschen/bestätigen/ablehnen,
+/// Anfragender zurückziehen). Reines Verhalten unverändert – siehe
+/// reports/phase5_refactor.md.
+void _assertActor(
+  Pubkey actual,
+  Pubkey expected, {
+  required String action,
+  required String roleLabel,
+}) {
+  if (actual != expected) {
+    throw PermissionDenied(action, actor: actual, requiredRole: "$roleLabel=$expected");
   }
 }
 
@@ -92,9 +102,7 @@ void _assertOwner(Tool tool, Pubkey actor, {required String action}) {
   required LoanId loanId,
   required DateTime now,
 }) {
-  if (actor != request.ownerPubkey) {
-    throw PermissionDenied("Anfrage bestätigen", actor: actor, requiredRole: "owner_pubkey=${request.ownerPubkey}");
-  }
+  _assertActor(actor, request.ownerPubkey, action: "Anfrage bestätigen", roleLabel: "owner_pubkey");
   assertValidToolTransition(tool.status, ToolStatus.loaned);
 
   final updatedRequest = request.withStatus(LoanRequestStatus.accepted);
@@ -120,9 +128,7 @@ void _assertOwner(Tool tool, Pubkey actor, {required String action}) {
   required Pubkey actor,
   required DateTime now,
 }) {
-  if (actor != request.ownerPubkey) {
-    throw PermissionDenied("Anfrage ablehnen", actor: actor, requiredRole: "owner_pubkey=${request.ownerPubkey}");
-  }
+  _assertActor(actor, request.ownerPubkey, action: "Anfrage ablehnen", roleLabel: "owner_pubkey");
   assertValidToolTransition(tool.status, ToolStatus.available);
   return (
     tool: tool.copyWith(status: ToolStatus.available, updatedAt: now),
@@ -138,9 +144,7 @@ void _assertOwner(Tool tool, Pubkey actor, {required String action}) {
   required Pubkey actor,
   required DateTime now,
 }) {
-  if (actor != request.requesterPubkey) {
-    throw PermissionDenied("Anfrage zurückziehen", actor: actor, requiredRole: "requester_pubkey=${request.requesterPubkey}");
-  }
+  _assertActor(actor, request.requesterPubkey, action: "Anfrage zurückziehen", roleLabel: "requester_pubkey");
   assertValidToolTransition(tool.status, ToolStatus.available);
   return (
     tool: tool.copyWith(status: ToolStatus.available, updatedAt: now),
@@ -156,9 +160,7 @@ void _assertOwner(Tool tool, Pubkey actor, {required String action}) {
   required Pubkey actor,
   required DateTime now,
 }) {
-  if (actor != loan.ownerPubkey) {
-    throw PermissionDenied("Rückgabe bestätigen", actor: actor, requiredRole: "owner_pubkey=${loan.ownerPubkey}");
-  }
+  _assertActor(actor, loan.ownerPubkey, action: "Rückgabe bestätigen", roleLabel: "owner_pubkey");
   assertValidToolTransition(tool.status, ToolStatus.available);
   return (
     tool: tool.copyWith(status: ToolStatus.available, updatedAt: now),

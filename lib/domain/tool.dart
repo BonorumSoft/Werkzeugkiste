@@ -1,8 +1,8 @@
 import "package:meta/meta.dart";
 
 import "conflict_resolution.dart";
-import "exceptions.dart";
 import "ids.dart";
+import "state_machine.dart" as state_machine;
 
 /// Zustand eines Werkzeugs (Lastenheft Abschnitt 10.2).
 ///
@@ -34,16 +34,12 @@ const Map<ToolStatus, Set<ToolStatus>> _allowedToolTransitions = {
 };
 
 /// Prüft, ob der Übergang [from] -> [to] laut Tool-State-Machine gültig ist.
-bool isValidToolTransition(ToolStatus from, ToolStatus to) {
-  return _allowedToolTransitions[from]?.contains(to) ?? false;
-}
+bool isValidToolTransition(ToolStatus from, ToolStatus to) =>
+    state_machine.isValidTransition(_allowedToolTransitions, from, to);
 
-/// Wirft [InvalidStateTransition], falls der Übergang ungültig ist.
-void assertValidToolTransition(ToolStatus from, ToolStatus to) {
-  if (!isValidToolTransition(from, to)) {
-    throw InvalidStateTransition(from, to);
-  }
-}
+/// Wirft `InvalidStateTransition`, falls der Übergang ungültig ist.
+void assertValidToolTransition(ToolStatus from, ToolStatus to) =>
+    state_machine.assertValidTransition(_allowedToolTransitions, from, to);
 
 /// Werkzeug-Datensatz (Lastenheft Abschnitt 10).
 ///
