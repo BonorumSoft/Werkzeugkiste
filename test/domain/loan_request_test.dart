@@ -18,7 +18,7 @@ void main() {
         requesterPubkey: borrowerPubkey,
         requestId: "req-1",
         now: t0,
-        existingActiveRequestsForTool: const [],
+        existingActiveRequestsForTool: const <LoanRequest>[],
       );
 
       expect(result.tool.status, ToolStatus.requested);
@@ -63,7 +63,7 @@ void main() {
           requesterPubkey: borrowerPubkey,
           requestId: "req-1",
           now: t0,
-          existingActiveRequestsForTool: const [],
+          existingActiveRequestsForTool: const <LoanRequest>[],
         ),
         throwsA(isA<InvalidStateTransition>()),
       );
