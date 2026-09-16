@@ -46,11 +46,14 @@ void main() {
     expect(find.text("Deine Communities"), findsOneWidget);
     expect(find.textContaining("Noch keine Community"), findsOneWidget);
 
-    // Drift schliesst Query-Streams intern leicht verzoegert (Timer), z.B.
-    // wenn beim Screen-Wechsel Onboarding -> Community-Auswahl ein Watcher
-    // abbestellt wird. pumpAndSettle allein drainiert diesen Timer nicht
-    // zuverlaessig, daher hier ein kurzer zusaetzlicher Pump, um den Test
-    // sauber (ohne "Timer is still pending"-Assertion) zu beenden.
+    // Der Drift-interne Timer beim Schliessen von Query-Streams entsteht
+    // erst, wenn ProviderScope/AppDatabase disposed werden - das passiert
+    // sonst erst NACH Ende dieser Testfunktion durch das implizite
+    // Tree-Teardown von testWidgets, also zu spaet fuer einen Pump hier.
+    // Deshalb den Baum explizit VOR Testende durch einen leeren ersetzen
+    // (loest das Dispose synchron innerhalb des Tests aus) und danach kurz
+    // pumpen, um den dabei entstehenden Timer sauber abzuwarten.
+    await tester.pumpWidget(Container());
     await tester.pump(const Duration(milliseconds: 50));
   });
 
@@ -71,8 +74,10 @@ void main() {
     expect(find.text("Werkzeuge"), findsWidgets); // AppBar-Titel + evtl. Bottom-Nav-Label
     expect(find.textContaining("Noch keine Werkzeuge"), findsOneWidget);
 
-    // Siehe Kommentar im vorherigen Test: Drift-interner Timer beim
-    // Abbestellen eines Query-Streams (Screen-Wechsel) sauber abwarten.
+    // Siehe Kommentar im vorherigen Test: Baum explizit vor Testende
+    // durch einen leeren ersetzen, um das Dispose (und den dabei
+    // entstehenden Drift-Timer) noch innerhalb des Tests abzuwarten.
+    await tester.pumpWidget(Container());
     await tester.pump(const Duration(milliseconds: 50));
   });
 }
