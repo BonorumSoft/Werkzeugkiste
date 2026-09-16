@@ -11,8 +11,11 @@ name: Flutter-App – Android-Build (Phase 10)
 # android/app/build.gradle.kts: "TODO: Add your own signing config for the
 # release build" - fuer echtes Play-Store-Deployment spaeter durch ein
 # eigenes Signing-Zertifikat zu ersetzen, fuer Sideloading auf Testgeraeten
-# reicht das). Das fertige APK wird als Workflow-Artifact hochgeladen, zum
-# Download direkt aus dem Actions-Lauf.
+# reicht das). Das fertige APK wird sowohl als Workflow-Artifact als auch
+# als Asset an einem echten GitHub-Release angehaengt (der CI-Runner hat
+# normalen Internetzugriff, im Gegensatz zur Cloud-Sandbox/Geraete-Bruecke,
+# die den Artifact-/Log-Download blockiert bekommen - deshalb macht die CI
+# selbst den Release, nicht ich im Nachhinein).
 
 on:
   workflow_dispatch: {}
@@ -80,10 +83,76 @@ jobs:
             git push
           fi
 
-      - name: APK als Artifact hochladen
+      - name: APK als Workflow-Artifact hochladen
         if: success()
         uses: actions/upload-artifact@v4
         with:
           name: werkzeugkiste-app-release
           path: app/build/app/outputs/flutter-apk/app-release.apk
           retention-days: 30
+
+      - name: Release-Notes erzeugen
+        if: success()
+        run: |
+          APP_VERSION=$(grep '^version:' app/pubspec.yaml | sed 's/version: *//')
+          {
+            echo "## Werkzeugkiste – Android-Testbuild"
+            echo ""
+            echo "Automatisch erzeugter CI-Build zum Sideloaden auf Android-Testgeraeten."
+            echo "Kein Play-Store-Release, keine Produktions-Signatur."
+            echo ""
+            echo "**Version:** \`${APP_VERSION}\`  "
+            echo "**Commit:** \`${{ github.sha }}\`  "
+            echo "**Build:** #${{ github.run_number }} (Workflow-Run [${{ github.run_id }}](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}))  "
+            echo "**Erstellt:** $(date -u +'%Y-%m-%d %H:%M UTC')"
+            echo ""
+            echo "### Was in diesem Build enthalten ist"
+            echo ""
+            echo "Vollstaendige lokale MVP-Umsetzung der Kern-Workflows aus dem Lastenheft (v0.4):"
+            echo ""
+            echo "- Onboarding mit lokaler Geraete-Identitaet"
+            echo "- Community anlegen, per Einladungs-Token beitreten"
+            echo "- Werkzeuge anlegen, bearbeiten, in der Community-Uebersicht anzeigen"
+            echo "- Ausleihe anfragen, durch Eigentuemer annehmen, Rueckgabe bestaetigen"
+            echo "- Vollstaendig lokale Persistenz (SQLite ueber Drift, ADR-07)"
+            echo "- Foto-Ablage inhaltsadressiert per SHA-256-Hash (ADR-05)"
+            echo ""
+            echo "### Was bewusst NICHT enthalten ist"
+            echo ""
+            echo "- **Kein Geraete-Sync:** Es gibt noch keine Nostr-Relay-Anbindung (ADR-01/02/08)."
+            echo "  Jede Installation hat ihre eigene lokale Datenbank; zwei Geraete tauschen"
+            echo "  aktuell nichts miteinander aus. Interaktionen zwischen mehreren Personen"
+            echo "  lassen sich damit noch nicht end-to-end testen."
+            echo "- **Keine echte kryptographische Identitaet:** Der Geraete-Pubkey ist ein"
+            echo "  zufaelliger Platzhalter, keine echten secp256k1/Nostr-Schluessel (ADR-06)."
+            echo "- **Keine Datenbank-Verschluesselung:** SQLCipher ist als Ziel in ADR-07"
+            echo "  dokumentiert, aber noch nicht umgesetzt."
+            echo "- **Kein Produktions-Signing:** Diese APK ist mit Flutters Standard-Debug-Key"
+            echo "  signiert (siehe \`android/app/build.gradle.kts\`), nicht fuer den Play Store."
+            echo ""
+            echo "### Installation (Sideloading)"
+            echo ""
+            echo "1. \`werkzeugkiste-app-release.apk\` unten unter Assets herunterladen."
+            echo "2. Auf dem Android-Geraet \"Installation aus unbekannten Quellen\" fuer den"
+            echo "   verwendeten Browser/Dateimanager erlauben (Einstellungen > Sicherheit, je"
+            echo "   nach Android-Version)."
+            echo "3. APK oeffnen und installieren."
+            echo ""
+            echo "### Technische Details"
+            echo ""
+            echo "- Flutter-Kanal: stable (subosito/flutter-action)"
+            echo "- Build-Runner: ubuntu-latest, Java 17 (Temurin)"
+            echo "- Domain-Paket \`werkzeugkiste\` als lokale Pfad-Abhaengigkeit eingebunden"
+            echo "- State-Management: Riverpod; Persistenz: Drift/SQLite"
+          } > /tmp/release_notes.md
+          cat /tmp/release_notes.md
+
+      - name: GitHub-Release erstellen (mit APK als Asset)
+        if: success()
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: android-build-${{ github.run_number }}
+          name: "Android-Testbuild #${{ github.run_number }}"
+          body_path: /tmp/release_notes.md
+          files: app/build/app/outputs/flutter-apk/app-release.apk
+          prerelease: true
