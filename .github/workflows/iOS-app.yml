@@ -18,6 +18,13 @@ name: Flutter-App – Grundgerüst & iOS-Build (Phase 10)
 # Typ macos-latest haben beides bereits vorinstalliert und uneingeschraenkten
 # Netzwerkzugriff – deshalb laeuft das komplette Flutter/iOS-Scaffolding
 # und der erste Kompilierbarkeits-Nachweis hier statt lokal.
+#
+# Hinweis zur Fehlerdiagnose: Sowohl die GitHub-Actions-Rohlogs (Redirect auf
+# blob.core.windows.net) als auch ::error::-Annotationen mit \r-haltigem
+# Flutter-Output (Fortschrittsanzeigen wie "Analyzing app...") sind fuer die
+# automatisierte Diagnose unzuverlaessig/blockiert. Deshalb werden die
+# Fehler-Logs bei einem Fehlschlag zusaetzlich direkt ins Repo committet
+# (ci-logs/), das funktioniert ueber den normalen GITHUB_TOKEN dieses Laufs.
 
 on:
   workflow_dispatch: {}
@@ -74,7 +81,8 @@ jobs:
         run: |
           cd app
           if ! flutter analyze > /tmp/analyze.log 2>&1; then
-            echo "::error::flutter analyze fehlgeschlagen:%0A$(sed ':a;N;$!ba;s/\n/%0A/g' /tmp/analyze.log)"
+            tr -d '\r' < /tmp/analyze.log > /tmp/analyze.clean.log
+            echo "::error::flutter analyze fehlgeschlagen:%0A$(sed 's/%/%25/g' /tmp/analyze.clean.log | sed ':a;N;$!ba;s/\n/%0A/g')"
             cat /tmp/analyze.log
             exit 1
           fi
@@ -84,7 +92,8 @@ jobs:
         run: |
           cd app
           if ! flutter test > /tmp/test.log 2>&1; then
-            echo "::error::flutter test fehlgeschlagen:%0A$(sed ':a;N;$!ba;s/\n/%0A/g' /tmp/test.log)"
+            tr -d '\r' < /tmp/test.log > /tmp/test.clean.log
+            echo "::error::flutter test fehlgeschlagen:%0A$(sed 's/%/%25/g' /tmp/test.clean.log | sed ':a;N;$!ba;s/\n/%0A/g')"
             cat /tmp/test.log
             exit 1
           fi
@@ -94,11 +103,29 @@ jobs:
         run: |
           cd app
           if ! flutter build ios --no-codesign > /tmp/build.log 2>&1; then
-            echo "::error::flutter build ios fehlgeschlagen:%0A$(tail -c 60000 /tmp/build.log | sed ':a;N;$!ba;s/\n/%0A/g')"
+            tr -d '\r' < /tmp/build.log > /tmp/build.clean.log
+            echo "::error::flutter build ios fehlgeschlagen:%0A$(tail -c 60000 /tmp/build.clean.log | sed 's/%/%25/g' | sed ':a;N;$!ba;s/\n/%0A/g')"
             cat /tmp/build.log
             exit 1
           fi
           cat /tmp/build.log
+
+      - name: Fehler-Logs bei Fehlschlag ins Repo committen (Diagnose)
+        if: failure()
+        run: |
+          mkdir -p ci-logs
+          cp /tmp/analyze.log ci-logs/analyze.log 2>/dev/null || true
+          cp /tmp/test.log ci-logs/test.log 2>/dev/null || true
+          cp /tmp/build.log ci-logs/build.log 2>/dev/null || true
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add ci-logs
+          if ! git diff --cached --quiet; then
+            git commit -m "CI-Diagnose: Fehler-Logs von Run ${{ github.run_id }} (${{ github.run_attempt }})"
+            git push
+          else
+            echo "Keine Log-Dateien zum Committen gefunden."
+          fi
 
       - name: Erzeugtes Scaffold committen (nur wenn neu/geaendert)
         run: |
