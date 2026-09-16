@@ -46,11 +46,11 @@ class InviteRepository {
       communityId: row.communityId,
       createdByPubkey: row.createdByPubkey,
       tokenHash: row.tokenHash,
-      createdAt: row.createdAt,
-      expiresAt: row.expiresAt,
+      createdAt: row.createdAt.toUtc(),
+      expiresAt: row.expiresAt.toUtc(),
       status: InviteStatus.values.byName(row.status),
       consumedByPubkey: row.consumedByPubkey,
-      consumedAt: row.consumedAt,
+      consumedAt: row.consumedAt?.toUtc(),
       schemaVersion: row.schemaVersion,
     );
   }

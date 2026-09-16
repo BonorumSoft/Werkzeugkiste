@@ -36,9 +36,9 @@ class LoanRepository {
       communityId: row.communityId,
       ownerPubkey: row.ownerPubkey,
       borrowerPubkey: row.borrowerPubkey,
-      requestedAt: row.requestedAt,
-      acceptedAt: row.acceptedAt,
-      returnedAt: row.returnedAt,
+      requestedAt: row.requestedAt.toUtc(),
+      acceptedAt: row.acceptedAt.toUtc(),
+      returnedAt: row.returnedAt?.toUtc(),
       status: LoanStatus.values.byName(row.status),
       schemaVersion: row.schemaVersion,
     );

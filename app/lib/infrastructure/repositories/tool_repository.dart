@@ -44,7 +44,7 @@ class ToolRepository {
       photoRefs: photoRefs,
       condition: row.condition,
       status: ToolStatus.values.byName(row.status),
-      updatedAt: row.updatedAt,
+      updatedAt: row.updatedAt.toUtc(),
       schemaVersion: row.schemaVersion,
     );
   }

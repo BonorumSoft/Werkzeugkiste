@@ -45,6 +45,13 @@ void main() {
 
     expect(find.text("Deine Communities"), findsOneWidget);
     expect(find.textContaining("Noch keine Community"), findsOneWidget);
+
+    // Drift schliesst Query-Streams intern leicht verzoegert (Timer), z.B.
+    // wenn beim Screen-Wechsel Onboarding -> Community-Auswahl ein Watcher
+    // abbestellt wird. pumpAndSettle allein drainiert diesen Timer nicht
+    // zuverlaessig, daher hier ein kurzer zusaetzlicher Pump, um den Test
+    // sauber (ohne "Timer is still pending"-Assertion) zu beenden.
+    await tester.pump(const Duration(milliseconds: 50));
   });
 
   testWidgets("neue Community erstellen führt zur Werkzeug-Übersicht", (tester) async {
@@ -61,7 +68,11 @@ void main() {
     await tester.tap(find.text("Erstellen"));
     await tester.pumpAndSettle();
 
-    expect(find.text("Werkzeuge"), findsOneWidget);
+    expect(find.text("Werkzeuge"), findsWidgets); // AppBar-Titel + evtl. Bottom-Nav-Label
     expect(find.textContaining("Noch keine Werkzeuge"), findsOneWidget);
+
+    // Siehe Kommentar im vorherigen Test: Drift-interner Timer beim
+    // Abbestellen eines Query-Streams (Screen-Wechsel) sauber abwarten.
+    await tester.pump(const Duration(milliseconds: 50));
   });
 }
