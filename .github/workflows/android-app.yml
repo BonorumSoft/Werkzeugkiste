@@ -1,0 +1,89 @@
+name: Flutter-App – Android-Build (Phase 10)
+
+# Analog zu ios-app.yml: manuell hinzuzufuegen, da das genutzte GitHub-PAT
+# kein "workflow"-Scope hat und Dateien unter .github/workflows/ nicht
+# selbst pushen kann. Einmalig manuell als .github/workflows/android-app.yml
+# im Repo anlegen, danach laeuft alles Weitere automatisch.
+#
+# Laeuft auf ubuntu-latest (guenstiger/schneller als macOS, Android-SDK ist
+# auf den Standard-Ubuntu-Runnern bereits vorinstalliert). Die APK wird mit
+# dem Debug-Key signiert (Standard-Flutter-Vorlage, siehe
+# android/app/build.gradle.kts: "TODO: Add your own signing config for the
+# release build" - fuer echtes Play-Store-Deployment spaeter durch ein
+# eigenes Signing-Zertifikat zu ersetzen, fuer Sideloading auf Testgeraeten
+# reicht das). Das fertige APK wird als Workflow-Artifact hochgeladen, zum
+# Download direkt aus dem Actions-Lauf.
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+    paths:
+      - "app/**"
+      - ".github/workflows/android-app.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  flutter-android-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Domain-Package (werkzeugkiste) als Pfad-Abhaengigkeit einbinden
+        run: |
+          cd app
+          if ! grep -q "^  werkzeugkiste:" pubspec.yaml; then
+            awk '/^dependencies:/{print; print "  werkzeugkiste:"; print "    path: .."; next}1' pubspec.yaml > pubspec.yaml.new
+            mv pubspec.yaml.new pubspec.yaml
+          fi
+
+      - name: flutter pub get
+        run: cd app && flutter pub get
+
+      - name: Code-Generierung (Drift, ADR-07)
+        run: cd app && dart run build_runner build --delete-conflicting-outputs
+
+      - name: flutter build apk (release, debug-signiert)
+        run: |
+          cd app
+          if ! flutter build apk --release > /tmp/build_android.log 2>&1; then
+            tr -d '\r' < /tmp/build_android.log > /tmp/build_android.clean.log
+            echo "::error::flutter build apk fehlgeschlagen:%0A$(tail -c 60000 /tmp/build_android.clean.log | sed 's/%/%25/g' | sed ':a;N;$!ba;s/\n/%0A/g')"
+            cat /tmp/build_android.log
+            exit 1
+          fi
+          cat /tmp/build_android.log
+
+      - name: Fehler-Log bei Fehlschlag ins Repo committen (Diagnose)
+        if: failure()
+        run: |
+          mkdir -p ci-logs
+          cp /tmp/build_android.log ci-logs/build_android.log 2>/dev/null || true
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add ci-logs
+          if ! git diff --cached --quiet; then
+            git commit -m "CI-Diagnose: Android-Build-Log von Run ${{ github.run_id }} (${{ github.run_attempt }})"
+            git push
+          fi
+
+      - name: APK als Artifact hochladen
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: werkzeugkiste-app-release
+          path: app/build/app/outputs/flutter-apk/app-release.apk
+          retention-days: 30
