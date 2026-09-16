@@ -22,8 +22,8 @@ class CommunityRepository {
 
   Stream<List<Community>> watchCommunities() {
     final trigger = StreamGroup.merge<void>([
-      _db.select(_db.communitiesTable).watch().map((_) => null),
-      _db.select(_db.membersTable).watch().map((_) => null),
+      _db.select(_db.communitiesTable).watch().map((_) {}),
+      _db.select(_db.membersTable).watch().map((_) {}),
     ]);
     return trigger.asyncMap((_) => _fetchAll());
   }

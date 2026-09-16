@@ -129,7 +129,7 @@ class _CommunityList extends StatelessWidget {
     return ListView.separated(
       padding: const EdgeInsets.only(bottom: 96),
       itemCount: communities.length,
-      separatorBuilder: (_, __) => const Divider(height: 1),
+      separatorBuilder: (_, _) => const Divider(height: 1),
       itemBuilder: (context, index) {
         final community = communities[index];
         final activeMembers = community.members.where((m) => m.status == MembershipStatus.active).length;

@@ -33,7 +33,7 @@ class ToolListScreen extends ConsumerWidget {
           return ListView.separated(
             padding: const EdgeInsets.only(bottom: 96, top: 8),
             itemCount: visible.length,
-            separatorBuilder: (_, __) => const Divider(height: 1),
+            separatorBuilder: (_, _) => const Divider(height: 1),
             itemBuilder: (context, index) {
               final tool = visible[index];
               return ListTile(
