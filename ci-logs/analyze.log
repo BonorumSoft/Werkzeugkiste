@@ -1,9 +1,2 @@
 Analyzing app...                                                
-
-   info • The imported package 'sqlite3' isn't a dependency of the importing package. Try adding a dependency for 'sqlite3' in the 'pubspec.yaml' file • lib/infrastructure/database/app_database.dart:21:8 • depend_on_referenced_packages
-   info • Don't return 'null' from a function with a return type of 'void'. Try removing the 'null' • lib/infrastructure/repositories/community_repository.dart:25:56 • avoid_returning_null_for_void
-   info • Don't return 'null' from a function with a return type of 'void'. Try removing the 'null' • lib/infrastructure/repositories/community_repository.dart:26:52 • avoid_returning_null_for_void
-   info • Unnecessary use of multiple underscores. Try using '_' • lib/presentation/community/community_picker_screen.dart:132:29 • unnecessary_underscores
-   info • Unnecessary use of multiple underscores. Try using '_' • lib/presentation/tools/tool_list_screen.dart:36:35 • unnecessary_underscores
-
-5 issues found. (ran in 6.8s)
+No issues found! (ran in 8.2s)

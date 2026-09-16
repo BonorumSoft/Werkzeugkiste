@@ -1,0 +1,286 @@
+
+::group::✅ Passing tests
+✅ /Users/runner/work/Werkzeugkiste/Werkzeugkiste/app/test/widget_test.dart: zeigt Onboarding, wenn noch keine Identität existiert
+::endgroup::
+::group::❌ /Users/runner/work/Werkzeugkiste/Werkzeugkiste/app/test/widget_test.dart: nach Onboarding erscheint die Community-Auswahl (failed)
+Pending timers:
+Timer (duration: 0:00:00.000000, periodic: false), created:
+#0      new FakeTimer._ (package:fake_async/fake_async.dart:342:62)
+#1      FakeAsync._createTimer (package:fake_async/fake_async.dart:260:29)
+#2      FakeAsync.run.<anonymous closure> (package:fake_async/fake_async.dart:185:15)
+#6      StreamQueryStore.markAsClosed (package:drift/src/runtime/executor/stream_queries.dart:154:11)
+#7      QueryStream._onCancelOrPause (package:drift/src/runtime/executor/stream_queries.dart:305:14)
+#8      QueryStream._stream.<anonymous closure>.<anonymous closure> (package:drift/src/runtime/executor/stream_queries.dart:237:11)
+#20     StreamGroup._onCancel.<anonymous closure> (package:async/src/stream_group.dart:238:59)
+#21     MappedIterator.moveNext (dart:_internal/iterable.dart:421:20)
+#22     NonNullsIterator.moveNext (dart:_internal/iterable.dart:944:20)
+#23     new _GrowableList._ofOther (dart:core-patch/growable_array.dart:207:26)
+#24     new _GrowableList.of (dart:core-patch/growable_array.dart:156:26)
+#25     new List.of (dart:core-patch/array_patch.dart:39:18)
+#26     Iterable.toList (dart:core/iterable.dart:517:7)
+#27     StreamGroup._onCancel (package:async/src/stream_group.dart:245:10)
+#38     FutureHandlerProviderElementMixin.handleStream.<anonymous closure>.<anonymous closure> (package:riverpod/src/async_notifier/base.dart:312:64)
+#52     FutureHandlerProviderElementMixin.runOnDispose (package:riverpod/src/async_notifier/base.dart:430:26)
+#53     ProviderElementBase.dispose (package:riverpod/src/framework/element.dart:861:5)
+#54     FutureHandlerProviderElementMixin.dispose (package:riverpod/src/async_notifier/base.dart:471:11)
+#55     StreamProviderElement.dispose (package:riverpod/src/stream_provider/base.dart:180:11)
+#56     ProviderContainer.dispose (package:riverpod/src/framework/container.dart:634:15)
+#57     ProviderScopeState.dispose (package:flutter_riverpod/src/framework.dart:264:15)
+#58     StatefulElement.unmount (package:flutter/src/widgets/framework.dart:6043:11)
+#59     _InactiveElements._unmount (package:flutter/src/widgets/framework.dart:2119:13)
+#60     ListIterable.forEach (dart:_internal/iterable.dart:49:13)
+#61     _InactiveElements._unmountAll (package:flutter/src/widgets/framework.dart:2128:25)
+#62     BuildOwner.lockState (package:flutter/src/widgets/framework.dart:3033:15)
+#63     BuildOwner.finalizeTree (package:flutter/src/widgets/framework.dart:3357:7)
+#64     AutomatedTestWidgetsFlutterBinding.drawFrame (package:flutter_test/src/binding.dart:2454:19)
+#65     RendererBinding._handlePersistentFrameCallback (package:flutter/src/rendering/binding.dart:558:5)
+#66     SchedulerBinding._invokeFrameCallback (package:flutter/src/scheduler/binding.dart:1430:15)
+#67     SchedulerBinding.handleDrawFrame (package:flutter/src/scheduler/binding.dart:1345:9)
+#68     AutomatedTestWidgetsFlutterBinding.scheduleWarmUpFrame (package:flutter_test/src/binding.dart:2358:5)
+#69     _runWidget (package:flutter/src/widgets/binding.dart:1952:7)
+#70     runApp (package:flutter/src/widgets/binding.dart:1885:3)
+#71     TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1960:7)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided 38 frames from dart:async and package:stack_trace)
+
+Timer (duration: 0:00:00.000000, periodic: false), created:
+#0      new FakeTimer._ (package:fake_async/fake_async.dart:342:62)
+#1      FakeAsync._createTimer (package:fake_async/fake_async.dart:260:29)
+#2      FakeAsync.run.<anonymous closure> (package:fake_async/fake_async.dart:185:15)
+#6      StreamQueryStore.markAsClosed (package:drift/src/runtime/executor/stream_queries.dart:154:11)
+#7      QueryStream._onCancelOrPause (package:drift/src/runtime/executor/stream_queries.dart:305:14)
+#8      QueryStream._stream.<anonymous closure>.<anonymous closure> (package:drift/src/runtime/executor/stream_queries.dart:237:11)
+#20     StreamGroup._onCancel.<anonymous closure> (package:async/src/stream_group.dart:238:59)
+#21     MappedIterator.moveNext (dart:_internal/iterable.dart:421:20)
+#22     NonNullsIterator.moveNext (dart:_internal/iterable.dart:944:20)
+#23     new _GrowableList._ofOther (dart:core-patch/growable_array.dart:207:26)
+#24     new _GrowableList.of (dart:core-patch/growable_array.dart:156:26)
+#25     new List.of (dart:core-patch/array_patch.dart:39:18)
+#26     Iterable.toList (dart:core/iterable.dart:517:7)
+#27     StreamGroup._onCancel (package:async/src/stream_group.dart:245:10)
+#38     FutureHandlerProviderElementMixin.handleStream.<anonymous closure>.<anonymous closure> (package:riverpod/src/async_notifier/base.dart:312:64)
+#52     FutureHandlerProviderElementMixin.runOnDispose (package:riverpod/src/async_notifier/base.dart:430:26)
+#53     ProviderElementBase.dispose (package:riverpod/src/framework/element.dart:861:5)
+#54     FutureHandlerProviderElementMixin.dispose (package:riverpod/src/async_notifier/base.dart:471:11)
+#55     StreamProviderElement.dispose (package:riverpod/src/stream_provider/base.dart:180:11)
+#56     ProviderContainer.dispose (package:riverpod/src/framework/container.dart:634:15)
+#57     ProviderScopeState.dispose (package:flutter_riverpod/src/framework.dart:264:15)
+#58     StatefulElement.unmount (package:flutter/src/widgets/framework.dart:6043:11)
+#59     _InactiveElements._unmount (package:flutter/src/widgets/framework.dart:2119:13)
+#60     ListIterable.forEach (dart:_internal/iterable.dart:49:13)
+#61     _InactiveElements._unmountAll (package:flutter/src/widgets/framework.dart:2128:25)
+#62     BuildOwner.lockState (package:flutter/src/widgets/framework.dart:3033:15)
+#63     BuildOwner.finalizeTree (package:flutter/src/widgets/framework.dart:3357:7)
+#64     AutomatedTestWidgetsFlutterBinding.drawFrame (package:flutter_test/src/binding.dart:2454:19)
+#65     RendererBinding._handlePersistentFrameCallback (package:flutter/src/rendering/binding.dart:558:5)
+#66     SchedulerBinding._invokeFrameCallback (package:flutter/src/scheduler/binding.dart:1430:15)
+#67     SchedulerBinding.handleDrawFrame (package:flutter/src/scheduler/binding.dart:1345:9)
+#68     AutomatedTestWidgetsFlutterBinding.scheduleWarmUpFrame (package:flutter_test/src/binding.dart:2358:5)
+#69     _runWidget (package:flutter/src/widgets/binding.dart:1952:7)
+#70     runApp (package:flutter/src/widgets/binding.dart:1885:3)
+#71     TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1960:7)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided 38 frames from dart:async and package:stack_trace)
+
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following assertion was thrown running a test:
+A Timer is still pending even after the widget tree was disposed.
+'package:flutter_test/src/binding.dart':
+Failed assertion: line 2543 pos 12: '!timersPending'
+
+When the exception was thrown, this was the stack:
+#2      AutomatedTestWidgetsFlutterBinding._verifyInvariants (package:flutter_test/src/binding.dart:2543:12)
+#3      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1974:7)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided 3 frames from class _AssertionError and package:stack_trace)
+
+The test description was:
+  nach Onboarding erscheint die Community-Auswahl
+════════════════════════════════════════════════════════════════════════════════════════════════════
+Test failed. See exception logs above.
+The test description was: nach Onboarding erscheint die Community-Auswahl
+
+::endgroup::
+::group::❌ /Users/runner/work/Werkzeugkiste/Werkzeugkiste/app/test/widget_test.dart: neue Community erstellen führt zur Werkzeug-Übersicht (failed)
+WARNING (drift): It looks like you've created the database class AppDatabase multiple times. When these two databases use the same QueryExecutor, race conditions will occur and might corrupt the database. 
+Try to follow the advice at https://drift.simonbinder.eu/faq/#using-the-database or, if you know what you're doing, set driftRuntimeOptions.dontWarnAboutMultipleDatabases = true
+Here is the stacktrace from when the database was opened a second time:
+#0      GeneratedDatabase._handleInstantiated (package:drift/src/runtime/api/db_base.dart:96:30)
+#1      GeneratedDatabase._whenConstructed (package:drift/src/runtime/api/db_base.dart:73:12)
+#2      new GeneratedDatabase (package:drift/src/runtime/api/db_base.dart:64:5)
+#3      new _$AppDatabase (package:werkzeugkiste_app/infrastructure/database/app_database.g.dart:3394:36)
+#4      new AppDatabase (package:werkzeugkiste_app/infrastructure/database/app_database.dart:39:44)
+#5      new AppDatabase.forTesting (package:werkzeugkiste_app/infrastructure/database/app_database.dart:42:39)
+#6      _testApp.<anonymous closure> (file:///Users/runner/work/Werkzeugkiste/Werkzeugkiste/app/test/widget_test.dart:21:32)
+#7      Provider._create (package:riverpod/src/provider/base.dart:59:57)
+#8      ProviderElement.create (package:riverpod/src/provider/base.dart:345:23)
+#9      ProviderElementBase.buildState (package:riverpod/src/framework/element.dart:426:7)
+#10     ProviderElementBase.mount (package:riverpod/src/framework/element.dart:228:5)
+#11     _StateReader._create (package:riverpod/src/framework/container.dart:47:11)
+#12     _StateReader.getElement (package:riverpod/src/framework/container.dart:35:52)
+#13     ProviderContainer.readProviderElement (package:riverpod/src/framework/container.dart:479:19)
+#14     ProviderElementBase._debugAssertCanDependOn.<anonymous closure> (package:riverpod/src/framework/element.dart:624:42)
+#15     ProviderElementBase._debugAssertCanDependOn (package:riverpod/src/framework/element.dart:667:8)
+#16     ProviderElementBase.watch (package:riverpod/src/framework/element.dart:714:12)
+#17     communityRepositoryProvider.<anonymous closure> (package:werkzeugkiste_app/application/database_providers.dart:36:34)
+#18     Provider._create (package:riverpod/src/provider/base.dart:59:57)
+#19     ProviderElement.create (package:riverpod/src/provider/base.dart:345:23)
+#20     ProviderElementBase.buildState (package:riverpod/src/framework/element.dart:426:7)
+#21     ProviderElementBase.mount (package:riverpod/src/framework/element.dart:228:5)
+#22     _StateReader._create (package:riverpod/src/framework/container.dart:47:11)
+#23     _StateReader.getElement (package:riverpod/src/framework/container.dart:35:52)
+#24     ProviderContainer.readProviderElement (package:riverpod/src/framework/container.dart:479:19)
+#25     ProviderElementBase._debugAssertCanDependOn.<anonymous closure> (package:riverpod/src/framework/element.dart:624:42)
+#26     ProviderElementBase._debugAssertCanDependOn (package:riverpod/src/framework/element.dart:667:8)
+#27     ProviderElementBase.watch (package:riverpod/src/framework/element.dart:714:12)
+#28     communitiesProvider.<anonymous closure> (package:werkzeugkiste_app/application/community_controller.dart:15:14)
+#29     StreamProvider._create (package:riverpod/src/stream_provider/base.dart:125:63)
+#30     StreamProviderElement.create.<anonymous closure> (package:riverpod/src/stream_provider/base.dart:172:25)
+#31     FutureHandlerProviderElementMixin.handleStream.<anonymous closure> (package:riverpod/src/async_notifier/base.dart:309:31)
+#32     FutureHandlerProviderElementMixin._handleAsync (package:riverpod/src/async_notifier/base.dart:388:47)
+#33     FutureHandlerProviderElementMixin.handleStream (package:riverpod/src/async_notifier/base.dart:303:5)
+#34     StreamProviderElement.create (package:riverpod/src/stream_provider/base.dart:169:5)
+#35     ProviderElementBase.buildState (package:riverpod/src/framework/element.dart:426:7)
+#36     ProviderElementBase.mount (package:riverpod/src/framework/element.dart:228:5)
+#37     _StateReader._create (package:riverpod/src/framework/container.dart:47:11)
+#38     _StateReader.getElement (package:riverpod/src/framework/container.dart:35:52)
+#39     ProviderContainer.readProviderElement.<anonymous closure> (package:riverpod/src/framework/container.dart:440:40)
+#40     ProviderContainer.readProviderElement (package:riverpod/src/framework/container.dart:475:8)
+#41     ProviderBase.addListener (package:riverpod/src/framework/provider_base.dart:79:26)
+#42     ProviderContainer.listen (package:riverpod/src/framework/container.dart:280:21)
+#43     ConsumerStatefulElement.watch.<anonymous closure> (package:flutter_riverpod/src/consumer.dart:564:25)
+#44     _LinkedHashMapMixin.putIfAbsent (dart:_compact_hash:631:23)
+#45     ConsumerStatefulElement.watch (package:flutter_riverpod/src/consumer.dart:557:26)
+#46     _CommunityGate.build (package:werkzeugkiste_app/presentation/app.dart:57:34)
+#47     _ConsumerState.build (package:flutter_riverpod/src/consumer.dart:476:19)
+#48     StatefulElement.build (package:flutter/src/widgets/framework.dart:5944:27)
+#49     ConsumerStatefulElement.build (package:flutter_riverpod/src/consumer.dart:539:20)
+#50     ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5830:15)
+#51     StatefulElement.performRebuild (package:flutter/src/widgets/framework.dart:5995:11)
+#52     Element.rebuild (package:flutter/src/widgets/framework.dart:5542:7)
+#53     ComponentElement._firstBuild (package:flutter/src/widgets/framework.dart:5812:5)
+#54     StatefulElement._firstBuild (package:flutter/src/widgets/framework.dart:5986:11)
+#55     ComponentElement.mount (package:flutter/src/widgets/framework.dart:5806:5)
+#56     Element.inflateWidget (package:flutter/src/widgets/framework.dart:4600:20)
+#57     Element.updateChild (package:flutter/src/widgets/framework.dart:4066:20)
+#58     ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5854:16)
+#59     StatefulElement.performRebuild (package:flutter/src/widgets/framework.dart:5995:11)
+#60     Element.rebuild (package:flutter/src/widgets/framework.dart:5542:7)
+#61     BuildScope._tryRebuild (package:flutter/src/widgets/framework.dart:2763:15)
+#62     BuildScope._flushDirtyElements (package:flutter/src/widgets/framework.dart:2820:11)
+#63     BuildOwner.buildScope (package:flutter/src/widgets/framework.dart:3124:18)
+#64     AutomatedTestWidgetsFlutterBinding.drawFrame (package:flutter_test/src/binding.dart:2432:19)
+#65     RendererBinding._handlePersistentFrameCallback (package:flutter/src/rendering/binding.dart:558:5)
+#66     SchedulerBinding._invokeFrameCallback (package:flutter/src/scheduler/binding.dart:1430:15)
+#67     SchedulerBinding.handleDrawFrame (package:flutter/src/scheduler/binding.dart:1345:9)
+#68     AutomatedTestWidgetsFlutterBinding.pump.<anonymous closure> (package:flutter_test/src/binding.dart:2261:9)
+#69     _rootRun (dart:async/zone_root.dart:35:13)
+#70     _CustomZone.run (dart:async/zone.dart:810:35)
+#71     TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#72     AutomatedTestWidgetsFlutterBinding.pump (package:flutter_test/src/binding.dart:2250:27)
+#73     WidgetTester.pumpAndSettle.<anonymous closure> (package:flutter_test/src/widget_tester.dart:719:23)
+#74     _rootRun (dart:async/zone_root.dart:35:13)
+#75     _CustomZone.run (dart:async/zone.dart:810:35)
+#76     TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#77     WidgetTester.pumpAndSettle (package:flutter_test/src/widget_tester.dart:712:27)
+#78     main.<anonymous closure> (file:///Users/runner/work/Werkzeugkiste/Werkzeugkiste/app/test/widget_test.dart:56:18)
+<asynchronous suspension>
+#79     testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#80     TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+#81     StackZoneSpecification._registerCallback.<anonymous closure> (package:stack_trace/src/stack_zone_specification.dart:114:42)
+<asynchronous suspension>
+This warning will only appear on debug builds.
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 2 widgets with text "Werkzeuge": [
+            Text("Werkzeuge", dependencies: [DefaultSelectionStyle, DefaultTextStyle, MediaQuery]),
+            Text("Werkzeuge", debugLabel: ((englishLike labelMedium 2021).merge((blackMountainView
+labelMedium).apply)).apply, inherit: false, color: Color(alpha: 1.0000, red: 0.0863, green: 0.1137,
+blue: 0.1098, colorSpace: ColorSpace.sRGB), family: Roboto, size: 12.0, weight: 500, letterSpacing:
+0.5, baseline: alphabetic, height: 1.3x, leadingDistribution: even, decoration: Color(alpha: 1.0000,
+red: 0.0863, green: 0.1137, blue: 0.1098, colorSpace: ColorSpace.sRGB) TextDecoration.none,
+dependencies: [DefaultSelectionStyle, DefaultTextStyle, MediaQuery]),
+          ]>
+   Which: is too many
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///Users/runner/work/Werkzeugkiste/Werkzeugkiste/app/test/widget_test.dart:64:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///Users/runner/work/Werkzeugkiste/Werkzeugkiste/app/test/widget_test.dart line 64
+The test description was:
+  neue Community erstellen führt zur Werkzeug-Übersicht
+════════════════════════════════════════════════════════════════════════════════════════════════════
+Test failed. See exception logs above.
+The test description was: neue Community erstellen führt zur Werkzeug-Übersicht
+
+::endgroup::
+::group::✅ Passing tests
+✅ /Users/runner/work/Werkzeugkiste/Werkzeugkiste/app/test/application/loan_workflow_controller_test.dart: vollständiger Leihzyklus über zwei simulierte Geräte
+✅ /Users/runner/work/Werkzeugkiste/Werkzeugkiste/app/test/application/loan_workflow_controller_test.dart: Einladung: erstellen und auf demselben Gerät wieder einlösen scheitert erwartungsgemäß an 'bereits aktives Mitglied' nicht, sondern läuft durch (Domain erlaubt Re-Redemption-Versuch nur einmal, siehe InvalidStateTransition bei zweitem Versuch)
+::endgroup::
+::group::❌ /Users/runner/work/Werkzeugkiste/Werkzeugkiste/app/test/infrastructure/repository_round_trip_test.dart: ToolRepository: Round-Trip erhält alle Felder inkl. photoRefs (failed)
+Expected: {
+            'tool_id': 'tool-1',
+            'owner_pubkey': 'owner-1',
+            'community_id': 'community-1',
+            'name': 'Bohrmaschine',
+            'category': 'Elektrowerkzeug',
+            'model': 'PSB 500',
+            'description': 'Mit Schlagbohrfunktion',
+            'photos': ['hash-a', 'hash-b'],
+            'condition': 'gut',
+            'status': 'requested',
+            'updated_at': '2026-01-02T03:04:05.000Z',
+            'schema_version': 1
+          }
+  Actual: {
+            'tool_id': 'tool-1',
+            'owner_pubkey': 'owner-1',
+            'community_id': 'community-1',
+            'name': 'Bohrmaschine',
+            'category': 'Elektrowerkzeug',
+            'model': 'PSB 500',
+            'description': 'Mit Schlagbohrfunktion',
+            'photos': ['hash-a', 'hash-b'],
+            'condition': 'gut',
+            'status': 'requested',
+            'updated_at': '2026-01-02T03:04:05.000',
+            'schema_version': 1
+          }
+   Which: at location ['updated_at'] is '2026-01-02T03:04:05.000' instead of '2026-01-02T03:04:05.000Z'
+
+package:matcher                                           expect
+package:flutter_test/src/widget_tester.dart 473:18        expect
+test/infrastructure/repository_round_trip_test.dart 49:5  main.<fn>
+::endgroup::
+::group::✅ Passing tests
+✅ /Users/runner/work/Werkzeugkiste/Werkzeugkiste/app/test/infrastructure/repository_round_trip_test.dart: LoanRequestRepository: getActiveRequestsForTool filtert nach status pending
+::endgroup::
+::group::❌ /Users/runner/work/Werkzeugkiste/Werkzeugkiste/app/test/infrastructure/repository_round_trip_test.dart: LoanRepository: Round-Trip erhält returnedAt/null korrekt (failed)
+Expected: DateTime:<2026-01-10 00:00:00.000Z>
+  Actual: DateTime:<2026-01-10 00:00:00.000>
+
+package:matcher                                           expect
+package:flutter_test/src/widget_tester.dart 473:18        expect
+test/infrastructure/repository_round_trip_test.dart 92:5  main.<fn>
+::endgroup::
+::group::✅ Passing tests
+✅ /Users/runner/work/Werkzeugkiste/Werkzeugkiste/app/test/infrastructure/repository_round_trip_test.dart: CommunityRepository: speichert Community inkl. Mitgliederliste
+✅ /Users/runner/work/Werkzeugkiste/Werkzeugkiste/app/test/infrastructure/repository_round_trip_test.dart: InviteRepository: findByTokenHash findet eine erzeugte Einladung
+::endgroup::
+
+::error::6 tests passed, 4 failed.
